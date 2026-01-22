@@ -1,16 +1,66 @@
-# React + Vite
+# ネイバーズ江坂 文化祭 (Bunkasai)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+2026年2月22日に開催される「ネイバーズ江坂 第一回文化祭」のイベントWebサイトです。
 
-Currently, two official plugins are available:
+## 🎉 イベント概要
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **日時**: 2026年2月22日 (日)
+- **時間**: 13:00 - 19:00 (昼の部) / 19:00 - 21:00 (夜の部)
+- **場所**: ネイバーズ江坂 1st & 2nd
 
-## React Compiler
+## 🚀 技術スタック
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19
+- Vite 7
+- Lucide React (アイコン)
+- Tailwind CSS風のインラインスタイリング
 
-## Expanding the ESLint configuration
+## 📦 セットアップ
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+# 依存関係のインストール
+npm install
+
+# 開発サーバーの起動
+npm run dev
+
+# プロダクションビルド
+npm run build
+
+# ビルドのプレビュー
+npm run preview
+```
+
+## 🌐 GitHub Pagesへのデプロイ
+
+このプロジェクトはGitHub Actionsを使って自動的にGitHub Pagesにデプロイされます。
+
+### 初回設定
+
+1. GitHubリポジトリの設定に移動
+2. **Settings** > **Pages** を開く
+3. **Source** で「GitHub Actions」を選択
+4. ブランチにプッシュすると自動的にデプロイされます
+
+### 公開URL
+
+デプロイ後、以下のURLでアクセスできます:
+```
+https://aya474747.github.io/bunkasai/
+```
+
+## 📝 主な機能
+
+- ⏱️ イベントまでのカウントダウンタイマー
+- 📅 タイムテーブル（6つのステージ）
+- 🗺️ 会場マップ
+- 🎨 ブルータリストデザイン
+- 📱 レスポンシブデザイン
+
+## 🎨 デザインコンセプト
+
+「LOOSE & ART & FUN」をコンセプトに、ブルータリストスタイルのデザインを採用しています。
+
+## 📄 ライセンス
+
+MIT
