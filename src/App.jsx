@@ -209,7 +209,7 @@ const TimeSchedule = () => {
     { id: 8, title: 'AI教室', stage: 'C', start: '15:15', end: '16:15', rowStart: 10, rowSpan: 4, user: 'なべちゃん' },
 
     { id: 4, title: 'スマホストラップ作り', stage: 'C', start: '16:15', end: '17:15', rowStart: 14, rowSpan: 4, user: 'みなみ先生' },
-    { id: 2, title: 'ダンスショーケース', stage: 'C', start: '18:00', end: '18:30', rowStart: 21, rowSpan: 2, user: 'りほ・ごう・まりん・むぎ・なっちゃん' },
+    { id: 2, title: 'ダンスショーケース', stage: 'C', start: '18:00', end: '18:15', rowStart: 21, rowSpan: 1, user: 'りほ・ごう・まりん・むぎ・なっちゃん' },
     { id: 13, title: '閉会式', stage: 'C', start: '18:30', end: '19:00', rowStart: 23, rowSpan: 2, user: '全員' },
     { id: 12, title: 'かのお悩み相談', stage: 'A', start: '14:00', end: '16:00', rowStart: 5, rowSpan: 8, user: 'かのくん' },
     { id: 3, title: 'AIプリクラ', stage: 'A', start: '16:00', end: '19:00', rowStart: 13, rowSpan: 12, user: 'なべちゃん' },
@@ -296,7 +296,7 @@ export default function EventPage() {
       { name: "書籍完成トークショー", desc: "しおりちゃん", time: "14:15-15:15", stage: "STAGE C" },
       // AI教室の時間を更新
       { name: "AI教室", desc: "なべちゃん", time: "15:15-16:15", stage: "STAGE C" },
-      { name: "ダンスショーケース", desc: "りほちゃん ごうちゃん まりんちゃん むぎちゃん なっちゃん", time: "18:00-18:30", stage: "STAGE C" },
+      { name: "ダンスショーケース", desc: "りほちゃん ごうちゃん まりんちゃん むぎちゃん なっちゃん", time: "18:00-18:15", stage: "STAGE C" },
       { name: "閉会式", desc: "全員", time: "18:30-19:00", stage: "STAGE C" },
     ],
     workshop: [
