@@ -188,6 +188,7 @@ const StageMap = () => {
 };
 
 const TimeSchedule = () => {
+  const [selectedEvent, setSelectedEvent] = useState(null);
   const stages = [
     { id: 'A', name: 'STAGE A', bg: 'bg-red-200', border: 'border-red-500', text: 'text-red-900' },
     { id: 'B', name: 'STAGE B', bg: 'bg-orange-200', border: 'border-orange-500', text: 'text-orange-900' },
@@ -273,7 +274,9 @@ const TimeSchedule = () => {
                     style={{
                       gridColumn: stageIndex + 2,
                       gridRow: `${event.rowStart} / span ${event.rowSpan}`
-                    }}
+                    
+                                onClick={() => setSelectedEvent({ title: event.title, user: event.user, start: event.start, end: event.end, stage: stageStyle.name })}
+                               style={{ cursor: 'pointer' }}}}
                  >
                     <div className="font-black text-xs md:text-base leading-tight line-clamp-2 text-black font-rounded">{event.title}</div>
                     <div className="hidden md:block opacity-80 text-[8px] md:text-[10px] font-bold text-black/70 truncate mt-0.5">{event.user}</div>
@@ -287,7 +290,44 @@ const TimeSchedule = () => {
   );
 };
 
-export default function EventPage() {
+export defau
+  
+{/* Modal */}
+{selectedEvent && (
+          <div 
+                      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+                      onClick={() => setSelectedEvent(null)}
+                    >
+                    <div 
+                                  className="bg-white border-4 border-black p-6 md:p-8 brutalist-shadow max-w-lg w-full"
+                                  onClick={(e) => e.stopPropagation()}
+                                >
+                                <div className="flex justify-between items-start mb-4">
+                                              <h3 className="text-2xl md:text-3xl font-display text-black">{selectedEvent.title}</h3>h3>
+                                              <button 
+                                                                onClick={() => setSelectedEvent(null)}
+                                                                className="text-2xl font-bold hover:scale-110 transition-transform"
+                                                              >
+                                                              ×
+                                              </button>button>
+                                </div>div>
+                                <div className="space-y-3">
+                                              <div className="flex items-center gap-2">
+                                                              <span className="font-bold text-sm bg-black text-white px-3 py-1">出演者</span>span>
+                                                              <span className="font-bold">{selectedEvent.user}</span>span>
+                                              </div>div>
+                                              <div className="flex items-center gap-2">
+                                                              <span className="font-bold text-sm bg-black text-white px-3 py-1">時間</span>span>
+                                                              <span className="font-bold">{selectedEvent.start} - {selectedEvent.end}</span>span>
+                                              </div>div>
+                                              <div className="flex items-center gap-2">
+                                                              <span className="font-bold text-sm bg-black text-white px-3 py-1">ステージ</span>span>
+                                                              <span className="font-bold">{selectedEvent.stage}</span>span>
+                                              </div>div>
+                                </div>div>
+                    </div>div>
+          </div>div>
+        )}</div>lt function EventPage() {
   const content = {
     performance: [
       { name: "開会式", desc: "全員", time: "13:00-13:15", stage: "STAGE C" },
