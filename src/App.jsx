@@ -214,9 +214,12 @@ const TimeSchedule = () => {
     { id: 12, title: 'かのお悩み相談', stage: 'A', start: '14:00', end: '16:00', rowStart: 5, rowSpan: 8, user: 'かのくん' },
     { id: 3, title: 'AIプリクラ', stage: 'A', start: '16:00', end: '19:00', rowStart: 13, rowSpan: 12, user: 'なべちゃん' },
     { id: 5, title: 'トイレZINE販売', stage: 'D', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'さくら＆ゆうこ' },
-    { id: 61, title: 'ほぐしの満洲①', stage: 'E', start: '14:30', end: '15:30', rowStart: 7, rowSpan: 4, user: 'ごとちゃん' },
-    { id: 63, title: 'ほぐしの満洲②', stage: 'E', start: '16:30', end: '17:30', rowStart: 15, rowSpan: 4, user: 'ごとちゃん' },
-    { id: 65, title: 'いけめぐスープ', stage: 'F', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'いけめぐ' },
+    { id: 61, title: 'ほぐしの満洲', stage: 'E', start: '13:30', end: '13:40', rowStart: 3, rowSpan: 1, user: 'ごとちゃん' },
+    { id: 62, title: 'ほぐしの満洲', stage: 'E', start: '14:30', end: '14:40', rowStart: 7, rowSpan: 1, user: 'ごとちゃん' },
+    { id: 63, title: 'ほぐしの満洲', stage: 'E', start: '15:30', end: '15:40', rowStart: 11, rowSpan: 1, user: 'ごとちゃん' },
+    { id: 64, title: 'ほぐしの満洲', stage: 'E', start: '16:30', end: '16:40', rowStart: 15, rowSpan: 1, user: 'ごとちゃん' },
+    { id: 65, title: 'ほぐしの満洲', stage: 'E', start: '17:30', end: '17:40', rowStart: 19, rowSpan: 1, user: 'ごとちゃん' },
+    { id: 66, title: 'いけめぐスープ', stage: 'F', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'いけめぐ' },
   ];
 
   const times = ['13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00'];
@@ -319,7 +322,7 @@ export default function EventPage() {
         image: "https://i.gyazo.com/4f5d109e4ddc5bbdddaab52ea475f5fc.jpg",
         detail: "トイレマークの写真を撮り集めて、気づいたら、10年以上経っていました.........！様々な国を旅して出会った、ニッチな世界へようこそ......！"
       },
-      { name: "ほぐしの満洲", desc: "ごとちゃん", time: "14:30-15:30 / 16:30-17:30", stage: "STAGE E", image: "https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg" },
+      { name: "ほぐしの満洲", desc: "ごとちゃん", time: "13:30 / 14:30 / 15:30 / 16:30 / 17:30開始", stage: "STAGE E", image: "https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg", detail: "施術時間10分 Max 5人" },
       { name: "AIで作ったプリクラコーナー", desc: "なべちゃん", time: "16:00-19:00", stage: "STAGE A" },
     ],
     food: [
