@@ -236,22 +236,26 @@ const TimeSchedule = () => {
         </div>
 
         <div className="min-w-[700px] md:min-w-[800px] border-4 border-black bg-white brutalist-shadow p-2 md:p-4 relative rounded-xl">
-          <div className="grid grid-cols-[60px_repeat(6,1fr)] md:grid-cols-[80px_repeat(6,1fr)] gap-1 md:gap-2 mb-4 border-b-4 border-black pb-2">
+          <div className="grid grid-cols-[60px_repeat(6,1fr)_60px] md:grid-cols-[80px_repeat(6,1fr)] gap-1 md:gap-2 mb-4 border-b-4 border-black pb-2">
              <div className="font-bold text-center pt-2 text-xs md:text-base text-black font-display">TIME</div>
              {stages.map(stage => (
                <div key={stage.id} className={`font-display text-center py-2 border-2 border-black text-xs md:text-base ${stage.bg} text-black brutalist-shadow-sm rounded-md`}>
                  {stage.name}
                </div>
              ))}
+             <div className="md:hidden font-bold text-center pt-2 text-xs text-black font-display">TIME</div>
           </div>
 
-          <div className="grid grid-cols-[60px_repeat(6,1fr)] md:grid-cols-[80px_repeat(6,1fr)] auto-rows-[30px] gap-x-1 md:gap-x-2 relative">
+          <div className="grid grid-cols-[60px_repeat(6,1fr)_60px] md:grid-cols-[80px_repeat(6,1fr)] auto-rows-[30px] gap-x-1 md:gap-x-2 relative">
              {times.map((time, i) => (
                 <React.Fragment key={time}>
                   <div className="text-[10px] md:text-xs font-bold text-gray-600 text-right pr-2 pt-1 border-t border-gray-300" style={{ gridRow: i * 2 + 1 }}>
                     {time}
                   </div>
-                  <div className="col-span-6 border-t border-dashed border-gray-300" style={{ gridColumn: '2 / span 6', gridRow: i * 2 + 1 }}></div>
+                  <div className="col-span-6 md:col-span-6 border-t border-dashed border-gray-300" style={{ gridColumn: '2 / span 6', gridRow: i * 2 + 1 }}></div>
+                  <div className="md:hidden text-[10px] font-bold text-gray-600 text-left pl-2 pt-1 border-t border-gray-300" style={{ gridRow: i * 2 + 1 }}>
+                    {time}
+                  </div>
                 </React.Fragment>
              ))}
 
