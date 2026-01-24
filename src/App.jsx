@@ -221,7 +221,7 @@ const TimeSchedule = () => {
     { id: 63, title: 'ほぐしの満洲', stage: 'E', start: '15:30', end: '15:40', rowStart: 11, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg' },
     { id: 64, title: 'ほぐしの満洲', stage: 'E', start: '16:30', end: '16:40', rowStart: 15, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg' },
     { id: 65, title: 'ほぐしの満洲', stage: 'E', start: '17:30', end: '17:40', rowStart: 19, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg' },
-    { id: 66, title: 'Soup Stock Esaka', stage: 'F', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'いけめぐ・あまね', image: 'https://i.gyazo.com/15b13e1be930f3aa55f79bf942bbb05a.jpg' },
+    { id: 66, title: 'Soup Stock Esaka', stage: 'F', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'いけめぐ・あまね', image: 'https://i.gyazo.com/1c0d4ff391dd612c82c5fe1d702d5836.jpg' },
   ];
 
   const times = ['13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00'];
@@ -381,7 +381,7 @@ export default function EventPage() {
       { name: "AIで作ったプリクラコーナー", desc: "なべちゃん", time: "16:00-19:00", stage: "STAGE A" },
     ],
     food: [
-      { name: "Soup Stock Esaka", desc: "いけめぐ あまねちゃん", time: "14:15-18:00", stage: "STAGE F", image: "https://i.gyazo.com/15b13e1be930f3aa55f79bf942bbb05a.jpg", detail: "スープ+パンのセット 限定15食" },
+      { name: "Soup Stock Esaka", desc: "いけめぐ あまねちゃん", time: "14:15-18:00", stage: "STAGE F", image: "https://i.gyazo.com/1c0d4ff391dd612c82c5fe1d702d5836.jpg", detail: "スープ+パンのセット 限定15食" },
       {
         name: "喫茶まゆか",
         desc: "まゆちゃん あっこたん ぐっち",
