@@ -203,7 +203,7 @@ const TimeSchedule = () => {
     { id: 99, title: '喫茶まゆか', stage: 'B', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'まゆちゃん＆あっこたん', image: 'https://i.gyazo.com/baa82c92d80f091a8fee8815bd02c9fb.jpg' },
     { id: 0, title: '開会式', stage: 'C', start: '13:00', end: '13:15', rowStart: 1, rowSpan: 1, user: '全員' },
     { id: 1, title: 'アコースティックバンド', stage: 'C', start: '13:15', end: '13:30', rowStart: 2, rowSpan: 1, user: 'うみ・もも・まゆ・さっちゃま・かの' },
-    { id: 11, title: '旅立ちの日に合唱', stage: 'C', start: '13:30', end: '14:00', rowStart: 3, rowSpan: 2, user: '全員参加' },
+    { id: 11, title: '旅立ちの日に合唱', stage: 'C', start: '13:30', end: '14:00', rowStart: 3, rowSpan: 2, user: '全員参加', image: 'https://i.gyazo.com/c62624ce8f2a843df2a8f1e2d63532aa.jpg' },
     { id: 7, title: '社交ダンス', stage: 'C', start: '14:00', end: '14:15', rowStart: 5, rowSpan: 1, user: 'つねぽん＆りほ' },
     { id: 10, title: '書籍完成トーク', stage: 'C', start: '14:15', end: '15:15', rowStart: 6, rowSpan: 4, user: 'しおりちゃん' },
 
