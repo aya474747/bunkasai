@@ -370,7 +370,7 @@ export default function EventPage() {
       { name: "AIで作ったプリクラコーナー", desc: "なべちゃん", time: "16:00-19:00", stage: "STAGE A" },
     ],
     food: [
-      { name: "Soup Stock Esaka", desc: "いけめぐ あまねちゃん", time: "14:15-18:00", stage: "STAGE F", detail: "スープ+パンのセット 限定15食" },
+      { name: "Soup Stock Esaka", desc: "いけめぐ あまねちゃん", time: "14:15-18:00", stage: "STAGE F", image: "https://i.gyazo.com/15b13e1be930f3aa55f79bf942bbb05a.jpg", detail: "スープ+パンのセット 限定15食" },
       {
         name: "喫茶まゆか",
         desc: "まゆちゃん あっこたん ぐっち",
