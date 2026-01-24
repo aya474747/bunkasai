@@ -200,7 +200,7 @@ const TimeSchedule = () => {
   ];
 
   const scheduleData15Min = [
-    { id: 99, title: '喫茶まゆか', stage: 'B', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'まゆちゃん＆あっこたん' },
+    { id: 99, title: '喫茶まゆか', stage: 'B', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'まゆちゃん＆あっこたん', image: 'https://i.gyazo.com/baa82c92d80f091a8fee8815bd02c9fb.jpg' },
     { id: 0, title: '開会式', stage: 'C', start: '13:00', end: '13:15', rowStart: 1, rowSpan: 1, user: '全員' },
     { id: 1, title: 'アコースティックバンド', stage: 'C', start: '13:15', end: '13:30', rowStart: 2, rowSpan: 1, user: 'うみ・もも・まゆ・さっちゃま・かの' },
     { id: 11, title: '旅立ちの日に合唱', stage: 'C', start: '13:30', end: '14:00', rowStart: 3, rowSpan: 2, user: '全員参加' },
@@ -213,15 +213,15 @@ const TimeSchedule = () => {
     { id: 4, title: 'スマホストラップ作り', stage: 'C', start: '16:15', end: '17:15', rowStart: 14, rowSpan: 4, user: 'みなみ先生' },
     { id: 2, title: 'ダンスショーケース', stage: 'C', start: '18:00', end: '18:15', rowStart: 21, rowSpan: 1, user: 'りほ・ごう・まりん・むぎ・なっちゃん' },
     { id: 13, title: '閉会式', stage: 'C', start: '18:30', end: '19:00', rowStart: 23, rowSpan: 2, user: '全員' },
-    { id: 12, title: 'かのお悩み相談', stage: 'A', start: '14:00', end: '16:00', rowStart: 5, rowSpan: 8, user: 'かのくん' },
+    { id: 12, title: 'かのお悩み相談', stage: 'A', start: '14:00', end: '16:00', rowStart: 5, rowSpan: 8, user: 'かのくん', image: 'https://i.gyazo.com/b9e87d295b700786368bda29c865c97b.jpg' },
     { id: 3, title: 'AIプリクラ', stage: 'A', start: '16:00', end: '19:00', rowStart: 13, rowSpan: 12, user: 'なべちゃん' },
-    { id: 5, title: 'トイレZINE販売', stage: 'D', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'さくら＆ゆうこ' },
-    { id: 61, title: 'ほぐしの満洲', stage: 'E', start: '13:30', end: '13:40', rowStart: 3, rowSpan: 1, user: 'ごとちゃん' },
-    { id: 62, title: 'ほぐしの満洲', stage: 'E', start: '14:30', end: '14:40', rowStart: 7, rowSpan: 1, user: 'ごとちゃん' },
-    { id: 63, title: 'ほぐしの満洲', stage: 'E', start: '15:30', end: '15:40', rowStart: 11, rowSpan: 1, user: 'ごとちゃん' },
-    { id: 64, title: 'ほぐしの満洲', stage: 'E', start: '16:30', end: '16:40', rowStart: 15, rowSpan: 1, user: 'ごとちゃん' },
-    { id: 65, title: 'ほぐしの満洲', stage: 'E', start: '17:30', end: '17:40', rowStart: 19, rowSpan: 1, user: 'ごとちゃん' },
-    { id: 66, title: 'Soup Stock Esaka', stage: 'F', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'いけめぐ・あまね' },
+    { id: 5, title: 'トイレZINE販売', stage: 'D', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'さくら＆ゆうこ', image: 'https://i.gyazo.com/4f5d109e4ddc5bbdddaab52ea475f5fc.jpg' },
+    { id: 61, title: 'ほぐしの満洲', stage: 'E', start: '13:30', end: '13:40', rowStart: 3, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg' },
+    { id: 62, title: 'ほぐしの満洲', stage: 'E', start: '14:30', end: '14:40', rowStart: 7, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg' },
+    { id: 63, title: 'ほぐしの満洲', stage: 'E', start: '15:30', end: '15:40', rowStart: 11, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg' },
+    { id: 64, title: 'ほぐしの満洲', stage: 'E', start: '16:30', end: '16:40', rowStart: 15, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg' },
+    { id: 65, title: 'ほぐしの満洲', stage: 'E', start: '17:30', end: '17:40', rowStart: 19, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg' },
+    { id: 66, title: 'Soup Stock Esaka', stage: 'F', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'いけめぐ・あまね', image: 'https://i.gyazo.com/15b13e1be930f3aa55f79bf942bbb05a.jpg' },
   ];
 
   const times = ['13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00'];
@@ -276,7 +276,7 @@ const TimeSchedule = () => {
                       gridColumn: stageIndex + 2,
                       gridRow: `${event.rowStart} / span ${event.rowSpan}`
                     }}
-                    onClick={() => setSelectedEvent({ title: event.title, user: event.user, start: event.start, end: event.end, stage: stageStyle.name })}
+                    onClick={() => setSelectedEvent({ title: event.title, user: event.user, start: event.start, end: event.end, stage: stageStyle.name, image: event.image })}
                  >
                     <div className="font-black text-xs md:text-base leading-tight line-clamp-2 text-black font-rounded">{event.title}</div>
                     <div className="hidden md:block opacity-80 text-[8px] md:text-[10px] font-bold text-black/70 truncate mt-0.5">{event.user}</div>
@@ -306,6 +306,17 @@ const TimeSchedule = () => {
                 ×
               </button>
             </div>
+
+            {selectedEvent.image && (
+              <div className="mb-4">
+                <img
+                  src={selectedEvent.image}
+                  alt={selectedEvent.title}
+                  className="w-full h-48 object-cover border-2 border-black brutalist-shadow-sm rounded-lg"
+                />
+              </div>
+            )}
+
             <div className="space-y-3">
               <div className="flex items-center gap-2">
                 <span className="font-bold text-sm bg-black text-white px-3 py-1 rounded">出演者</span>
