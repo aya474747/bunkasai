@@ -221,7 +221,7 @@ const TimeSchedule = () => {
     { id: 63, title: 'ほぐしの満洲', stage: 'E', start: '15:30', end: '15:40', rowStart: 11, rowSpan: 1, user: 'ごとちゃん' },
     { id: 64, title: 'ほぐしの満洲', stage: 'E', start: '16:30', end: '16:40', rowStart: 15, rowSpan: 1, user: 'ごとちゃん' },
     { id: 65, title: 'ほぐしの満洲', stage: 'E', start: '17:30', end: '17:40', rowStart: 19, rowSpan: 1, user: 'ごとちゃん' },
-    { id: 66, title: 'いけめぐスープ', stage: 'F', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'いけめぐ' },
+    { id: 66, title: 'Soup Stock Esaka', stage: 'F', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'いけめぐ・あまね' },
   ];
 
   const times = ['13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00'];
@@ -370,7 +370,7 @@ export default function EventPage() {
       { name: "AIで作ったプリクラコーナー", desc: "なべちゃん", time: "16:00-19:00", stage: "STAGE A" },
     ],
     food: [
-      { name: "いけめぐスープ", desc: "いけめぐ あまねちゃん", time: "14:15-18:00", stage: "STAGE F" },
+      { name: "Soup Stock Esaka", desc: "いけめぐ あまねちゃん", time: "14:15-18:00", stage: "STAGE F", detail: "スープ+パンのセット 限定15食" },
       {
         name: "喫茶まゆか",
         desc: "まゆちゃん あっこたん ぐっち",
