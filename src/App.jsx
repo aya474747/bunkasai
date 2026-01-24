@@ -308,11 +308,11 @@ const TimeSchedule = () => {
             </div>
 
             {selectedEvent.image && (
-              <div className="mb-4">
+              <div className="mb-4 flex justify-center">
                 <img
                   src={selectedEvent.image}
                   alt={selectedEvent.title}
-                  className="w-full h-48 object-cover border-2 border-black brutalist-shadow-sm rounded-lg"
+                  className="w-64 h-64 object-cover border-2 border-black brutalist-shadow-sm rounded-lg"
                 />
               </div>
             )}
@@ -348,6 +348,7 @@ export default function EventPage() {
         desc: "全員 指揮:かよちゃん ピアノ:さっちゃま",
         time: "13:30-14:00",
         stage: "STAGE C",
+        image: "https://i.gyazo.com/c62624ce8f2a843df2a8f1e2d63532aa.png",
         detail: "久しぶりに歌っちゃおう！練習時間も設けるから、男子〜！ちゃんとして〜！ってやつもやろう！"
       },
       { name: "社交ダンス", desc: "つねぽん & りほちゃん", stage: "STAGE C", time: "14:00-14:15" },
