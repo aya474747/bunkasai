@@ -330,7 +330,7 @@ export default function EventPage() {
       { name: "AIで作ったプリクラコーナー", desc: "なべちゃん", time: "16:00-19:00", stage: "STAGE A" },
     ],
     food: [
-      { name: "いけめぐスープ", desc: "いけめぐ", time: "14:15-18:00", stage: "STAGE F" },
+      { name: "いけめぐスープ", desc: "いけめぐ あまねちゃん", time: "14:15-18:00", stage: "STAGE F" },
       {
         name: "喫茶まゆか",
         desc: "まゆちゃん あっこたん ぐっち",
