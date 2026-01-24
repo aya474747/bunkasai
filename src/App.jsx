@@ -188,6 +188,8 @@ const StageMap = () => {
 };
 
 const TimeSchedule = () => {
+  const [selectedEvent, setSelectedEvent] = useState(null);
+
   const stages = [
     { id: 'A', name: 'STAGE A', bg: 'bg-red-200', border: 'border-red-500', text: 'text-red-900' },
     { id: 'B', name: 'STAGE B', bg: 'bg-orange-200', border: 'border-orange-500', text: 'text-orange-900' },
@@ -269,11 +271,12 @@ const TimeSchedule = () => {
                return (
                  <div
                     key={event.id}
-                    className={`px-1 md:px-2 py-1 border-2 border-black ${stageStyle.bg} ${zIndex} ${opacity} hover:brightness-110 transition-all overflow-hidden rounded flex flex-col justify-center rounded-md`}
+                    className={`px-1 md:px-2 py-1 border-2 border-black ${stageStyle.bg} ${zIndex} ${opacity} hover:brightness-110 transition-all overflow-hidden rounded flex flex-col justify-center rounded-md cursor-pointer`}
                     style={{
                       gridColumn: stageIndex + 2,
                       gridRow: `${event.rowStart} / span ${event.rowSpan}`
                     }}
+                    onClick={() => setSelectedEvent({ title: event.title, user: event.user, start: event.start, end: event.end, stage: stageStyle.name })}
                  >
                     <div className="font-black text-xs md:text-base leading-tight line-clamp-2 text-black font-rounded">{event.title}</div>
                     <div className="hidden md:block opacity-80 text-[8px] md:text-[10px] font-bold text-black/70 truncate mt-0.5">{event.user}</div>
@@ -283,6 +286,43 @@ const TimeSchedule = () => {
           </div>
         </div>
       </div>
+
+      {/* Modal */}
+      {selectedEvent && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          onClick={() => setSelectedEvent(null)}
+        >
+          <div
+            className="bg-white border-4 border-black p-6 md:p-8 brutalist-shadow max-w-lg w-full rounded-xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-start mb-4">
+              <h3 className="text-2xl md:text-3xl font-display text-black">{selectedEvent.title}</h3>
+              <button
+                onClick={() => setSelectedEvent(null)}
+                className="text-3xl font-bold hover:scale-110 transition-transform"
+              >
+                ×
+              </button>
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-sm bg-black text-white px-3 py-1 rounded">出演者</span>
+                <span className="font-bold">{selectedEvent.user}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-sm bg-black text-white px-3 py-1 rounded">時間</span>
+                <span className="font-bold">{selectedEvent.start} - {selectedEvent.end}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-sm bg-black text-white px-3 py-1 rounded">ステージ</span>
+                <span className="font-bold">{selectedEvent.stage}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
