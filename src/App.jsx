@@ -416,18 +416,7 @@ const TimeSchedule = ({ onEventClick }) => {
 };
 
 export default function EventPage() {
-  const [visitorCount, setVisitorCount] = useState(1);
   const [selectedEvent, setSelectedEvent] = useState(null);
-
-  useEffect(() => {
-    // ローカルストレージから訪問回数を取得してカウントアップ
-    const storedCount = localStorage.getItem('bunkasai-visitor-count');
-    const currentCount = storedCount ? parseInt(storedCount, 10) + 1 : 1;
-
-    // カウントを保存して表示
-    localStorage.setItem('bunkasai-visitor-count', currentCount.toString());
-    setVisitorCount(currentCount);
-  }, []);
 
   const handleEventClick = (item) => {
     setSelectedEvent({
@@ -550,7 +539,7 @@ export default function EventPage() {
 
       {/* MARQUEE */}
       <div className="mb-12 w-full transform -rotate-1 origin-left scale-105">
-        <Marquee text={`★ あなたは${String(visitorCount).padStart(3, '0')}番目の訪問者です ★`} />
+        <Marquee text="★ ENJOY THE MOMENT ★ LOOSE VIBES ONLY ★ ART & MUSIC & FOOD ★ WELCOME EVERYONE ★" />
       </div>
 
       <main className="px-4 md:px-8 max-w-7xl mx-auto">
