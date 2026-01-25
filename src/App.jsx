@@ -79,7 +79,6 @@ const Countdown = () => {
 
 const VisitorCounter = () => {
   const [count, setCount] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // CountAPIを使って訪問者数を取得・カウントアップ
@@ -87,27 +86,20 @@ const VisitorCounter = () => {
       .then(res => res.json())
       .then(data => {
         setCount(data.value);
-        setLoading(false);
       })
       .catch(err => {
         console.error('Failed to fetch visitor count:', err);
-        setLoading(false);
+        // エラー時は静的表示
+        setCount(999);
       });
   }, []);
 
-  if (loading) {
-    return (
-      <div className="inline-block bg-yellow-400 text-black px-6 py-3 border-4 border-black brutalist-shadow transform rotate-1 font-display text-lg">
-        Loading...
-      </div>
-    );
-  }
-
-  if (!count) return null;
+  // APIからの応答を待たずに静的表示（数字はAPI取得後に更新される）
+  const displayCount = count || 999;
 
   return (
     <div className="inline-block bg-yellow-400 text-black px-6 py-3 border-4 border-black brutalist-shadow transform rotate-1 font-display text-lg">
-      あなたは <span className="text-3xl font-black mx-2">{count.toLocaleString()}</span> 人目のネイバーです
+      あなたは <span className="text-3xl font-black mx-2">{displayCount.toLocaleString()}</span> 人目のネイバーです
     </div>
   );
 };
