@@ -177,15 +177,15 @@ const ContentCard = ({ title, items, colorClass, rotate = "rotate-0" }) => (
   </div>
 );
 
-const Marquee = ({ text }) => (
+const Marquee = ({ text, visitorCount }) => (
   <div className="bg-lime-400 border-y-4 border-black py-2 marquee-container font-display text-lg md:text-xl font-bold uppercase overflow-hidden mb-12 text-black w-full">
     <div className="marquee-content">
-      <span className="mx-4">{text}</span>
-      <span className="mx-4 text-stroke">{text}</span>
-      <span className="mx-4">{text}</span>
-      <span className="mx-4 text-stroke">{text}</span>
-      <span className="mx-4">{text}</span>
-      <span className="mx-4 text-stroke">{text}</span>
+      <span className="mx-4">{text.replace('VISITOR_COUNT', visitorCount || '999')}</span>
+      <span className="mx-4 text-stroke">{text.replace('VISITOR_COUNT', visitorCount || '999')}</span>
+      <span className="mx-4">{text.replace('VISITOR_COUNT', visitorCount || '999')}</span>
+      <span className="mx-4 text-stroke">{text.replace('VISITOR_COUNT', visitorCount || '999')}</span>
+      <span className="mx-4">{text.replace('VISITOR_COUNT', visitorCount || '999')}</span>
+      <span className="mx-4 text-stroke">{text.replace('VISITOR_COUNT', visitorCount || '999')}</span>
     </div>
   </div>
 );
@@ -387,6 +387,21 @@ const TimeSchedule = () => {
 };
 
 export default function EventPage() {
+  const [visitorCount, setVisitorCount] = useState(null);
+
+  useEffect(() => {
+    // CountAPIを使って訪問者数を取得・カウントアップ
+    fetch('https://api.countapi.xyz/hit/neighbors-esaka-bunkasai/visitors')
+      .then(res => res.json())
+      .then(data => {
+        setVisitorCount(data.value);
+      })
+      .catch(err => {
+        console.error('Failed to fetch visitor count:', err);
+        setVisitorCount(999);
+      });
+  }, []);
+
   // EVENT_DATAからcontentオブジェクトを自動生成
   const generateContent = () => {
     const grouped = {};
@@ -493,15 +508,10 @@ export default function EventPage() {
 
       {/* MARQUEE */}
       <div className="mb-12 w-full transform -rotate-1 origin-left scale-105">
-        <Marquee text="★ ENJOY THE MOMENT ★ LOOSE VIBES ONLY ★ ART & MUSIC & FOOD ★ WELCOME EVERYONE ★" />
+        <Marquee text="★ ENJOY THE MOMENT ★ あなたはVISITOR_COUNT人目のネイバーです ★ ART & MUSIC & FOOD ★ WELCOME EVERYONE ★" visitorCount={visitorCount} />
       </div>
 
       <main className="px-4 md:px-8 max-w-7xl mx-auto">
-
-        {/* VISITOR COUNTER */}
-        <div className="flex justify-center mb-8">
-          <VisitorCounter />
-        </div>
 
         {/* COUNTDOWN */}
         <Countdown />
