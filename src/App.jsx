@@ -195,6 +195,7 @@ const EVENT_DATA = [
   { id: 7, title: '社交ダンス', category: 'performance', stage: 'C', start: '14:00', end: '14:15', rowStart: 5, rowSpan: 1, user: 'つねぽん、りほちゃんペア' },
   { id: 10, title: '書籍完成トークショー', category: 'performance', stage: 'C', start: '14:15', end: '15:15', rowStart: 6, rowSpan: 4, user: 'しおりちゃん' },
   { id: 8, title: 'AI教室', category: 'performance', stage: 'C', start: '15:15', end: '16:15', rowStart: 10, rowSpan: 4, user: 'なべちゃん' },
+  { id: 14, title: 'DJ', category: 'performance', stage: 'C', start: '17:15', end: '18:00', rowStart: 18, rowSpan: 3, user: 'ジョージさん' },
   { id: 2, title: 'ダンスショーケース', category: 'performance', stage: 'C', start: '18:00', end: '18:15', rowStart: 21, rowSpan: 1, user: 'りほちゃん・ごうちゃん・まりんちゃん・むぎちゃん・なっちゃん' },
   { id: 13, title: '閉会式', category: 'performance', stage: 'C', start: '18:30', end: '19:00', rowStart: 23, rowSpan: 2, user: '全員' },
   { id: 4, title: 'スマホストラップ作り', category: 'workshop', stage: 'C', start: '16:15', end: '17:15', rowStart: 14, rowSpan: 4, user: 'みなみ先生' },
