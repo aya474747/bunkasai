@@ -81,11 +81,13 @@ const VisitorCounter = () => {
   const [count, setCount] = useState(null);
 
   useEffect(() => {
-    // hit.yhype.meを使って訪問者数を取得・カウントアップ
-    fetch('https://hit.yhype.me/hit/neighbors-esaka-bunkasai')
-      .then(res => res.text())
+    // hits.shを使って訪問者数を取得・カウントアップ
+    fetch('https://hits.sh/neighbors-esaka-bunkasai.json')
+      .then(res => res.json())
       .then(data => {
-        const count = parseInt(data) || 22;
+        console.log('Hits.sh Response:', data);
+        const count = data.hits || 22;
+        console.log('Parsed count:', count);
         setCount(count);
       })
       .catch(err => {
@@ -393,19 +395,33 @@ export default function EventPage() {
   const [visitorCount, setVisitorCount] = useState(null);
 
   useEffect(() => {
-    // hit.yhype.meを使って訪問者数を取得・カウントアップ
-    fetch('https://hit.yhype.me/hit/neighbors-esaka-bunkasai')
-      .then(res => res.text())
-      .then(data => {
+    // 訪問者数を取得・カウントアップ
+    const fetchVisitorCount = async () => {
+      try {
+        // hits.shを使用してビジターカウントを取得
+        const response = await fetch('https://hits.sh/neighbors-esaka-bunkasai.json');
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
         console.log('API Response:', data);
-        const count = parseInt(data) || 22;
-        console.log('Parsed count:', count);
-        setVisitorCount(count);
-      })
-      .catch(err => {
+
+        if (data && typeof data.hits === 'number') {
+          console.log('Visitor count:', data.hits);
+          setVisitorCount(data.hits);
+        } else {
+          throw new Error('Invalid response format');
+        }
+      } catch (err) {
         console.error('Failed to fetch visitor count:', err);
+        // エラー時はデフォルト値を表示
         setVisitorCount(22);
-      });
+      }
+    };
+
+    fetchVisitorCount();
   }, []);
 
   // EVENT_DATAからcontentオブジェクトを自動生成
