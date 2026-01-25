@@ -81,14 +81,21 @@ const VisitorCounter = () => {
   const [count, setCount] = useState(null);
 
   useEffect(() => {
-    // hits.shを使って訪問者数を取得・カウントアップ
-    fetch('https://hits.sh/neighbors-esaka-bunkasai.json')
-      .then(res => res.json())
-      .then(data => {
-        console.log('Hits.sh Response:', data);
-        const count = data.hits || 22;
-        console.log('Parsed count:', count);
-        setCount(count);
+    // visitor-badgeを使って訪問者数を取得・カウントアップ
+    fetch('https://visitor-badge.laobi.icu/badge?page_id=neighbors-esaka-bunkasai')
+      .then(res => res.text())
+      .then(svgText => {
+        console.log('SVG Response received');
+        // SVGからvisitors数を抽出
+        const match = svgText.match(/visitors<\/text><text[^>]*>([0-9,]+)<\/text>/);
+        if (match && match[1]) {
+          // カンマを削除して数値に変換
+          const count = parseInt(match[1].replace(/,/g, ''), 10);
+          console.log('Parsed count:', count);
+          setCount(count);
+        } else {
+          setCount(22);
+        }
       })
       .catch(err => {
         console.error('Failed to fetch visitor count:', err);
@@ -398,21 +405,25 @@ export default function EventPage() {
     // 訪問者数を取得・カウントアップ
     const fetchVisitorCount = async () => {
       try {
-        // hits.shを使用してビジターカウントを取得
-        const response = await fetch('https://hits.sh/neighbors-esaka-bunkasai.json');
+        // visitor-badgeを使用してビジターカウントを取得
+        const response = await fetch('https://visitor-badge.laobi.icu/badge?page_id=neighbors-esaka-bunkasai');
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data = await response.json();
-        console.log('API Response:', data);
+        const svgText = await response.text();
+        console.log('SVG Response received');
 
-        if (data && typeof data.hits === 'number') {
-          console.log('Visitor count:', data.hits);
-          setVisitorCount(data.hits);
+        // SVGからvisitors数を抽出
+        const match = svgText.match(/visitors<\/text><text[^>]*>([0-9,]+)<\/text>/);
+        if (match && match[1]) {
+          // カンマを削除して数値に変換
+          const count = parseInt(match[1].replace(/,/g, ''), 10);
+          console.log('Visitor count:', count);
+          setVisitorCount(count);
         } else {
-          throw new Error('Invalid response format');
+          throw new Error('Could not parse visitor count from SVG');
         }
       } catch (err) {
         console.error('Failed to fetch visitor count:', err);
