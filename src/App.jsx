@@ -491,7 +491,6 @@ export default function EventPage() {
               title="PERFORMANCE & TALK"
               items={content.performance}
               colorClass="bg-cyan-300"
-              rotate="md:-rotate-1"
             />
           </div>
 
@@ -502,7 +501,6 @@ export default function EventPage() {
               title="SHOPS & BOOTHS"
               items={content.shops}
               colorClass="bg-pink-300"
-              rotate="md:rotate-1"
             />
           </div>
 
@@ -523,7 +521,6 @@ export default function EventPage() {
               title="WORKSHOP"
               items={content.workshop}
               colorClass="bg-green-300"
-              rotate="md:rotate-2"
             />
           </div>
 
@@ -534,14 +531,13 @@ export default function EventPage() {
               title="EXHIBITION"
               items={content.exhibition}
               colorClass="bg-purple-300"
-              rotate="md:-rotate-1"
             />
           </div>
 
            {/* NIGHT PART */}
            <div className="md:col-span-2 lg:col-span-1">
             <SectionTitle title="NIGHT" icon={Moon} color="bg-indigo-600" />
-             <div className="bg-indigo-950 text-white border-4 border-black p-6 h-full brutalist-shadow relative overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-xl md:rotate-1 rounded-xl">
+             <div className="bg-indigo-950 text-white border-4 border-black p-6 h-full brutalist-shadow relative overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-xl rounded-xl">
                 <div className="absolute top-0 right-0 p-4 opacity-20">
                   <Moon size={100} className="text-yellow-200" />
                 </div>
