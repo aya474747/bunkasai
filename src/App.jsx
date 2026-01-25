@@ -85,14 +85,11 @@ const VisitorCounter = () => {
     fetch('https://hits.dwyl.com/neighbors-esaka/bunkasai.json')
       .then(res => res.json())
       .then(data => {
-        console.log('Full API Response:', JSON.stringify(data, null, 2));
         // 可能性のあるすべてのプロパティを試す
         const visitorCount = data.count || data.total || data.hits || data.value || 22;
-        console.log('Using count:', visitorCount);
         setCount(visitorCount);
       })
       .catch(err => {
-        console.error('API Error:', err);
         setCount(22);
       });
   }, []);
@@ -101,7 +98,7 @@ const VisitorCounter = () => {
 
   return (
     <div className="inline-block bg-yellow-400 text-black px-6 py-3 border-4 border-black brutalist-shadow transform rotate-1 font-display text-lg">
-      あなたは <span className="text-3xl font-black mx-2">{String(displayCount).padStart(3, '0')}</span> 人目のネイバーです
+      Visitor <span className="text-3xl font-black mx-2">#{String(displayCount).padStart(3, '0')}</span>
     </div>
   );
 };
@@ -398,14 +395,11 @@ export default function EventPage() {
     fetch('https://hits.dwyl.com/neighbors-esaka/bunkasai.json')
       .then(res => res.json())
       .then(data => {
-        console.log('Full API Response (EventPage):', JSON.stringify(data, null, 2));
         // 可能性のあるすべてのプロパティを試す
         const count = data.count || data.total || data.hits || data.value || 22;
-        console.log('Using count:', count);
         setVisitorCount(count);
       })
       .catch(err => {
-        console.error('API Error (EventPage):', err);
         setVisitorCount(22);
       });
   }, []);
@@ -516,7 +510,7 @@ export default function EventPage() {
 
       {/* MARQUEE */}
       <div className="mb-12 w-full transform -rotate-1 origin-left scale-105">
-        <Marquee text={`★ あなたは${String(visitorCount || 22).padStart(3, '0')}人目のネイバーです ★`} />
+        <Marquee text={`★ You are visitor #${String(visitorCount || 22).padStart(3, '0')} ★`} />
       </div>
 
       <main className="px-4 md:px-8 max-w-7xl mx-auto">
