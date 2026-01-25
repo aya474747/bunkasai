@@ -594,7 +594,7 @@ export default function EventPage() {
                 </div>
                 <div className="relative z-10">
                   <h3 className="text-2xl font-display text-yellow-300 mb-6 border-b-2 border-indigo-700 pb-2 inline-block">
-                    ★ スナックちえこ OPEN ★
+                    スナックちえこ
                   </h3>
 
                   {/* ママ */}
