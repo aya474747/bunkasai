@@ -200,11 +200,11 @@ const TimeSchedule = () => {
   ];
 
   const scheduleData15Min = [
-    { id: 99, title: '喫茶まゆか', stage: 'B', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'まゆちゃん＆あっこたん', image: 'https://i.gyazo.com/baa82c92d80f091a8fee8815bd02c9fb.jpg' },
+    { id: 99, title: '喫茶まゆか', stage: 'B', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'まゆちゃん・あっこたん・ぐっち', image: 'https://i.gyazo.com/baa82c92d80f091a8fee8815bd02c9fb.jpg' },
     { id: 0, title: '開会式', stage: 'C', start: '13:00', end: '13:15', rowStart: 1, rowSpan: 1, user: '全員' },
     { id: 1, title: 'アコースティックバンド', stage: 'C', start: '13:15', end: '13:30', rowStart: 2, rowSpan: 1, user: 'うみ・もも・まゆ・さっちゃま・かの' },
     { id: 11, title: '旅立ちの日に合唱', stage: 'C', start: '13:30', end: '14:00', rowStart: 3, rowSpan: 2, user: '全員参加', image: 'https://i.gyazo.com/c62624ce8f2a843df2a8f1e2d63532aa.png' },
-    { id: 7, title: '社交ダンス', stage: 'C', start: '14:00', end: '14:15', rowStart: 5, rowSpan: 1, user: 'つねぽん＆りほ' },
+    { id: 7, title: '社交ダンス', stage: 'C', start: '14:00', end: '14:15', rowStart: 5, rowSpan: 1, user: 'つねぽん、りほちゃんペア' },
     { id: 10, title: '書籍完成トーク', stage: 'C', start: '14:15', end: '15:15', rowStart: 6, rowSpan: 4, user: 'しおりちゃん' },
 
     // AI教室 (15:15から1時間に修正)
@@ -215,13 +215,13 @@ const TimeSchedule = () => {
     { id: 13, title: '閉会式', stage: 'C', start: '18:30', end: '19:00', rowStart: 23, rowSpan: 2, user: '全員' },
     { id: 12, title: 'かのお悩み相談', stage: 'A', start: '14:00', end: '16:00', rowStart: 5, rowSpan: 8, user: 'かのくん', image: 'https://i.gyazo.com/b9e87d295b700786368bda29c865c97b.jpg' },
     { id: 3, title: 'AIプリクラ', stage: 'A', start: '16:00', end: '19:00', rowStart: 13, rowSpan: 12, user: 'なべちゃん' },
-    { id: 5, title: 'トイレZINE販売', stage: 'D', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'さくら＆ゆうこ', image: 'https://i.gyazo.com/4f5d109e4ddc5bbdddaab52ea475f5fc.jpg' },
+    { id: 5, title: 'トイレZINE販売', stage: 'D', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'さくらちゃん・ゆうこりん', image: 'https://i.gyazo.com/4f5d109e4ddc5bbdddaab52ea475f5fc.jpg' },
     { id: 61, title: 'ほぐしの満洲', stage: 'E', start: '13:30', end: '13:40', rowStart: 3, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg' },
     { id: 62, title: 'ほぐしの満洲', stage: 'E', start: '14:30', end: '14:40', rowStart: 7, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg' },
     { id: 63, title: 'ほぐしの満洲', stage: 'E', start: '15:30', end: '15:40', rowStart: 11, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg' },
     { id: 64, title: 'ほぐしの満洲', stage: 'E', start: '16:30', end: '16:40', rowStart: 15, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg' },
     { id: 65, title: 'ほぐしの満洲', stage: 'E', start: '17:30', end: '17:40', rowStart: 19, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg' },
-    { id: 66, title: 'Soup Stock Esaka', stage: 'F', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'いけめぐ・あまね', image: 'https://i.gyazo.com/1c0d4ff391dd612c82c5fe1d702d5836.jpg' },
+    { id: 66, title: 'Soup Stock Esaka', stage: 'F', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'いけめぐ・あまねちゃん', image: 'https://i.gyazo.com/1c0d4ff391dd612c82c5fe1d702d5836.jpg' },
   ];
 
   const times = ['13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00'];
@@ -342,7 +342,7 @@ export default function EventPage() {
   const content = {
     performance: [
       { name: "開会式", desc: "全員", time: "13:00-13:15", stage: "STAGE C" },
-      { name: "アコースティックバンド", desc: "うみ ももちゃん まゆちゃん さっちゃま かのくん", time: "13:15-13:30", stage: "STAGE C" },
+      { name: "アコースティックバンド", desc: "うみ・ももちゃん・まゆちゃん・さっちゃま・かのくん", time: "13:15-13:30", stage: "STAGE C" },
       {
         name: "旅立ちの日に合唱",
         desc: "全員 指揮:かよちゃん ピアノ:さっちゃま",
@@ -351,11 +351,11 @@ export default function EventPage() {
         image: "https://i.gyazo.com/c62624ce8f2a843df2a8f1e2d63532aa.png",
         detail: "久しぶりに歌っちゃおう！練習時間も設けるから、男子〜！ちゃんとして〜！ってやつもやろう！"
       },
-      { name: "社交ダンス", desc: "つねぽん & りほちゃん", stage: "STAGE C", time: "14:00-14:15" },
+      { name: "社交ダンス", desc: "つねぽん、りほちゃんペア", stage: "STAGE C", time: "14:00-14:15" },
       { name: "書籍完成トークショー", desc: "しおりちゃん", time: "14:15-15:15", stage: "STAGE C" },
       // AI教室の時間を更新
       { name: "AI教室", desc: "なべちゃん", time: "15:15-16:15", stage: "STAGE C" },
-      { name: "ダンスショーケース", desc: "りほちゃん ごうちゃん まりんちゃん むぎちゃん なっちゃん", time: "18:00-18:15", stage: "STAGE C" },
+      { name: "ダンスショーケース", desc: "りほちゃん・ごうちゃん・まりんちゃん・むぎちゃん・なっちゃん", time: "18:00-18:15", stage: "STAGE C" },
       { name: "閉会式", desc: "全員", time: "18:30-19:00", stage: "STAGE C" },
     ],
     workshop: [
@@ -372,7 +372,7 @@ export default function EventPage() {
       },
       {
         name: "トイレZINE販売",
-        desc: "さくらちゃんとゆうこりん",
+        desc: "さくらちゃん・ゆうこりん",
         time: "14:15-18:00",
         stage: "STAGE D",
         image: "https://i.gyazo.com/4f5d109e4ddc5bbdddaab52ea475f5fc.jpg",
@@ -382,10 +382,10 @@ export default function EventPage() {
       { name: "AIで作ったプリクラコーナー", desc: "なべちゃん", time: "16:00-19:00", stage: "STAGE A" },
     ],
     food: [
-      { name: "Soup Stock Esaka", desc: "いけめぐ あまねちゃん", time: "14:15-18:00", stage: "STAGE F", image: "https://i.gyazo.com/1c0d4ff391dd612c82c5fe1d702d5836.jpg", detail: "スープ+パンのセット 限定15食" },
+      { name: "Soup Stock Esaka", desc: "いけめぐ・あまねちゃん", time: "14:15-18:00", stage: "STAGE F", image: "https://i.gyazo.com/1c0d4ff391dd612c82c5fe1d702d5836.jpg", detail: "スープ+パンのセット 限定15食" },
       {
         name: "喫茶まゆか",
-        desc: "まゆちゃん あっこたん ぐっち",
+        desc: "まゆちゃん・あっこたん・ぐっち",
         time: "14:15-18:00",
         stage: "STAGE B",
         image: "https://i.gyazo.com/baa82c92d80f091a8fee8815bd02c9fb.jpg",
@@ -400,7 +400,7 @@ export default function EventPage() {
     ],
     night: [
       { name: "ちえちゃん", desc: "スナックちえこ ママ" },
-      { name: "かさたろう / ぐっち", desc: "ボーイ" },
+      { name: "かさたろう・ぐっち", desc: "ボーイ" },
     ]
   };
 
@@ -563,7 +563,7 @@ export default function EventPage() {
                      <div className="w-12 h-12 bg-indigo-800 rounded-full flex items-center justify-center font-bold text-xs border-2 border-indigo-500 shrink-0 text-white">
                         ボーイ
                      </div>
-                     <div className="text-lg font-bold">かさたろう / ぐっち</div>
+                     <div className="text-lg font-bold">かさたろう・ぐっち</div>
                   </div>
 
                   <p className="text-indigo-200 text-sm mb-6 leading-relaxed bg-indigo-900/50 p-3 rounded border border-indigo-800">
