@@ -81,11 +81,12 @@ const VisitorCounter = () => {
   const [count, setCount] = useState(null);
 
   useEffect(() => {
-    // CountAPIを使って訪問者数を取得・カウントアップ
-    fetch('https://api.countapi.xyz/hit/neighbors-esaka-bunkasai/visitors')
-      .then(res => res.json())
+    // hit.yhype.meを使って訪問者数を取得・カウントアップ
+    fetch('https://hit.yhype.me/hit/neighbors-esaka-bunkasai')
+      .then(res => res.text())
       .then(data => {
-        setCount(data.value);
+        const count = parseInt(data) || 22;
+        setCount(count);
       })
       .catch(err => {
         console.error('Failed to fetch visitor count:', err);
@@ -393,11 +394,12 @@ export default function EventPage() {
   const [visitorCount, setVisitorCount] = useState(null);
 
   useEffect(() => {
-    // CountAPIを使って訪問者数を取得・カウントアップ
-    fetch('https://api.countapi.xyz/hit/neighbors-esaka-bunkasai/visitors')
-      .then(res => res.json())
+    // hit.yhype.meを使って訪問者数を取得・カウントアップ
+    fetch('https://hit.yhype.me/hit/neighbors-esaka-bunkasai')
+      .then(res => res.text())
       .then(data => {
-        setVisitorCount(data.value);
+        const count = parseInt(data) || 22;
+        setVisitorCount(count);
       })
       .catch(err => {
         console.error('Failed to fetch visitor count:', err);
