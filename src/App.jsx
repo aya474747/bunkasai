@@ -79,17 +79,20 @@ const Countdown = () => {
 
 const VisitorCounter = () => {
   const [count, setCount] = useState(null);
+  const [debug, setDebug] = useState('');
 
   useEffect(() => {
     // hits.dwyl.comを使って実際の訪問者数を取得・カウントアップ
     fetch('https://hits.dwyl.com/neighbors-esaka/bunkasai.json')
       .then(res => res.json())
       .then(data => {
+        setDebug(JSON.stringify(data));
         // 可能性のあるすべてのプロパティを試す
         const visitorCount = data.count || data.total || data.hits || data.value || 22;
         setCount(visitorCount);
       })
       .catch(err => {
+        setDebug(`Error: ${err.message}`);
         setCount(22);
       });
   }, []);
@@ -97,10 +100,17 @@ const VisitorCounter = () => {
   const displayCount = count || 22;
 
   return (
-    <div className="fixed top-4 right-4 z-50 bg-yellow-400 text-black px-4 py-2 border-3 border-black brutalist-shadow-sm font-display text-sm flex items-center gap-2 rounded-md">
-      <span className="text-xs opacity-70">Visitor</span>
-      <span className="text-2xl font-black tabular-nums">#{String(displayCount).padStart(3, '0')}</span>
-    </div>
+    <>
+      <div className="fixed top-4 right-4 z-50 bg-yellow-400 text-black px-4 py-2 border-3 border-black brutalist-shadow-sm font-display text-sm flex items-center gap-2 rounded-md">
+        <span className="text-xs opacity-70">Visitor</span>
+        <span className="text-2xl font-black tabular-nums">#{String(displayCount).padStart(3, '0')}</span>
+      </div>
+      {debug && (
+        <div className="fixed top-20 right-4 z-50 bg-red-400 text-black px-3 py-2 border-2 border-black text-xs max-w-xs break-all rounded">
+          {debug}
+        </div>
+      )}
+    </>
   );
 };
 
