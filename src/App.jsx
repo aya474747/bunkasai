@@ -85,13 +85,10 @@ const VisitorCounter = () => {
     fetch('https://hits.dwyl.com/neighbors-esaka/bunkasai.json')
       .then(res => res.json())
       .then(data => {
-        console.log('API Response:', data);
         const visitorCount = data.count || data.total || 22;
-        console.log('Visitor count:', visitorCount);
         setCount(visitorCount);
       })
       .catch(err => {
-        console.error('Failed to fetch visitor count:', err);
         setCount(22);
       });
   }, []);
@@ -397,13 +394,10 @@ export default function EventPage() {
     fetch('https://hits.dwyl.com/neighbors-esaka/bunkasai.json')
       .then(res => res.json())
       .then(data => {
-        console.log('API Response:', data);
         const count = data.count || data.total || 22;
-        console.log('Visitor count:', count);
         setVisitorCount(count);
       })
       .catch(err => {
-        console.error('Failed to fetch visitor count:', err);
         setVisitorCount(22);
       });
   }, []);
