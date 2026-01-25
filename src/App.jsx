@@ -85,10 +85,14 @@ const VisitorCounter = () => {
     fetch('https://hits.dwyl.com/neighbors-esaka/bunkasai.json')
       .then(res => res.json())
       .then(data => {
-        const visitorCount = data.count || data.total || 22;
+        console.log('Full API Response:', JSON.stringify(data, null, 2));
+        // 可能性のあるすべてのプロパティを試す
+        const visitorCount = data.count || data.total || data.hits || data.value || 22;
+        console.log('Using count:', visitorCount);
         setCount(visitorCount);
       })
       .catch(err => {
+        console.error('API Error:', err);
         setCount(22);
       });
   }, []);
@@ -394,10 +398,14 @@ export default function EventPage() {
     fetch('https://hits.dwyl.com/neighbors-esaka/bunkasai.json')
       .then(res => res.json())
       .then(data => {
-        const count = data.count || data.total || 22;
+        console.log('Full API Response (EventPage):', JSON.stringify(data, null, 2));
+        // 可能性のあるすべてのプロパティを試す
+        const count = data.count || data.total || data.hits || data.value || 22;
+        console.log('Using count:', count);
         setVisitorCount(count);
       })
       .catch(err => {
+        console.error('API Error (EventPage):', err);
         setVisitorCount(22);
       });
   }, []);
