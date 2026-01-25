@@ -239,92 +239,96 @@ const EventModal = ({ selectedEvent, onClose }) => {
       onClick={onClose}
     >
       <div
-        className="bg-white border-4 border-black p-6 md:p-8 brutalist-shadow max-w-lg w-full rounded-xl"
+        className="bg-white border-4 border-black brutalist-shadow max-w-lg w-full max-h-[90vh] rounded-xl flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex justify-between items-start mb-4">
-          <h3 className="text-2xl md:text-3xl font-display text-black">{selectedEvent.title}</h3>
+        {/* 固定ヘッダー（タイトルと閉じるボタン） */}
+        <div className="flex justify-between items-start p-6 md:p-8 pb-4 border-b-2 border-gray-200 shrink-0">
+          <h3 className="text-2xl md:text-3xl font-display text-black pr-4">{selectedEvent.title}</h3>
           <button
             onClick={onClose}
-            className="text-3xl font-bold hover:scale-110 transition-transform"
+            className="text-3xl font-bold hover:scale-110 transition-transform shrink-0 w-10 h-10 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-full border-2 border-black"
           >
             ×
           </button>
         </div>
 
-        {selectedEvent.image && (
-          <div className="mb-4 flex justify-center">
-            <img
-              src={selectedEvent.image}
-              alt={selectedEvent.title}
-              className="w-64 h-64 object-cover border-2 border-black brutalist-shadow-sm rounded-lg"
-            />
-          </div>
-        )}
+        {/* スクロール可能なコンテンツエリア */}
+        <div className="overflow-y-auto p-6 md:p-8 pt-4">
+          {selectedEvent.image && (
+            <div className="mb-4 flex justify-center">
+              <img
+                src={selectedEvent.image}
+                alt={selectedEvent.title}
+                className="w-64 h-64 object-cover border-2 border-black brutalist-shadow-sm rounded-lg"
+              />
+            </div>
+          )}
 
-        <div className="space-y-3">
-          {selectedEvent.user && (
-            <div className="flex items-center gap-2">
-              <span className="font-bold text-sm bg-black text-white px-3 py-1 rounded">出演者</span>
-              <span className="font-bold">{selectedEvent.user}</span>
-            </div>
-          )}
-          {(selectedEvent.start && selectedEvent.end) && (
-            <div className="flex items-center gap-2">
-              <span className="font-bold text-sm bg-black text-white px-3 py-1 rounded">時間</span>
-              <span className="font-bold">{selectedEvent.start} - {selectedEvent.end}</span>
-            </div>
-          )}
-          {selectedEvent.time && !(selectedEvent.start && selectedEvent.end) && (
-            <div className="flex items-center gap-2">
-              <span className="font-bold text-sm bg-black text-white px-3 py-1 rounded">時間</span>
-              <span className="font-bold">{selectedEvent.time}</span>
-            </div>
-          )}
-          {selectedEvent.stage && (
-            <div className="flex items-center gap-2">
-              <span className="font-bold text-sm bg-black text-white px-3 py-1 rounded">ステージ</span>
-              <span className="font-bold">{selectedEvent.stage}</span>
-            </div>
-          )}
-          {selectedEvent.detail && (
-            <div className="mt-4 pt-4 border-t-2 border-gray-200">
-              <p className="text-sm text-gray-800 leading-relaxed bg-gray-50 p-3 rounded border border-gray-200 whitespace-pre-line">
-                {selectedEvent.detail}
-              </p>
-            </div>
-          )}
-          {selectedEvent.practiceVideos && (
-            <div className="mt-4 pt-4 border-t-2 border-gray-200">
-              <h3 className="font-bold text-base mb-3">練習動画</h3>
-              <div className="space-y-2">
-                {selectedEvent.practiceVideos.soprano && (
-                  <div>
-                    <span className="font-semibold text-sm">ソプラノパート: </span>
-                    <a href={selectedEvent.practiceVideos.soprano} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline text-sm break-all">
-                      {selectedEvent.practiceVideos.soprano}
-                    </a>
-                  </div>
-                )}
-                {selectedEvent.practiceVideos.alto && (
-                  <div>
-                    <span className="font-semibold text-sm">アルトパート: </span>
-                    <a href={selectedEvent.practiceVideos.alto} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline text-sm break-all">
-                      {selectedEvent.practiceVideos.alto}
-                    </a>
-                  </div>
-                )}
-                {selectedEvent.practiceVideos.tenor && (
-                  <div>
-                    <span className="font-semibold text-sm">テノールパート: </span>
-                    <a href={selectedEvent.practiceVideos.tenor} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline text-sm break-all">
-                      {selectedEvent.practiceVideos.tenor}
-                    </a>
-                  </div>
-                )}
+          <div className="space-y-3">
+            {selectedEvent.user && (
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-sm bg-black text-white px-3 py-1 rounded">出演者</span>
+                <span className="font-bold">{selectedEvent.user}</span>
               </div>
-            </div>
-          )}
+            )}
+            {(selectedEvent.start && selectedEvent.end) && (
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-sm bg-black text-white px-3 py-1 rounded">時間</span>
+                <span className="font-bold">{selectedEvent.start} - {selectedEvent.end}</span>
+              </div>
+            )}
+            {selectedEvent.time && !(selectedEvent.start && selectedEvent.end) && (
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-sm bg-black text-white px-3 py-1 rounded">時間</span>
+                <span className="font-bold">{selectedEvent.time}</span>
+              </div>
+            )}
+            {selectedEvent.stage && (
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-sm bg-black text-white px-3 py-1 rounded">ステージ</span>
+                <span className="font-bold">{selectedEvent.stage}</span>
+              </div>
+            )}
+            {selectedEvent.detail && (
+              <div className="mt-4 pt-4 border-t-2 border-gray-200">
+                <p className="text-sm text-gray-800 leading-relaxed bg-gray-50 p-3 rounded border border-gray-200 whitespace-pre-line">
+                  {selectedEvent.detail}
+                </p>
+              </div>
+            )}
+            {selectedEvent.practiceVideos && (
+              <div className="mt-4 pt-4 border-t-2 border-gray-200">
+                <h3 className="font-bold text-base mb-3">練習動画</h3>
+                <div className="space-y-2">
+                  {selectedEvent.practiceVideos.soprano && (
+                    <div>
+                      <span className="font-semibold text-sm">ソプラノパート: </span>
+                      <a href={selectedEvent.practiceVideos.soprano} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline text-sm break-all">
+                        {selectedEvent.practiceVideos.soprano}
+                      </a>
+                    </div>
+                  )}
+                  {selectedEvent.practiceVideos.alto && (
+                    <div>
+                      <span className="font-semibold text-sm">アルトパート: </span>
+                      <a href={selectedEvent.practiceVideos.alto} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline text-sm break-all">
+                        {selectedEvent.practiceVideos.alto}
+                      </a>
+                    </div>
+                  )}
+                  {selectedEvent.practiceVideos.tenor && (
+                    <div>
+                      <span className="font-semibold text-sm">テノールパート: </span>
+                      <a href={selectedEvent.practiceVideos.tenor} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline text-sm break-all">
+                        {selectedEvent.practiceVideos.tenor}
+                      </a>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
