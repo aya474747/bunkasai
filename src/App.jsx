@@ -97,8 +97,9 @@ const VisitorCounter = () => {
   const displayCount = count || 22;
 
   return (
-    <div className="inline-block bg-yellow-400 text-black px-6 py-3 border-4 border-black brutalist-shadow transform rotate-1 font-display text-lg">
-      Visitor <span className="text-3xl font-black mx-2">#{String(displayCount).padStart(3, '0')}</span>
+    <div className="fixed top-4 right-4 z-50 bg-yellow-400 text-black px-4 py-2 border-3 border-black brutalist-shadow-sm font-display text-sm flex items-center gap-2 rounded-md">
+      <span className="text-xs opacity-70">Visitor</span>
+      <span className="text-2xl font-black tabular-nums">#{String(displayCount).padStart(3, '0')}</span>
     </div>
   );
 };
@@ -450,6 +451,9 @@ export default function EventPage() {
   return (
     <div className="min-h-screen pb-20 w-full overflow-x-hidden">
       <GlobalStyles />
+
+      {/* VISITOR COUNTER */}
+      <VisitorCounter />
 
       {/* HEADER SECTION - CENTERED */}
       <header className="pt-12 px-4 md:px-8 max-w-5xl mx-auto mb-8 text-center relative">
