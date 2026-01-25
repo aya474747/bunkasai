@@ -506,6 +506,11 @@ export default function EventPage() {
 
       <main className="px-4 md:px-8 max-w-7xl mx-auto">
 
+        {/* VISITOR COUNTER */}
+        <div className="flex justify-center mb-8">
+          <VisitorCounter />
+        </div>
+
         {/* COUNTDOWN */}
         <Countdown />
 
@@ -635,22 +640,15 @@ export default function EventPage() {
 
       {/* FOOTER */}
       <footer className="mt-20 bg-black text-white py-12 border-t-8 border-lime-400">
-        <div className="max-w-7xl mx-auto px-8 flex flex-col items-center gap-8">
-            {/* Visitor Counter */}
-            <div className="mb-4">
-              <VisitorCounter />
+        <div className="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div className="text-center md:text-left">
+              <h2 className="text-4xl font-display mb-2">NEIGHBORS ESAKA</h2>
+              <p className="opacity-70 font-mono font-bold">2026.02.22 SUN / OSAKA</p>
             </div>
-
-            <div className="flex flex-col md:flex-row justify-between items-center gap-8 w-full">
-              <div className="text-center md:text-left">
-                <h2 className="text-4xl font-display mb-2">NEIGHBORS ESAKA</h2>
-                <p className="opacity-70 font-mono font-bold">2026.02.22 SUN / OSAKA</p>
-              </div>
-              <div className="flex gap-4">
-                <button className="w-16 h-16 bg-white text-black border-4 border-transparent hover:border-lime-400 flex items-center justify-center rounded-full transition-all hover:scale-110">
-                   <Heart size={30} fill="black" />
-                </button>
-              </div>
+            <div className="flex gap-4">
+              <button className="w-16 h-16 bg-white text-black border-4 border-transparent hover:border-lime-400 flex items-center justify-center rounded-full transition-all hover:scale-110">
+                 <Heart size={30} fill="black" />
+              </button>
             </div>
         </div>
       </footer>
