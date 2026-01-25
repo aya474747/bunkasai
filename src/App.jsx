@@ -187,6 +187,41 @@ const StageMap = () => {
   );
 };
 
+// マスターデータ（このデータを編集すれば、タイムテーブルとコンテンツセクションの両方に反映されます）
+const EVENT_DATA = [
+  { id: 0, title: '開会式', category: 'performance', stage: 'C', start: '13:00', end: '13:15', rowStart: 1, rowSpan: 1, user: '全員' },
+  { id: 1, title: 'アコースティックバンド', category: 'performance', stage: 'C', start: '13:15', end: '13:30', rowStart: 2, rowSpan: 1, user: 'うみ・ももちゃん・まゆちゃん・さっちゃま・かのくん' },
+  { id: 11, title: '旅立ちの日に合唱', category: 'performance', stage: 'C', start: '13:30', end: '14:00', rowStart: 3, rowSpan: 2, user: '全員 指揮:かよちゃん ピアノ:さっちゃま', image: 'https://i.gyazo.com/c62624ce8f2a843df2a8f1e2d63532aa.png', detail: '久しぶりに歌っちゃおう！練習時間も設けるから、男子〜！ちゃんとして〜！ってやつもやろう！' },
+  { id: 7, title: '社交ダンス', category: 'performance', stage: 'C', start: '14:00', end: '14:15', rowStart: 5, rowSpan: 1, user: 'つねぽん、りほちゃんペア' },
+  { id: 10, title: '書籍完成トークショー', category: 'performance', stage: 'C', start: '14:15', end: '15:15', rowStart: 6, rowSpan: 4, user: 'しおりちゃん' },
+  { id: 8, title: 'AI教室', category: 'performance', stage: 'C', start: '15:15', end: '16:15', rowStart: 10, rowSpan: 4, user: 'なべちゃん' },
+  { id: 2, title: 'ダンスショーケース', category: 'performance', stage: 'C', start: '18:00', end: '18:15', rowStart: 21, rowSpan: 1, user: 'りほちゃん・ごうちゃん・まりんちゃん・むぎちゃん・なっちゃん' },
+  { id: 13, title: '閉会式', category: 'performance', stage: 'C', start: '18:30', end: '19:00', rowStart: 23, rowSpan: 2, user: '全員' },
+  { id: 4, title: 'スマホストラップ作り', category: 'workshop', stage: 'C', start: '16:15', end: '17:15', rowStart: 14, rowSpan: 4, user: 'みなみ先生' },
+  { id: 12, title: 'かのお悩み相談室', category: 'shops', stage: 'A', start: '14:00', end: '16:00', rowStart: 5, rowSpan: 8, user: 'かのくん', image: 'https://i.gyazo.com/b9e87d295b700786368bda29c865c97b.jpg', detail: 'かのくんがあなたのお悩み相談にのります！あるいはあなたにかのくんのお悩みを聞いてもらいます！決めるのはア・ナ・タ♡' },
+  { id: 5, title: 'トイレZINE販売', category: 'shops', stage: 'D', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'さくらちゃん・ゆうこりん', image: 'https://i.gyazo.com/4f5d109e4ddc5bbdddaab52ea475f5fc.jpg', detail: 'トイレマークの写真を撮り集めて、気づいたら、10年以上経っていました.........！様々な国を旅して出会った、ニッチな世界へようこそ......！' },
+  { id: 61, title: 'ほぐしの満洲', category: 'shops', stage: 'E', start: '13:30', end: '13:40', rowStart: 3, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg', detail: '施術時間10分 Max 5人' },
+  { id: 62, title: 'ほぐしの満洲', category: 'shops', stage: 'E', start: '14:30', end: '14:40', rowStart: 7, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg', detail: '施術時間10分 Max 5人' },
+  { id: 63, title: 'ほぐしの満洲', category: 'shops', stage: 'E', start: '15:30', end: '15:40', rowStart: 11, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg', detail: '施術時間10分 Max 5人' },
+  { id: 64, title: 'ほぐしの満洲', category: 'shops', stage: 'E', start: '16:30', end: '16:40', rowStart: 15, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg', detail: '施術時間10分 Max 5人' },
+  { id: 65, title: 'ほぐしの満洲', category: 'shops', stage: 'E', start: '17:30', end: '17:40', rowStart: 19, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg', detail: '施術時間10分 Max 5人' },
+  { id: 3, title: 'AIで作ったプリクラコーナー', category: 'shops', stage: 'A', start: '16:00', end: '19:00', rowStart: 13, rowSpan: 12, user: 'なべちゃん' },
+  { id: 66, title: 'Soup Stock Esaka', category: 'food', stage: 'F', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'いけめぐ・あまねちゃん', image: 'https://i.gyazo.com/1c0d4ff391dd612c82c5fe1d702d5836.jpg', detail: 'スープ+パンのセット 限定15食' },
+  { id: 99, title: '喫茶まゆか', category: 'food', stage: 'B', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'まゆちゃん・あっこたん・ぐっち', image: 'https://i.gyazo.com/baa82c92d80f091a8fee8815bd02c9fb.jpg', detail: 'あなたの"好きな言葉"、まゆか先生が筆にのせて贈ります。コーヒーと共に、心整うアートな時間を。' },
+  { id: 100, title: 'イラスト展示', category: 'exhibition', stage: null, start: null, end: null, user: 'アーリャン', time: '13:00-19:00', stageText: 'GALLERY', image: '' },
+  { id: 101, title: 'イラスト展示', category: 'exhibition', stage: null, start: null, end: null, user: 'あけちゃん', time: '13:00-19:00', stageText: 'GALLERY', image: '' },
+  { id: 102, title: 'イラスト展示', category: 'exhibition', stage: null, start: null, end: null, user: 'まみたす', time: '13:00-19:00', stageText: 'GALLERY', image: '' },
+  { id: 103, title: '写真展示', category: 'exhibition', stage: null, start: null, end: null, user: 'かまちゃん', time: '13:00-19:00', stageText: 'GALLERY', image: '' },
+];
+
+// タイムテーブルに表示されないイベント（夜の部など）
+const EXTRA_EVENTS = {
+  night: [
+    { name: "ちえちゃん", desc: "スナックちえこ ママ" },
+    { name: "かさたろう・ぐっち", desc: "ボーイ" },
+  ]
+};
+
 const TimeSchedule = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
 
@@ -199,30 +234,8 @@ const TimeSchedule = () => {
     { id: 'F', name: 'STAGE F', bg: 'bg-purple-200', border: 'border-purple-500', text: 'text-purple-900' },
   ];
 
-  const scheduleData15Min = [
-    { id: 99, title: '喫茶まゆか', stage: 'B', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'まゆちゃん・あっこたん・ぐっち', image: 'https://i.gyazo.com/baa82c92d80f091a8fee8815bd02c9fb.jpg', detail: 'あなたの"好きな言葉"、まゆか先生が筆にのせて贈ります。コーヒーと共に、心整うアートな時間を。' },
-    { id: 0, title: '開会式', stage: 'C', start: '13:00', end: '13:15', rowStart: 1, rowSpan: 1, user: '全員' },
-    { id: 1, title: 'アコースティックバンド', stage: 'C', start: '13:15', end: '13:30', rowStart: 2, rowSpan: 1, user: 'うみ・もも・まゆ・さっちゃま・かの' },
-    { id: 11, title: '旅立ちの日に合唱', stage: 'C', start: '13:30', end: '14:00', rowStart: 3, rowSpan: 2, user: '全員参加', image: 'https://i.gyazo.com/c62624ce8f2a843df2a8f1e2d63532aa.png', detail: '久しぶりに歌っちゃおう！練習時間も設けるから、男子〜！ちゃんとして〜！ってやつもやろう！' },
-    { id: 7, title: '社交ダンス', stage: 'C', start: '14:00', end: '14:15', rowStart: 5, rowSpan: 1, user: 'つねぽん、りほちゃんペア' },
-    { id: 10, title: '書籍完成トーク', stage: 'C', start: '14:15', end: '15:15', rowStart: 6, rowSpan: 4, user: 'しおりちゃん' },
-
-    // AI教室 (15:15から1時間に修正)
-    { id: 8, title: 'AI教室', stage: 'C', start: '15:15', end: '16:15', rowStart: 10, rowSpan: 4, user: 'なべちゃん' },
-
-    { id: 4, title: 'スマホストラップ作り', stage: 'C', start: '16:15', end: '17:15', rowStart: 14, rowSpan: 4, user: 'みなみ先生' },
-    { id: 2, title: 'ダンスショーケース', stage: 'C', start: '18:00', end: '18:15', rowStart: 21, rowSpan: 1, user: 'りほ・ごう・まりん・むぎ・なっちゃん' },
-    { id: 13, title: '閉会式', stage: 'C', start: '18:30', end: '19:00', rowStart: 23, rowSpan: 2, user: '全員' },
-    { id: 12, title: 'かのお悩み相談', stage: 'A', start: '14:00', end: '16:00', rowStart: 5, rowSpan: 8, user: 'かのくん', image: 'https://i.gyazo.com/b9e87d295b700786368bda29c865c97b.jpg', detail: 'かのくんがあなたのお悩み相談にのります！あるいはあなたにかのくんのお悩みを聞いてもらいます！決めるのはア・ナ・タ♡' },
-    { id: 3, title: 'AIプリクラ', stage: 'A', start: '16:00', end: '19:00', rowStart: 13, rowSpan: 12, user: 'なべちゃん' },
-    { id: 5, title: 'トイレZINE販売', stage: 'D', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'さくらちゃん・ゆうこりん', image: 'https://i.gyazo.com/4f5d109e4ddc5bbdddaab52ea475f5fc.jpg', detail: 'トイレマークの写真を撮り集めて、気づいたら、10年以上経っていました.........！様々な国を旅して出会った、ニッチな世界へようこそ......！' },
-    { id: 61, title: 'ほぐしの満洲', stage: 'E', start: '13:30', end: '13:40', rowStart: 3, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg', detail: '施術時間10分 Max 5人' },
-    { id: 62, title: 'ほぐしの満洲', stage: 'E', start: '14:30', end: '14:40', rowStart: 7, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg', detail: '施術時間10分 Max 5人' },
-    { id: 63, title: 'ほぐしの満洲', stage: 'E', start: '15:30', end: '15:40', rowStart: 11, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg', detail: '施術時間10分 Max 5人' },
-    { id: 64, title: 'ほぐしの満洲', stage: 'E', start: '16:30', end: '16:40', rowStart: 15, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg', detail: '施術時間10分 Max 5人' },
-    { id: 65, title: 'ほぐしの満洲', stage: 'E', start: '17:30', end: '17:40', rowStart: 19, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg', detail: '施術時間10分 Max 5人' },
-    { id: 66, title: 'Soup Stock Esaka', stage: 'F', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'いけめぐ・あまねちゃん', image: 'https://i.gyazo.com/1c0d4ff391dd612c82c5fe1d702d5836.jpg', detail: 'スープ+パンのセット 限定15食' },
-  ];
+  // タイムテーブルに表示するイベント（stageがnullでないもの）
+  const scheduleData15Min = EVENT_DATA.filter(event => event.stage !== null);
 
   const times = ['13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00'];
 
@@ -346,70 +359,48 @@ const TimeSchedule = () => {
 };
 
 export default function EventPage() {
-  const content = {
-    performance: [
-      { name: "開会式", desc: "全員", time: "13:00-13:15", stage: "STAGE C" },
-      { name: "アコースティックバンド", desc: "うみ・ももちゃん・まゆちゃん・さっちゃま・かのくん", time: "13:15-13:30", stage: "STAGE C" },
-      {
-        name: "旅立ちの日に合唱",
-        desc: "全員 指揮:かよちゃん ピアノ:さっちゃま",
-        time: "13:30-14:00",
-        stage: "STAGE C",
-        image: "https://i.gyazo.com/c62624ce8f2a843df2a8f1e2d63532aa.png",
-        detail: "久しぶりに歌っちゃおう！練習時間も設けるから、男子〜！ちゃんとして〜！ってやつもやろう！"
-      },
-      { name: "社交ダンス", desc: "つねぽん、りほちゃんペア", stage: "STAGE C", time: "14:00-14:15" },
-      { name: "書籍完成トークショー", desc: "しおりちゃん", time: "14:15-15:15", stage: "STAGE C" },
-      // AI教室の時間を更新
-      { name: "AI教室", desc: "なべちゃん", time: "15:15-16:15", stage: "STAGE C" },
-      { name: "ダンスショーケース", desc: "りほちゃん・ごうちゃん・まりんちゃん・むぎちゃん・なっちゃん", time: "18:00-18:15", stage: "STAGE C" },
-      { name: "閉会式", desc: "全員", time: "18:30-19:00", stage: "STAGE C" },
-    ],
-    workshop: [
-      { name: "スマホストラップ作り", desc: "みなみ先生", time: "16:15-17:15", stage: "STAGE C" },
-    ],
-    shops: [
-      {
-        name: "かのお悩み相談室",
-        desc: "かのくん",
-        time: "14:00-16:00",
-        stage: "STAGE A",
-        image: "https://i.gyazo.com/b9e87d295b700786368bda29c865c97b.jpg",
-        detail: "かのくんがあなたのお悩み相談にのります！あるいはあなたにかのくんのお悩みを聞いてもらいます！決めるのはア・ナ・タ♡"
-      },
-      {
-        name: "トイレZINE販売",
-        desc: "さくらちゃん・ゆうこりん",
-        time: "14:15-18:00",
-        stage: "STAGE D",
-        image: "https://i.gyazo.com/4f5d109e4ddc5bbdddaab52ea475f5fc.jpg",
-        detail: "トイレマークの写真を撮り集めて、気づいたら、10年以上経っていました.........！様々な国を旅して出会った、ニッチな世界へようこそ......！"
-      },
-      { name: "ほぐしの満洲", desc: "ごとちゃん", time: "13:30 / 14:30 / 15:30 / 16:30 / 17:30開始", stage: "STAGE E", image: "https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg", detail: "施術時間10分 Max 5人" },
-      { name: "AIで作ったプリクラコーナー", desc: "なべちゃん", time: "16:00-19:00", stage: "STAGE A" },
-    ],
-    food: [
-      { name: "Soup Stock Esaka", desc: "いけめぐ・あまねちゃん", time: "14:15-18:00", stage: "STAGE F", image: "https://i.gyazo.com/1c0d4ff391dd612c82c5fe1d702d5836.jpg", detail: "スープ+パンのセット 限定15食" },
-      {
-        name: "喫茶まゆか",
-        desc: "まゆちゃん・あっこたん・ぐっち",
-        time: "14:15-18:00",
-        stage: "STAGE B",
-        image: "https://i.gyazo.com/baa82c92d80f091a8fee8815bd02c9fb.jpg",
-        detail: "あなたの\"好きな言葉\"、まゆか先生が筆にのせて贈ります。コーヒーと共に、心整うアートな時間を。"
-      },
-    ],
-    exhibition: [
-      { name: "イラスト展示", desc: "アーリャン", time: "13:00-19:00", stage: "GALLERY", image: "" },
-      { name: "イラスト展示", desc: "あけちゃん", time: "13:00-19:00", stage: "GALLERY", image: "" },
-      { name: "イラスト展示", desc: "まみたす", time: "13:00-19:00", stage: "GALLERY", image: "" },
-      { name: "写真展示", desc: "かまちゃん", time: "13:00-19:00", stage: "GALLERY", image: "" },
-    ],
-    night: [
-      { name: "ちえちゃん", desc: "スナックちえこ ママ" },
-      { name: "かさたろう・ぐっち", desc: "ボーイ" },
-    ]
+  // EVENT_DATAからcontentオブジェクトを自動生成
+  const generateContent = () => {
+    const grouped = {};
+
+    EVENT_DATA.forEach(event => {
+      if (!grouped[event.category]) {
+        grouped[event.category] = [];
+      }
+
+      // 同じタイトルのイベントが既にある場合はスキップ（ほぐしの満洲の重複を避ける）
+      const exists = grouped[event.category].find(e => e.name === event.title);
+      if (!exists) {
+        const formattedEvent = {
+          name: event.title,
+          desc: event.user,
+          time: event.time || (event.start && event.end ? `${event.start}-${event.end}` : ''),
+          stage: event.stageText || (event.stage ? `STAGE ${event.stage}` : ''),
+          image: event.image || '',
+          detail: event.detail || ''
+        };
+
+        // ほぐしの満洲の特別処理
+        if (event.title === 'ほぐしの満洲' && event.id === 61) {
+          formattedEvent.time = '13:30 / 14:30 / 15:30 / 16:30 / 17:30開始';
+        }
+
+        grouped[event.category].push(formattedEvent);
+      }
+    });
+
+    // EXTRA_EVENTSを追加
+    return {
+      performance: grouped.performance || [],
+      workshop: grouped.workshop || [],
+      shops: grouped.shops || [],
+      food: grouped.food || [],
+      exhibition: grouped.exhibition || [],
+      night: EXTRA_EVENTS.night || []
+    };
   };
+
+  const content = generateContent();
 
   return (
     <div className="min-h-screen pb-20 w-full overflow-x-hidden">
