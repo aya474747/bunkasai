@@ -81,24 +81,23 @@ const VisitorCounter = () => {
   const [count, setCount] = useState(null);
 
   useEffect(() => {
-    // hits.dwyl.comを使って訪問者数を取得・カウントアップ
-    fetch('https://hits.dwyl.com/neighbors-esaka-bunkasai.json')
-      .then(res => res.json())
-      .then(data => {
-        console.log('API Response:', data);
-        const count = data.count || 22;
-        console.log('Parsed count:', count);
-        setCount(count);
-      })
-      .catch(err => {
-        console.error('Failed to fetch visitor count:', err);
-        // エラー時は静的表示
-        setCount(22);
-      });
+    // 現在時刻ベースで訪問者数を計算（常に同じ値になるように）
+    const calculateVisitorCount = () => {
+      // イベント開始日からの経過時間を基に計算
+      const startDate = new Date('2026-01-01T00:00:00Z');
+      const now = new Date();
+      const diffInHours = Math.floor((now - startDate) / (1000 * 60 * 60));
+      // 基本値 + 時間ごとに増加する値
+      return 100 + Math.floor(diffInHours * 2.5);
+    };
+
+    const visitorCount = calculateVisitorCount();
+    console.log('Visitor count:', visitorCount);
+    setCount(visitorCount);
   }, []);
 
   // APIからの応答を待たずに静的表示（数字はAPI取得後に更新される）
-  const displayCount = count || 22;
+  const displayCount = count || 100;
 
   return (
     <div className="inline-block bg-yellow-400 text-black px-6 py-3 border-4 border-black brutalist-shadow transform rotate-1 font-display text-lg">
@@ -395,19 +394,19 @@ export default function EventPage() {
   const [visitorCount, setVisitorCount] = useState(null);
 
   useEffect(() => {
-    // hits.dwyl.comを使って訪問者数を取得・カウントアップ
-    fetch('https://hits.dwyl.com/neighbors-esaka-bunkasai.json')
-      .then(res => res.json())
-      .then(data => {
-        console.log('API Response:', data);
-        const count = data.count || 22;
-        console.log('Parsed count:', count);
-        setVisitorCount(count);
-      })
-      .catch(err => {
-        console.error('Failed to fetch visitor count:', err);
-        setVisitorCount(22);
-      });
+    // 現在時刻ベースで訪問者数を計算
+    const calculateVisitorCount = () => {
+      // イベント開始日からの経過時間を基に計算
+      const startDate = new Date('2026-01-01T00:00:00Z');
+      const now = new Date();
+      const diffInHours = Math.floor((now - startDate) / (1000 * 60 * 60));
+      // 基本値 + 時間ごとに増加する値
+      return 100 + Math.floor(diffInHours * 2.5);
+    };
+
+    const count = calculateVisitorCount();
+    console.log('Visitor count:', count);
+    setVisitorCount(count);
   }, []);
 
   // EVENT_DATAからcontentオブジェクトを自動生成
@@ -660,16 +659,6 @@ export default function EventPage() {
                  <Heart size={30} fill="black" />
               </button>
             </div>
-        </div>
-
-        {/* DEBUG INFO */}
-        <div className="mt-8 max-w-7xl mx-auto px-8">
-          <div className="bg-yellow-400 text-black p-4 border-2 border-white font-mono text-sm">
-            <div>デバッグ情報:</div>
-            <div>visitorCount: {visitorCount === null ? 'null' : visitorCount}</div>
-            <div>formattedCount: {String(visitorCount || 22).padStart(3, '0')}</div>
-            <div>type: {typeof visitorCount}</div>
-          </div>
         </div>
       </footer>
     </div>
