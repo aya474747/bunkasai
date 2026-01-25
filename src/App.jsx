@@ -180,6 +180,8 @@ const ContentCard = ({ title, items, colorClass, rotate = "rotate-0" }) => (
 
 const Marquee = ({ text, visitorCount }) => {
   const formattedCount = String(visitorCount || 22).padStart(3, '0');
+  console.log('Marquee - visitorCount:', visitorCount);
+  console.log('Marquee - formattedCount:', formattedCount);
   return (
     <div className="bg-lime-400 border-y-4 border-black py-2 marquee-container font-display text-lg md:text-xl font-bold uppercase overflow-hidden mb-12 text-black w-full">
       <div className="marquee-content">
@@ -398,7 +400,9 @@ export default function EventPage() {
     fetch('https://hit.yhype.me/hit/neighbors-esaka-bunkasai')
       .then(res => res.text())
       .then(data => {
+        console.log('API Response:', data);
         const count = parseInt(data) || 22;
+        console.log('Parsed count:', count);
         setVisitorCount(count);
       })
       .catch(err => {
