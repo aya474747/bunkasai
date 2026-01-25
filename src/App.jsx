@@ -87,14 +87,18 @@ const SectionTitle = ({ title, icon: Icon, color = "bg-yellow-400" }) => (
   </div>
 );
 
-const ContentCard = ({ title, items, colorClass, rotate = "rotate-0" }) => (
+const ContentCard = ({ title, items, colorClass, rotate = "rotate-0", onItemClick }) => (
   <div className={`bg-white border-4 border-black p-6 h-full brutalist-shadow transition-transform hover:-translate-y-1 hover:shadow-xl ${rotate}`}>
     <div className={`inline-block px-4 py-1 text-sm font-bold border-2 border-black mb-6 ${colorClass} text-black brutalist-shadow-sm`}>
       {title}
     </div>
     <ul className="space-y-6">
       {items.map((item, idx) => (
-        <li key={idx} className="flex items-start gap-4 border-b-2 border-dotted border-gray-300 pb-4 last:border-0 last:pb-0">
+        <li
+          key={idx}
+          className="flex items-start gap-4 border-b-2 border-dotted border-gray-300 pb-4 last:border-0 last:pb-0 cursor-pointer hover:bg-gray-50 transition-colors p-2 rounded-lg -mx-2"
+          onClick={() => onItemClick && onItemClick(item)}
+        >
 
           {/* 画像があれば表示、なければハートマーク */}
           <div className="shrink-0 mt-0.5">
@@ -226,8 +230,77 @@ const EXTRA_EVENTS = {
   ]
 };
 
-const TimeSchedule = () => {
-  const [selectedEvent, setSelectedEvent] = useState(null);
+const EventModal = ({ selectedEvent, onClose }) => {
+  if (!selectedEvent) return null;
+
+  return (
+    <div
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+      onClick={onClose}
+    >
+      <div
+        className="bg-white border-4 border-black p-6 md:p-8 brutalist-shadow max-w-lg w-full rounded-xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex justify-between items-start mb-4">
+          <h3 className="text-2xl md:text-3xl font-display text-black">{selectedEvent.title}</h3>
+          <button
+            onClick={onClose}
+            className="text-3xl font-bold hover:scale-110 transition-transform"
+          >
+            ×
+          </button>
+        </div>
+
+        {selectedEvent.image && (
+          <div className="mb-4 flex justify-center">
+            <img
+              src={selectedEvent.image}
+              alt={selectedEvent.title}
+              className="w-64 h-64 object-cover border-2 border-black brutalist-shadow-sm rounded-lg"
+            />
+          </div>
+        )}
+
+        <div className="space-y-3">
+          {selectedEvent.user && (
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-sm bg-black text-white px-3 py-1 rounded">出演者</span>
+              <span className="font-bold">{selectedEvent.user}</span>
+            </div>
+          )}
+          {(selectedEvent.start && selectedEvent.end) && (
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-sm bg-black text-white px-3 py-1 rounded">時間</span>
+              <span className="font-bold">{selectedEvent.start} - {selectedEvent.end}</span>
+            </div>
+          )}
+          {selectedEvent.time && !(selectedEvent.start && selectedEvent.end) && (
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-sm bg-black text-white px-3 py-1 rounded">時間</span>
+              <span className="font-bold">{selectedEvent.time}</span>
+            </div>
+          )}
+          {selectedEvent.stage && (
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-sm bg-black text-white px-3 py-1 rounded">ステージ</span>
+              <span className="font-bold">{selectedEvent.stage}</span>
+            </div>
+          )}
+          {selectedEvent.detail && (
+            <div className="mt-4 pt-4 border-t-2 border-gray-200">
+              <p className="text-sm text-gray-800 leading-relaxed bg-gray-50 p-3 rounded border border-gray-200">
+                {selectedEvent.detail}
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const TimeSchedule = ({ onEventClick }) => {
 
   const stages = [
     { id: 'A', name: 'STAGE A', bg: 'bg-red-200', border: 'border-red-500', text: 'text-red-900' },
@@ -293,7 +366,7 @@ const TimeSchedule = () => {
                       gridColumn: stageIndex + 2,
                       gridRow: `${event.rowStart} / span ${event.rowSpan}`
                     }}
-                    onClick={() => setSelectedEvent({ title: event.title, user: event.user, start: event.start, end: event.end, stage: stageStyle.name, image: event.image, detail: event.detail })}
+                    onClick={() => onEventClick && onEventClick({ title: event.title, user: event.user, start: event.start, end: event.end, stage: stageStyle.name, image: event.image, detail: event.detail })}
                  >
                     <div className="font-black text-xs md:text-base leading-tight line-clamp-2 text-black font-rounded">{event.title}</div>
                     <div className="hidden md:block opacity-80 text-[8px] md:text-[10px] font-bold text-black/70 truncate mt-0.5">{event.user}</div>
@@ -303,67 +376,13 @@ const TimeSchedule = () => {
           </div>
         </div>
       </div>
-
-      {/* Modal */}
-      {selectedEvent && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-          onClick={() => setSelectedEvent(null)}
-        >
-          <div
-            className="bg-white border-4 border-black p-6 md:p-8 brutalist-shadow max-w-lg w-full rounded-xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex justify-between items-start mb-4">
-              <h3 className="text-2xl md:text-3xl font-display text-black">{selectedEvent.title}</h3>
-              <button
-                onClick={() => setSelectedEvent(null)}
-                className="text-3xl font-bold hover:scale-110 transition-transform"
-              >
-                ×
-              </button>
-            </div>
-
-            {selectedEvent.image && (
-              <div className="mb-4 flex justify-center">
-                <img
-                  src={selectedEvent.image}
-                  alt={selectedEvent.title}
-                  className="w-64 h-64 object-cover border-2 border-black brutalist-shadow-sm rounded-lg"
-                />
-              </div>
-            )}
-
-            <div className="space-y-3">
-              <div className="flex items-center gap-2">
-                <span className="font-bold text-sm bg-black text-white px-3 py-1 rounded">出演者</span>
-                <span className="font-bold">{selectedEvent.user}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="font-bold text-sm bg-black text-white px-3 py-1 rounded">時間</span>
-                <span className="font-bold">{selectedEvent.start} - {selectedEvent.end}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="font-bold text-sm bg-black text-white px-3 py-1 rounded">ステージ</span>
-                <span className="font-bold">{selectedEvent.stage}</span>
-              </div>
-              {selectedEvent.detail && (
-                <div className="mt-4 pt-4 border-t-2 border-gray-200">
-                  <p className="text-sm text-gray-800 leading-relaxed bg-gray-50 p-3 rounded border border-gray-200">
-                    {selectedEvent.detail}
-                  </p>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
 
 export default function EventPage() {
   const [visitorCount, setVisitorCount] = useState(1);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   useEffect(() => {
     // ローカルストレージから訪問回数を取得してカウントアップ
@@ -374,6 +393,19 @@ export default function EventPage() {
     localStorage.setItem('bunkasai-visitor-count', currentCount.toString());
     setVisitorCount(currentCount);
   }, []);
+
+  const handleEventClick = (item) => {
+    setSelectedEvent({
+      title: item.name || item.title,
+      user: item.desc || item.user,
+      start: item.start,
+      end: item.end,
+      time: item.time,
+      stage: item.stage,
+      image: item.image,
+      detail: item.detail
+    });
+  };
 
   // EVENT_DATAからcontentオブジェクトを自動生成
   const generateContent = () => {
@@ -490,7 +522,7 @@ export default function EventPage() {
         <Countdown />
 
         {/* TIME SCHEDULE */}
-        <TimeSchedule />
+        <TimeSchedule onEventClick={handleEventClick} />
 
         {/* STAGE MAP */}
         <StageMap />
@@ -505,6 +537,7 @@ export default function EventPage() {
               title="PERFORMANCE & TALK"
               items={content.performance}
               colorClass="bg-cyan-300"
+              onItemClick={handleEventClick}
             />
           </div>
 
@@ -515,6 +548,7 @@ export default function EventPage() {
               title="SHOPS & BOOTHS"
               items={content.shops}
               colorClass="bg-pink-300"
+              onItemClick={handleEventClick}
             />
           </div>
 
@@ -525,6 +559,7 @@ export default function EventPage() {
               title="FOOD & DRINK"
               items={content.food}
               colorClass="bg-orange-300"
+              onItemClick={handleEventClick}
             />
           </div>
 
@@ -535,6 +570,7 @@ export default function EventPage() {
               title="WORKSHOP"
               items={content.workshop}
               colorClass="bg-green-300"
+              onItemClick={handleEventClick}
             />
           </div>
 
@@ -545,6 +581,7 @@ export default function EventPage() {
               title="EXHIBITION"
               items={content.exhibition}
               colorClass="bg-purple-300"
+              onItemClick={handleEventClick}
             />
           </div>
 
@@ -627,6 +664,9 @@ export default function EventPage() {
             </div>
         </div>
       </footer>
+
+      {/* EVENT MODAL */}
+      <EventModal selectedEvent={selectedEvent} onClose={() => setSelectedEvent(null)} />
     </div>
   );
 }
