@@ -206,7 +206,7 @@ const EVENT_DATA = [
   { id: 2, title: 'ダンスショーケース', category: 'performance', stage: 'C', start: '18:00', end: '18:15', rowStart: 21, rowSpan: 1, user: 'りほちゃん・ごうちゃん・まりんちゃん・むぎちゃん・なっちゃん' },
   { id: 13, title: '閉会式', category: 'performance', stage: 'C', start: '18:30', end: '19:00', rowStart: 23, rowSpan: 2, user: '全員' },
   { id: 4, title: 'スマホストラップ作り', category: 'workshop', stage: 'C', start: '16:15', end: '17:15', rowStart: 14, rowSpan: 4, user: 'みなみ先生' },
-  { id: 12, title: 'かのお悩み相談室', category: 'shops', stage: 'A', start: '14:15', end: '16:00', rowStart: 6, rowSpan: 7, user: 'かのくん', image: 'https://i.gyazo.com/b9e87d295b700786368bda29c865c97b.jpg', detail: 'かのくんがあなたのお悩み相談にのります！あるいはあなたにかのくんのお悩みを聞いてもらいます！決めるのはア・ナ・タ♡' },
+  { id: 12, title: 'かのお悩み相談室', category: 'shops', stage: 'A', start: '14:15', end: '16:00', rowStart: 6, rowSpan: 7, user: 'かのくん(うみの夫)', image: 'https://i.gyazo.com/b9e87d295b700786368bda29c865c97b.jpg', detail: 'かのくんがあなたのお悩み相談にのります！あるいはあなたにかのくんのお悩みを聞いてもらいます！決めるのはア・ナ・タ♡' },
   { id: 5, title: 'トイレZINE販売', category: 'shops', stage: 'D', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'さくらちゃん・ゆうこりん', image: 'https://i.gyazo.com/4f5d109e4ddc5bbdddaab52ea475f5fc.jpg', detail: 'トイレマークの写真を撮り集めて、気づいたら、10年以上経っていました.........！様々な国を旅して出会った、ニッチな世界へようこそ......！' },
   { id: 61, title: 'ほぐしの満洲', category: 'shops', stage: 'E', start: '13:30', end: '13:40', rowStart: 3, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg', detail: '施術時間10分 Max 5人' },
   { id: 62, title: 'ほぐしの満洲', category: 'shops', stage: 'E', start: '14:30', end: '14:40', rowStart: 7, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg', detail: '施術時間10分 Max 5人' },
