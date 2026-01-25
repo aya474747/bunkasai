@@ -198,7 +198,7 @@ const StageMap = () => {
 const EVENT_DATA = [
   { id: 0, title: '開会式', category: 'performance', stage: 'C', start: '13:00', end: '13:15', rowStart: 1, rowSpan: 1, user: '全員' },
   { id: 1, title: 'アコースティックバンド', category: 'performance', stage: 'C', start: '13:15', end: '13:30', rowStart: 2, rowSpan: 1, user: 'うみ・ももちゃん・まゆちゃん・さっちゃま・かのくん' },
-  { id: 11, title: '旅立ちの日に合唱', category: 'performance', stage: 'C', start: '13:30', end: '14:00', rowStart: 3, rowSpan: 2, user: '全員 指揮:かよちゃん ピアノ:さっちゃま', image: 'https://i.gyazo.com/c62624ce8f2a843df2a8f1e2d63532aa.png', detail: '久しぶりに歌っちゃおう！練習時間も設けるから、男子〜！ちゃんとして〜！ってやつもやろう！\n\n練習動画:\nソプラノパート: https://www.youtube.com/watch?v=mnM-UYeLz5Q\nアルトパート: https://www.youtube.com/watch?v=OW2dq5Xg73E\nテノールパート: https://m.youtube.com/watch?v=m5ctvhONbsI' },
+  { id: 11, title: '旅立ちの日に合唱', category: 'performance', stage: 'C', start: '13:30', end: '14:00', rowStart: 3, rowSpan: 2, user: '全員 指揮:かよちゃん ピアノ:さっちゃま', image: 'https://i.gyazo.com/c62624ce8f2a843df2a8f1e2d63532aa.png', detail: '久しぶりに歌っちゃおう！練習時間も設けるから、男子〜！ちゃんとして〜！ってやつもやろう！', practiceVideos: { soprano: 'https://www.youtube.com/watch?v=mnM-UYeLz5Q', alto: 'https://www.youtube.com/watch?v=OW2dq5Xg73E', tenor: 'https://m.youtube.com/watch?v=m5ctvhONbsI' } },
   { id: 7, title: '社交ダンス', category: 'performance', stage: 'C', start: '14:00', end: '14:15', rowStart: 5, rowSpan: 1, user: 'つねぽん、りほちゃんペア' },
   { id: 10, title: '書籍完成トークショー', category: 'performance', stage: 'C', start: '14:30', end: '15:00', rowStart: 7, rowSpan: 2, user: 'しおりちゃん' },
   { id: 8, title: 'AI教室', category: 'performance', stage: 'C', start: '15:15', end: '16:15', rowStart: 10, rowSpan: 4, user: 'なべちゃん' },
@@ -294,6 +294,37 @@ const EventModal = ({ selectedEvent, onClose }) => {
               </p>
             </div>
           )}
+          {selectedEvent.practiceVideos && (
+            <div className="mt-4 pt-4 border-t-2 border-gray-200">
+              <h3 className="font-bold text-base mb-3">練習動画</h3>
+              <div className="space-y-2">
+                {selectedEvent.practiceVideos.soprano && (
+                  <div>
+                    <span className="font-semibold text-sm">ソプラノパート: </span>
+                    <a href={selectedEvent.practiceVideos.soprano} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline text-sm break-all">
+                      {selectedEvent.practiceVideos.soprano}
+                    </a>
+                  </div>
+                )}
+                {selectedEvent.practiceVideos.alto && (
+                  <div>
+                    <span className="font-semibold text-sm">アルトパート: </span>
+                    <a href={selectedEvent.practiceVideos.alto} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline text-sm break-all">
+                      {selectedEvent.practiceVideos.alto}
+                    </a>
+                  </div>
+                )}
+                {selectedEvent.practiceVideos.tenor && (
+                  <div>
+                    <span className="font-semibold text-sm">テノールパート: </span>
+                    <a href={selectedEvent.practiceVideos.tenor} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline text-sm break-all">
+                      {selectedEvent.practiceVideos.tenor}
+                    </a>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -366,7 +397,7 @@ const TimeSchedule = ({ onEventClick }) => {
                       gridColumn: stageIndex + 2,
                       gridRow: `${event.rowStart} / span ${event.rowSpan}`
                     }}
-                    onClick={() => onEventClick && onEventClick({ title: event.title, user: event.user, start: event.start, end: event.end, stage: stageStyle.name, image: event.image, detail: event.detail })}
+                    onClick={() => onEventClick && onEventClick({ title: event.title, user: event.user, start: event.start, end: event.end, stage: stageStyle.name, image: event.image, detail: event.detail, practiceVideos: event.practiceVideos })}
                  >
                     <div className="font-black text-xs md:text-base leading-tight line-clamp-2 text-black font-rounded">{event.title}</div>
                     <div className="hidden md:block opacity-80 text-[8px] md:text-[10px] font-bold text-black/70 truncate mt-0.5">{event.user}</div>
@@ -403,7 +434,8 @@ export default function EventPage() {
       time: item.time,
       stage: item.stage,
       image: item.image,
-      detail: item.detail
+      detail: item.detail,
+      practiceVideos: item.practiceVideos
     });
   };
 
@@ -425,7 +457,8 @@ export default function EventPage() {
           time: event.time || (event.start && event.end ? `${event.start}-${event.end}` : ''),
           stage: event.stageText || (event.stage ? `STAGE ${event.stage}` : ''),
           image: event.image || '',
-          detail: event.detail || ''
+          detail: event.detail || '',
+          practiceVideos: event.practiceVideos
         };
 
         // ほぐしの満洲の特別処理
