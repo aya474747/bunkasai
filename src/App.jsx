@@ -81,23 +81,28 @@ const VisitorCounter = () => {
   const [count, setCount] = useState(null);
 
   useEffect(() => {
-    // 現在時刻ベースで訪問者数を計算（常に同じ値になるように）
-    const calculateVisitorCount = () => {
-      // イベント開始日からの経過時間を基に計算
-      const startDate = new Date('2026-01-01T00:00:00Z');
-      const now = new Date();
-      const diffInHours = Math.floor((now - startDate) / (1000 * 60 * 60));
-      // 基本値 + 時間ごとに増加する値
-      return 100 + Math.floor(diffInHours * 2.5);
-    };
-
-    const visitorCount = calculateVisitorCount();
-    console.log('Visitor count:', visitorCount);
-    setCount(visitorCount);
+    // hits.dwyl.comを使って実際の訪問者数を取得・カウントアップ
+    fetch('https://hits.dwyl.com/neighbors-esaka/bunkasai.svg')
+      .then(res => res.text())
+      .then(svgText => {
+        console.log('SVG Response received');
+        // SVGから数値を抽出（hits.dwyl.comのSVG形式）
+        const match = svgText.match(/>(\d+)<\/text>/);
+        if (match && match[1]) {
+          const visitorCount = parseInt(match[1], 10);
+          console.log('Visitor count:', visitorCount);
+          setCount(visitorCount);
+        } else {
+          setCount(22);
+        }
+      })
+      .catch(err => {
+        console.error('Failed to fetch visitor count:', err);
+        setCount(22);
+      });
   }, []);
 
-  // APIからの応答を待たずに静的表示（数字はAPI取得後に更新される）
-  const displayCount = count || 100;
+  const displayCount = count || 22;
 
   return (
     <div className="inline-block bg-yellow-400 text-black px-6 py-3 border-4 border-black brutalist-shadow transform rotate-1 font-display text-lg">
@@ -394,19 +399,25 @@ export default function EventPage() {
   const [visitorCount, setVisitorCount] = useState(null);
 
   useEffect(() => {
-    // 現在時刻ベースで訪問者数を計算
-    const calculateVisitorCount = () => {
-      // イベント開始日からの経過時間を基に計算
-      const startDate = new Date('2026-01-01T00:00:00Z');
-      const now = new Date();
-      const diffInHours = Math.floor((now - startDate) / (1000 * 60 * 60));
-      // 基本値 + 時間ごとに増加する値
-      return 100 + Math.floor(diffInHours * 2.5);
-    };
-
-    const count = calculateVisitorCount();
-    console.log('Visitor count:', count);
-    setVisitorCount(count);
+    // hits.dwyl.comを使って実際の訪問者数を取得・カウントアップ
+    fetch('https://hits.dwyl.com/neighbors-esaka/bunkasai.svg')
+      .then(res => res.text())
+      .then(svgText => {
+        console.log('SVG Response received');
+        // SVGから数値を抽出（hits.dwyl.comのSVG形式）
+        const match = svgText.match(/>(\d+)<\/text>/);
+        if (match && match[1]) {
+          const count = parseInt(match[1], 10);
+          console.log('Visitor count:', count);
+          setVisitorCount(count);
+        } else {
+          setVisitorCount(22);
+        }
+      })
+      .catch(err => {
+        console.error('Failed to fetch visitor count:', err);
+        setVisitorCount(22);
+      });
   }, []);
 
   // EVENT_DATAからcontentオブジェクトを自動生成
