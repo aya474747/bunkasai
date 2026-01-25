@@ -81,21 +81,14 @@ const VisitorCounter = () => {
   const [count, setCount] = useState(null);
 
   useEffect(() => {
-    // visitor-badgeを使って訪問者数を取得・カウントアップ
-    fetch('https://visitor-badge.laobi.icu/badge?page_id=neighbors-esaka-bunkasai')
-      .then(res => res.text())
-      .then(svgText => {
-        console.log('SVG Response received');
-        // SVGからvisitors数を抽出
-        const match = svgText.match(/visitors<\/text><text[^>]*>([0-9,]+)<\/text>/);
-        if (match && match[1]) {
-          // カンマを削除して数値に変換
-          const count = parseInt(match[1].replace(/,/g, ''), 10);
-          console.log('Parsed count:', count);
-          setCount(count);
-        } else {
-          setCount(22);
-        }
+    // hits.dwyl.comを使って訪問者数を取得・カウントアップ
+    fetch('https://hits.dwyl.com/neighbors-esaka-bunkasai.json')
+      .then(res => res.json())
+      .then(data => {
+        console.log('API Response:', data);
+        const count = data.count || 22;
+        console.log('Parsed count:', count);
+        setCount(count);
       })
       .catch(err => {
         console.error('Failed to fetch visitor count:', err);
@@ -247,7 +240,7 @@ const EVENT_DATA = [
   { id: 65, title: 'ほぐしの満洲', category: 'shops', stage: 'E', start: '17:30', end: '17:40', rowStart: 19, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg', detail: '施術時間10分 Max 5人' },
   { id: 3, title: 'AIで作ったプリクラコーナー', category: 'shops', stage: 'A', start: '16:00', end: '19:00', rowStart: 13, rowSpan: 12, user: 'なべちゃん' },
   { id: 66, title: 'Soup Stock Esaka', category: 'food', stage: 'F', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'いけめぐ・あまねちゃん', image: 'https://i.gyazo.com/1c0d4ff391dd612c82c5fe1d702d5836.jpg', detail: 'スープ+パンのセット 限定15食' },
-  { id: 99, title: '喫茶まゆか', category: 'food', stage: 'B', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'まゆちゃん・あっこたん・ぐっち', image: 'https://i.gyazo.com/baa82c92d80f091a8fee8815bd02c9fb.jpg', detail: 'あなたの"好きな言葉"、まゆか先生が筆にのせて贈ります。コーヒーと共に、心整うアートな時間を。' },
+  { id: 99, title: '喫茶まゆか', category: 'food', stage: 'B', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'まゆちゃん・ももちゃん・あっこたん・ぐっち', image: 'https://i.gyazo.com/baa82c92d80f091a8fee8815bd02c9fb.jpg', detail: 'あなたの"好きな言葉"、まゆか先生が筆にのせて贈ります。コーヒーと共に、心整うアートな時間を。' },
   { id: 100, title: 'イラスト展示', category: 'exhibition', stage: null, start: null, end: null, user: 'アーリャン', time: '13:00-19:00', stageText: 'GALLERY', image: '' },
   { id: 101, title: 'イラスト展示', category: 'exhibition', stage: null, start: null, end: null, user: 'あけちゃん', time: '13:00-19:00', stageText: 'GALLERY', image: '' },
   { id: 102, title: 'イラスト展示', category: 'exhibition', stage: null, start: null, end: null, user: 'まみたす', time: '13:00-19:00', stageText: 'GALLERY', image: '' },
@@ -402,37 +395,19 @@ export default function EventPage() {
   const [visitorCount, setVisitorCount] = useState(null);
 
   useEffect(() => {
-    // 訪問者数を取得・カウントアップ
-    const fetchVisitorCount = async () => {
-      try {
-        // visitor-badgeを使用してビジターカウントを取得
-        const response = await fetch('https://visitor-badge.laobi.icu/badge?page_id=neighbors-esaka-bunkasai');
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const svgText = await response.text();
-        console.log('SVG Response received');
-
-        // SVGからvisitors数を抽出
-        const match = svgText.match(/visitors<\/text><text[^>]*>([0-9,]+)<\/text>/);
-        if (match && match[1]) {
-          // カンマを削除して数値に変換
-          const count = parseInt(match[1].replace(/,/g, ''), 10);
-          console.log('Visitor count:', count);
-          setVisitorCount(count);
-        } else {
-          throw new Error('Could not parse visitor count from SVG');
-        }
-      } catch (err) {
+    // hits.dwyl.comを使って訪問者数を取得・カウントアップ
+    fetch('https://hits.dwyl.com/neighbors-esaka-bunkasai.json')
+      .then(res => res.json())
+      .then(data => {
+        console.log('API Response:', data);
+        const count = data.count || 22;
+        console.log('Parsed count:', count);
+        setVisitorCount(count);
+      })
+      .catch(err => {
         console.error('Failed to fetch visitor count:', err);
-        // エラー時はデフォルト値を表示
         setVisitorCount(22);
-      }
-    };
-
-    fetchVisitorCount();
+      });
   }, []);
 
   // EVENT_DATAからcontentオブジェクトを自動生成
