@@ -511,7 +511,7 @@ export default function EventPage() {
 
       {/* MARQUEE */}
       <div className="mb-12 w-full transform -rotate-1 origin-left scale-105">
-        <Marquee text="★ ENJOY THE MOMENT ★ あなたはVISITOR_COUNT人目のネイバーです ★ ART & MUSIC & FOOD ★ WELCOME EVERYONE ★" visitorCount={visitorCount} />
+        <Marquee text="★ あなたはVISITOR_COUNT人目のネイバーです ★" visitorCount={visitorCount} />
       </div>
 
       <main className="px-4 md:px-8 max-w-7xl mx-auto">
