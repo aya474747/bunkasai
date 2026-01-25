@@ -82,19 +82,13 @@ const VisitorCounter = () => {
 
   useEffect(() => {
     // hits.dwyl.comを使って実際の訪問者数を取得・カウントアップ
-    fetch('https://hits.dwyl.com/neighbors-esaka/bunkasai.svg')
-      .then(res => res.text())
-      .then(svgText => {
-        console.log('SVG Response received');
-        // SVGから数値を抽出（hits.dwyl.comのSVG形式）
-        const match = svgText.match(/>(\d+)<\/text>/);
-        if (match && match[1]) {
-          const visitorCount = parseInt(match[1], 10);
-          console.log('Visitor count:', visitorCount);
-          setCount(visitorCount);
-        } else {
-          setCount(22);
-        }
+    fetch('https://hits.dwyl.com/neighbors-esaka/bunkasai.json')
+      .then(res => res.json())
+      .then(data => {
+        console.log('API Response:', data);
+        const visitorCount = data.count || data.total || 22;
+        console.log('Visitor count:', visitorCount);
+        setCount(visitorCount);
       })
       .catch(err => {
         console.error('Failed to fetch visitor count:', err);
@@ -400,19 +394,13 @@ export default function EventPage() {
 
   useEffect(() => {
     // hits.dwyl.comを使って実際の訪問者数を取得・カウントアップ
-    fetch('https://hits.dwyl.com/neighbors-esaka/bunkasai.svg')
-      .then(res => res.text())
-      .then(svgText => {
-        console.log('SVG Response received');
-        // SVGから数値を抽出（hits.dwyl.comのSVG形式）
-        const match = svgText.match(/>(\d+)<\/text>/);
-        if (match && match[1]) {
-          const count = parseInt(match[1], 10);
-          console.log('Visitor count:', count);
-          setVisitorCount(count);
-        } else {
-          setVisitorCount(22);
-        }
+    fetch('https://hits.dwyl.com/neighbors-esaka/bunkasai.json')
+      .then(res => res.json())
+      .then(data => {
+        console.log('API Response:', data);
+        const count = data.count || data.total || 22;
+        console.log('Visitor count:', count);
+        setVisitorCount(count);
       })
       .catch(err => {
         console.error('Failed to fetch visitor count:', err);
