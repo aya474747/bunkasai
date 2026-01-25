@@ -198,7 +198,7 @@ const StageMap = () => {
 const EVENT_DATA = [
   { id: 0, title: '開会式', category: 'performance', stage: 'C', start: '13:00', end: '13:15', rowStart: 1, rowSpan: 1, user: '全員' },
   { id: 1, title: 'アコースティックバンド', category: 'performance', stage: 'C', start: '13:15', end: '13:30', rowStart: 2, rowSpan: 1, user: 'うみ・ももちゃん・まゆちゃん・さっちゃま・かのくん' },
-  { id: 11, title: '旅立ちの日に合唱', category: 'performance', stage: 'C', start: '13:30', end: '14:00', rowStart: 3, rowSpan: 2, user: '全員 指揮:かよちゃん ピアノ:さっちゃま', image: 'https://i.gyazo.com/c62624ce8f2a843df2a8f1e2d63532aa.png', detail: '久しぶりに歌っちゃおう！練習時間も設けるから、男子〜！ちゃんとして〜！ってやつもやろう！' },
+  { id: 11, title: '旅立ちの日に合唱', category: 'performance', stage: 'C', start: '13:30', end: '14:00', rowStart: 3, rowSpan: 2, user: '全員 指揮:かよちゃん ピアノ:さっちゃま', image: 'https://i.gyazo.com/c62624ce8f2a843df2a8f1e2d63532aa.png', detail: '久しぶりに歌っちゃおう！練習時間も設けるから、男子〜！ちゃんとして〜！ってやつもやろう！\n\n練習動画:\nソプラノパート: https://www.youtube.com/watch?v=mnM-UYeLz5Q\nアルトパート: https://www.youtube.com/watch?v=OW2dq5Xg73E\nテノールパート: https://m.youtube.com/watch?v=m5ctvhONbsI' },
   { id: 7, title: '社交ダンス', category: 'performance', stage: 'C', start: '14:00', end: '14:15', rowStart: 5, rowSpan: 1, user: 'つねぽん、りほちゃんペア' },
   { id: 10, title: '書籍完成トークショー', category: 'performance', stage: 'C', start: '14:30', end: '15:00', rowStart: 7, rowSpan: 2, user: 'しおりちゃん' },
   { id: 8, title: 'AI教室', category: 'performance', stage: 'C', start: '15:15', end: '16:15', rowStart: 10, rowSpan: 4, user: 'なべちゃん' },
@@ -289,7 +289,7 @@ const EventModal = ({ selectedEvent, onClose }) => {
           )}
           {selectedEvent.detail && (
             <div className="mt-4 pt-4 border-t-2 border-gray-200">
-              <p className="text-sm text-gray-800 leading-relaxed bg-gray-50 p-3 rounded border border-gray-200">
+              <p className="text-sm text-gray-800 leading-relaxed bg-gray-50 p-3 rounded border border-gray-200 whitespace-pre-line">
                 {selectedEvent.detail}
               </p>
             </div>
