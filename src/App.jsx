@@ -90,16 +90,16 @@ const VisitorCounter = () => {
       .catch(err => {
         console.error('Failed to fetch visitor count:', err);
         // エラー時は静的表示
-        setCount(999);
+        setCount(22);
       });
   }, []);
 
   // APIからの応答を待たずに静的表示（数字はAPI取得後に更新される）
-  const displayCount = count || 999;
+  const displayCount = count || 22;
 
   return (
     <div className="inline-block bg-yellow-400 text-black px-6 py-3 border-4 border-black brutalist-shadow transform rotate-1 font-display text-lg">
-      あなたは <span className="text-3xl font-black mx-2">{displayCount.toLocaleString()}</span> 人目のネイバーです
+      あなたは <span className="text-3xl font-black mx-2">{String(displayCount).padStart(3, '0')}</span> 人目のネイバーです
     </div>
   );
 };
@@ -177,18 +177,21 @@ const ContentCard = ({ title, items, colorClass, rotate = "rotate-0" }) => (
   </div>
 );
 
-const Marquee = ({ text, visitorCount }) => (
-  <div className="bg-lime-400 border-y-4 border-black py-2 marquee-container font-display text-lg md:text-xl font-bold uppercase overflow-hidden mb-12 text-black w-full">
-    <div className="marquee-content">
-      <span className="mx-4">{text.replace('VISITOR_COUNT', visitorCount || '999')}</span>
-      <span className="mx-4 text-stroke">{text.replace('VISITOR_COUNT', visitorCount || '999')}</span>
-      <span className="mx-4">{text.replace('VISITOR_COUNT', visitorCount || '999')}</span>
-      <span className="mx-4 text-stroke">{text.replace('VISITOR_COUNT', visitorCount || '999')}</span>
-      <span className="mx-4">{text.replace('VISITOR_COUNT', visitorCount || '999')}</span>
-      <span className="mx-4 text-stroke">{text.replace('VISITOR_COUNT', visitorCount || '999')}</span>
+const Marquee = ({ text, visitorCount }) => {
+  const formattedCount = String(visitorCount || 22).padStart(3, '0');
+  return (
+    <div className="bg-lime-400 border-y-4 border-black py-2 marquee-container font-display text-lg md:text-xl font-bold uppercase overflow-hidden mb-12 text-black w-full">
+      <div className="marquee-content">
+        <span className="mx-4">{text.replace('VISITOR_COUNT', formattedCount)}</span>
+        <span className="mx-4 text-stroke">{text.replace('VISITOR_COUNT', formattedCount)}</span>
+        <span className="mx-4">{text.replace('VISITOR_COUNT', formattedCount)}</span>
+        <span className="mx-4 text-stroke">{text.replace('VISITOR_COUNT', formattedCount)}</span>
+        <span className="mx-4">{text.replace('VISITOR_COUNT', formattedCount)}</span>
+        <span className="mx-4 text-stroke">{text.replace('VISITOR_COUNT', formattedCount)}</span>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const StageMap = () => {
   return (
@@ -398,7 +401,7 @@ export default function EventPage() {
       })
       .catch(err => {
         console.error('Failed to fetch visitor count:', err);
-        setVisitorCount(999);
+        setVisitorCount(22);
       });
   }, []);
 
