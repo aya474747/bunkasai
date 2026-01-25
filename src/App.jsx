@@ -77,26 +77,6 @@ const Countdown = () => {
   );
 };
 
-const VisitorCounter = () => {
-  const [count, setCount] = useState(22);
-
-  useEffect(() => {
-    // ローカルストレージから訪問回数を取得してカウントアップ
-    const storedCount = localStorage.getItem('bunkasai-visitor-count');
-    const currentCount = storedCount ? parseInt(storedCount, 10) + 1 : 23;
-
-    // カウントを保存して表示
-    localStorage.setItem('bunkasai-visitor-count', currentCount.toString());
-    setCount(currentCount);
-  }, []);
-
-  return (
-    <div className="fixed top-4 right-4 z-50 bg-yellow-400 text-black px-4 py-2 border-3 border-black brutalist-shadow-sm font-display text-sm flex items-center gap-2 rounded-md">
-      <span className="text-xs opacity-70">Visitor</span>
-      <span className="text-2xl font-black tabular-nums">#{String(count).padStart(3, '0')}</span>
-    </div>
-  );
-};
 
 const SectionTitle = ({ title, icon: Icon, color = "bg-yellow-400" }) => (
   <div className={`flex items-center gap-3 mb-10 border-b-4 border-black pb-2 ${color} bg-opacity-100 inline-block pr-6 pl-2 transform -rotate-1 border-2 border-black brutalist-shadow-sm`}>
@@ -383,20 +363,16 @@ const TimeSchedule = () => {
 };
 
 export default function EventPage() {
-  const [visitorCount, setVisitorCount] = useState(null);
+  const [visitorCount, setVisitorCount] = useState(1);
 
   useEffect(() => {
-    // hits.dwyl.comを使って実際の訪問者数を取得・カウントアップ
-    fetch('https://hits.dwyl.com/neighbors-esaka/bunkasai.json')
-      .then(res => res.json())
-      .then(data => {
-        // 可能性のあるすべてのプロパティを試す
-        const count = data.count || data.total || data.hits || data.value || 22;
-        setVisitorCount(count);
-      })
-      .catch(err => {
-        setVisitorCount(22);
-      });
+    // ローカルストレージから訪問回数を取得してカウントアップ
+    const storedCount = localStorage.getItem('bunkasai-visitor-count');
+    const currentCount = storedCount ? parseInt(storedCount, 10) + 1 : 1;
+
+    // カウントを保存して表示
+    localStorage.setItem('bunkasai-visitor-count', currentCount.toString());
+    setVisitorCount(currentCount);
   }, []);
 
   // EVENT_DATAからcontentオブジェクトを自動生成
@@ -445,9 +421,6 @@ export default function EventPage() {
   return (
     <div className="min-h-screen pb-20 w-full overflow-x-hidden">
       <GlobalStyles />
-
-      {/* VISITOR COUNTER */}
-      <VisitorCounter />
 
       {/* HEADER SECTION - CENTERED */}
       <header className="pt-12 px-4 md:px-8 max-w-5xl mx-auto mb-8 text-center relative">
@@ -508,7 +481,7 @@ export default function EventPage() {
 
       {/* MARQUEE */}
       <div className="mb-12 w-full transform -rotate-1 origin-left scale-105">
-        <Marquee text="★ ENJOY THE MOMENT ★ LOOSE VIBES ONLY ★ ART & MUSIC & FOOD ★ WELCOME EVERYONE ★" />
+        <Marquee text={`★ YOU ARE VISITOR #${String(visitorCount).padStart(3, '0')} ★ ENJOY THE MOMENT ★ LOOSE VIBES ONLY ★ ART & MUSIC & FOOD ★ WELCOME EVERYONE ★`} />
       </div>
 
       <main className="px-4 md:px-8 max-w-7xl mx-auto">
