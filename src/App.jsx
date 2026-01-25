@@ -662,6 +662,16 @@ export default function EventPage() {
               </button>
             </div>
         </div>
+
+        {/* DEBUG INFO */}
+        <div className="mt-8 max-w-7xl mx-auto px-8">
+          <div className="bg-yellow-400 text-black p-4 border-2 border-white font-mono text-sm">
+            <div>デバッグ情報:</div>
+            <div>visitorCount: {visitorCount === null ? 'null' : visitorCount}</div>
+            <div>formattedCount: {String(visitorCount || 22).padStart(3, '0')}</div>
+            <div>type: {typeof visitorCount}</div>
+          </div>
+        </div>
       </footer>
     </div>
   );
