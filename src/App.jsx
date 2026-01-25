@@ -384,8 +384,8 @@ export default function EventPage() {
         grouped[event.category] = [];
       }
 
-      // 同じタイトルのイベントが既にある場合はスキップ（ほぐしの満洲の重複を避ける）
-      const exists = grouped[event.category].find(e => e.name === event.title);
+      // 同じタイトル+ユーザー名のイベントが既にある場合はスキップ（ほぐしの満洲の重複を避ける）
+      const exists = grouped[event.category].find(e => e.name === event.title && e.desc === event.user);
       if (!exists) {
         const formattedEvent = {
           name: event.title,
