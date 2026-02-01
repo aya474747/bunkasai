@@ -219,7 +219,7 @@ const EVENT_DATA = [
   { id: 100, title: 'イラスト展示', category: 'exhibition', stage: null, start: null, end: null, user: 'アーリャン', time: '13:00-19:00', stageText: 'GALLERY', image: '' },
   { id: 101, title: 'イラスト展示', category: 'exhibition', stage: null, start: null, end: null, user: 'あけちゃん', time: '13:00-19:00', stageText: 'GALLERY', image: '' },
   { id: 102, title: 'イラスト展示', category: 'exhibition', stage: null, start: null, end: null, user: 'まみたす', time: '13:00-19:00', stageText: 'GALLERY', image: '' },
-  { id: 103, title: '余白（yohaku）', category: 'exhibition', stage: null, start: null, end: null, user: 'かまちゃん', time: '13:00-19:00', stageText: 'GALLERY', image: 'https://i.gyazo.com/2477fcf799bf4796c46d4c79c46c9030.jpg', detail: 'かまちゃんが人生の"余白"を求めて旅したり食べたりしたものたちの厳選集だよ' },
+  { id: 103, title: '余白（yohaku）', category: 'exhibition', stage: null, start: null, end: null, user: 'かまちゃん', time: '13:00-19:00', stageText: 'GALLERY', image: 'https://i.gyazo.com/2477fcf799bf4796c46d4c79c46c9030.jpg', detail: 'かまちゃんが人生の"余白"を求めて旅したり食べたりしたものたちの厳選写真展だよ' },
 ];
 
 // タイムテーブルに表示されないイベント（夜の部など）
