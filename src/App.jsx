@@ -219,7 +219,7 @@ const EVENT_DATA = [
   { id: 100, title: 'イラスト展示', category: 'exhibition', stage: null, start: null, end: null, user: 'アーリャン', time: '13:00-19:00', stageText: 'GALLERY', image: '' },
   { id: 101, title: 'イラスト展示', category: 'exhibition', stage: null, start: null, end: null, user: 'あけちゃん', time: '13:00-19:00', stageText: 'GALLERY', image: '' },
   { id: 102, title: 'イラスト展示', category: 'exhibition', stage: null, start: null, end: null, user: 'まみたす', time: '13:00-19:00', stageText: 'GALLERY', image: '' },
-  { id: 103, title: '余白（yohaku）', category: 'exhibition', stage: null, start: null, end: null, user: 'かまちゃん', time: '13:00-19:00', stageText: 'GALLERY', image: 'https://i.gyazo.com/2477fcf799bf4796c46d4c79c46c9030.jpg', detail: 'かまちゃんが人生の"余白"を求めて旅したり食べたりしたものたちの厳選写真展だよ' },
+  { id: 103, title: '余白（yohaku）', category: 'exhibition', stage: null, start: null, end: null, user: 'かまちゃん', time: '13:00-19:00', stageText: 'GALLERY', image: 'https://i.gyazo.com/2477fcf799bf4796c46d4c79c46c9030.jpg', detail: 'かまちゃんが人生の"余白"を求めて旅したり食べたりしたものたちの厳選写真展だよ', role: 'フォトグラファー' },
 ];
 
 // タイムテーブルに表示されないイベント（夜の部など）
@@ -268,7 +268,7 @@ const EventModal = ({ selectedEvent, onClose }) => {
           <div className="space-y-3">
             {selectedEvent.user && (
               <div className="flex items-center gap-2">
-                <span className="font-bold text-sm bg-black text-white px-3 py-1 rounded">出演者</span>
+                <span className="font-bold text-sm bg-black text-white px-3 py-1 rounded">{selectedEvent.role || '出演者'}</span>
                 <span className="font-bold">{selectedEvent.user}</span>
               </div>
             )}
@@ -401,7 +401,7 @@ const TimeSchedule = ({ onEventClick }) => {
                       gridColumn: stageIndex + 2,
                       gridRow: `${event.rowStart} / span ${event.rowSpan}`
                     }}
-                    onClick={() => onEventClick && onEventClick({ title: event.title, user: event.user, start: event.start, end: event.end, stage: stageStyle.name, image: event.image, detail: event.detail, practiceVideos: event.practiceVideos })}
+                    onClick={() => onEventClick && onEventClick({ title: event.title, user: event.user, start: event.start, end: event.end, stage: stageStyle.name, image: event.image, detail: event.detail, practiceVideos: event.practiceVideos, role: event.role })}
                  >
                     <div className="font-black text-xs md:text-base leading-tight line-clamp-2 text-black font-rounded">{event.title}</div>
                     <div className="hidden md:block opacity-80 text-[8px] md:text-[10px] font-bold text-black/70 truncate mt-0.5">{event.user}</div>
@@ -428,7 +428,8 @@ export default function EventPage() {
       stage: item.stage,
       image: item.image,
       detail: item.detail,
-      practiceVideos: item.practiceVideos
+      practiceVideos: item.practiceVideos,
+      role: item.role
     });
   };
 
@@ -451,7 +452,8 @@ export default function EventPage() {
           stage: event.stageText || (event.stage ? `STAGE ${event.stage}` : ''),
           image: event.image || '',
           detail: event.detail || '',
-          practiceVideos: event.practiceVideos
+          practiceVideos: event.practiceVideos,
+          role: event.role
         };
 
         // ほぐしの満洲の特別処理
