@@ -625,6 +625,15 @@ export default function EventPage() {
                     スナックちえこ
                   </h3>
 
+                  {/* イメージ画像 */}
+                  <div className="mb-6 flex justify-center">
+                    <img
+                      src="https://i.gyazo.com/c6e197593e628206f7f2b7215c8c185d.png"
+                      alt="スナックちえこ"
+                      className="w-full max-w-md h-auto object-cover border-2 border-indigo-400 brutalist-shadow-sm rounded-lg"
+                    />
+                  </div>
+
                   {/* ママ */}
                   <div className="flex items-center gap-4 mb-3">
                      <div className="w-12 h-12 bg-indigo-700 rounded-full flex items-center justify-center font-bold text-lg border-2 border-indigo-400 shrink-0 text-white">
