@@ -217,8 +217,7 @@ const EVENT_DATA = [
   { id: 66, title: 'Soup Stock Esaka', category: 'food', stage: 'F', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'いけめぐ・あまねちゃん', image: 'https://i.gyazo.com/1c0d4ff391dd612c82c5fe1d702d5836.jpg', detail: 'スープ+パンのセット 限定15食' },
   { id: 99, title: '喫茶まゆか', category: 'food', stage: 'B', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'まゆちゃん・ももちゃん・あっこたん・ぐっち', image: 'https://i.gyazo.com/baa82c92d80f091a8fee8815bd02c9fb.jpg', detail: 'あなたの"好きな言葉"、まゆか先生が筆にのせて贈ります。コーヒーと共に、心整うアートな時間を。' },
   { id: 100, title: 'イラスト展示', category: 'exhibition', stage: null, start: null, end: null, user: 'アーリャン', time: '13:00-19:00', stageText: 'GALLERY', image: '' },
-  { id: 101, title: 'イラスト展示', category: 'exhibition', stage: null, start: null, end: null, user: 'あけちゃん', time: '13:00-19:00', stageText: 'GALLERY', image: '' },
-  { id: 102, title: 'イラスト展示', category: 'exhibition', stage: null, start: null, end: null, user: 'まみたす', time: '13:00-19:00', stageText: 'GALLERY', image: '' },
+  { id: 101, title: 'イラスト展示', category: 'exhibition', stage: null, start: null, end: null, user: 'ななみん', time: '13:00-19:00', stageText: 'GALLERY', image: '' },
   { id: 103, title: '余白（yohaku）', category: 'exhibition', stage: null, start: null, end: null, user: 'かまちゃん', time: '13:00-19:00', stageText: 'GALLERY', image: 'https://i.gyazo.com/2477fcf799bf4796c46d4c79c46c9030.jpg', detail: 'かまちゃんが人生の"余白"を求めて旅したり食べたりしたものたちの厳選写真展だよ', role: 'フォトグラファー' },
 ];
 
