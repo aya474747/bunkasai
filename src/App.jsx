@@ -676,9 +676,6 @@ export default function EventPage() {
               <span className="block">仕事じゃないのでクオリティは問いません！</span>
               <span className="block">ドタキャンもOK！</span>
               <span className="block text-xl text-purple-600 mt-4 font-display">楽しむことが一番のルールです。</span>
-              <span className="block mt-6 text-base bg-lime-400 inline-block px-4 py-2 border-2 border-black transform rotate-1 shadow-[2px_2px_0px_0px_#000] rounded-md">
-                出店したい、発表したい、ご飯作りたい、展示したいなどなど、気になる人がいればLINEでうみまでご相談ください💁‍♀️
-              </span>
               <span className="inline-block mt-6 bg-black text-white px-6 py-2 transform -rotate-2 border-2 border-transparent hover:border-lime-400 transition-colors cursor-default rounded-lg">ENJOY & RELAX</span>
             </p>
           </div>
