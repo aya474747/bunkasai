@@ -216,7 +216,7 @@ const EVENT_DATA = [
   { id: 3, title: 'AIで作ったプリクラコーナー', category: 'shops', stage: 'A', start: '16:00', end: '19:00', rowStart: 13, rowSpan: 12, user: 'なべちゃん', image: 'https://i.gyazo.com/a01278114387d5bca52e7b8a88cbf1ec.jpg', detail: '気になるあの子と思い出のぷりとっちゃお！撮影したデータは、そのままプレゼント🎁' },
   { id: 66, title: 'Soup Stock Esaka', category: 'food', stage: 'F', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'いけめぐ・あまねちゃん', image: 'https://i.gyazo.com/1c0d4ff391dd612c82c5fe1d702d5836.jpg', detail: 'スープ+パンのセット 限定15食' },
   { id: 99, title: '喫茶まゆか', category: 'food', stage: 'B', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'まゆちゃん・ももちゃん・あっこたん・ぐっち', image: 'https://i.gyazo.com/baa82c92d80f091a8fee8815bd02c9fb.jpg', detail: 'あなたの"好きな言葉"、まゆか先生が筆にのせて贈ります。コーヒーと共に、心整うアートな時間を。' },
-  { id: 100, title: 'イラスト展示', category: 'exhibition', stage: null, start: null, end: null, user: 'アーリャン', time: '13:00-19:00', stageText: 'GALLERY', image: '' },
+  { id: 100, title: 'アーリャンデッサン展示', category: 'exhibition', stage: null, start: null, end: null, user: 'アーリャン', time: '13:00-19:00', stageText: 'GALLERY', image: 'https://i.gyazo.com/1a49ddef624a98f720aa300b27790001.jpg', detail: 'さあどっちが私でしょう〜\nアーリャンデッサン展示' },
   { id: 101, title: 'イラスト展示', category: 'exhibition', stage: null, start: null, end: null, user: 'ななみん', time: '13:00-19:00', stageText: 'GALLERY', image: '' },
   { id: 103, title: '余白（yohaku）', category: 'exhibition', stage: null, start: null, end: null, user: 'かまちゃん', time: '13:00-19:00', stageText: 'GALLERY', image: 'https://i.gyazo.com/2477fcf799bf4796c46d4c79c46c9030.jpg', detail: 'かまちゃんが人生の"余白"を求めて旅したり食べたりしたものたちの厳選写真展だよ', role: 'フォトグラファー' },
 ];
