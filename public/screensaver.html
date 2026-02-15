@@ -89,30 +89,47 @@
     }
 
     /* ---- MARQUEE BAND ---- */
+    #marquee-top-wrap,
     #marquee-wrap {
       position: fixed;
-      bottom: 0;
       left: 0;
       width: 100%;
       background: #a3e635; /* lime-400 */
-      border-top: 4px solid #000;
-      border-bottom: 0;
       padding: 10px 0;
       overflow: hidden;
       white-space: nowrap;
       z-index: 100;
     }
 
-    #marquee-inner {
+    #marquee-top-wrap {
+      top: 0;
+      border-bottom: 4px solid #000;
+    }
+
+    #marquee-wrap {
+      bottom: 0;
+      border-top: 4px solid #000;
+    }
+
+    #marquee-inner,
+    #marquee-top-inner {
       display: inline-block;
-      animation: scroll-left 50s linear infinite;
       font-family: 'Dela Gothic One', cursive;
       font-size: 18px;
       color: #000;
       letter-spacing: 0.04em;
     }
 
-    #marquee-inner .outline {
+    #marquee-inner {
+      animation: scroll-left 50s linear infinite;
+    }
+
+    #marquee-top-inner {
+      animation: scroll-right 50s linear infinite;
+    }
+
+    #marquee-inner .outline,
+    #marquee-top-inner .outline {
       -webkit-text-stroke: 1px #000;
       color: transparent;
     }
@@ -120,6 +137,11 @@
     @keyframes scroll-left {
       0%   { transform: translateX(0); }
       100% { transform: translateX(-50%); }
+    }
+
+    @keyframes scroll-right {
+      0%   { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
     }
 
     /* ---- CLICK HINT ---- */
@@ -146,6 +168,15 @@
     <span class="location">NEIGHBORS ESAKA / OSAKA</span>
   </div>
 
+  <div id="marquee-top-wrap">
+    <div id="marquee-top-inner">
+      <span>★ NEIGHBORS ESAKA ★ 文化祭 2026.2.22 ★ LOOSE &amp; ART &amp; FUN ★ WELCOME EVERYONE ★&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span class="outline">★ NEIGHBORS ESAKA ★ 文化祭 2026.2.22 ★ LOOSE &amp; ART &amp; FUN ★ WELCOME EVERYONE ★&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span>★ NEIGHBORS ESAKA ★ 文化祭 2026.2.22 ★ LOOSE &amp; ART &amp; FUN ★ WELCOME EVERYONE ★&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span class="outline">★ NEIGHBORS ESAKA ★ 文化祭 2026.2.22 ★ LOOSE &amp; ART &amp; FUN ★ WELCOME EVERYONE ★&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    </div>
+  </div>
+
   <div id="marquee-wrap">
     <div id="marquee-inner">
       <span>★ ENJOY THE MOMENT ★ LOOSE VIBES ONLY ★ ART &amp; MUSIC &amp; FOOD ★ WELCOME EVERYONE ★&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -160,7 +191,7 @@
   <script>
     const card = document.getElementById('card');
     const hint = document.getElementById('hint');
-    const MARQUEE_H = 50; // marquee band height
+    const MARQUEE_H = 50; // marquee band height (top & bottom)
 
     // accent colors that cycle on bounce
     const COLORS = [
@@ -201,10 +232,10 @@
       y += vy;
 
       let bounced = false;
-      if (x <= 0)       { x = 0;      vx = Math.abs(vx);  bounced = true; }
-      if (x >= W - cw)  { x = W - cw; vx = -Math.abs(vx); bounced = true; }
-      if (y <= 0)       { y = 0;      vy = Math.abs(vy);  bounced = true; }
-      if (y >= H - ch)  { y = H - ch; vy = -Math.abs(vy); bounced = true; }
+      if (x <= 0)            { x = 0;          vx = Math.abs(vx);  bounced = true; }
+      if (x >= W - cw)       { x = W - cw;     vx = -Math.abs(vx); bounced = true; }
+      if (y <= MARQUEE_H)    { y = MARQUEE_H;  vy = Math.abs(vy);  bounced = true; }
+      if (y >= H - ch)       { y = H - ch;     vy = -Math.abs(vy); bounced = true; }
 
       if (bounced) {
         colorIdx = (colorIdx + 1) % COLORS.length;
