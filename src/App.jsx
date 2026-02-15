@@ -698,7 +698,7 @@ export default function EventPage() {
             </div>
         </div>
         <div className="max-w-7xl mx-auto px-8 pt-6 border-t border-white/10 mt-6 text-center">
-          <a href="/screensaver.html" className="text-xs text-white/20 hover:text-white/50 transition-colors font-mono tracking-widest">SCREENSAVER</a>
+          <a href="/bunkasai/screensaver.html" className="text-xs text-white/20 hover:text-white/50 transition-colors font-mono tracking-widest">SCREENSAVER</a>
         </div>
       </footer>
 
