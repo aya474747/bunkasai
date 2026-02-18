@@ -22,25 +22,36 @@
       justify-content: center;
     }
 
-    /* ---- IMAGE FILL ---- */
-    #bg-image {
+    /* ---- SPLIT LAYOUT (画像あり) ---- */
+    #split-layout {
       position: absolute;
       inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
+      display: flex;
       z-index: 1;
     }
 
-    /* ---- INFO OVERLAY (bottom) ---- */
-    #info {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(transparent, rgba(0,0,0,0.85) 40%);
-      padding: 80px 64px 48px;
-      z-index: 10;
+    #image-panel {
+      flex: 0 0 58%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #bg-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    #info-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 64px 52px;
+      background: #0d0d0d;
+      border-left: 1px solid rgba(255,255,255,0.07);
     }
 
     #stage-badge {
@@ -52,35 +63,37 @@
       background: #000;
       border: 2px solid #a3e635;
       display: inline-block;
+      align-self: flex-start;
       padding: 4px 16px;
       border-radius: 4px;
-      margin-bottom: 16px;
+      margin-bottom: 28px;
     }
 
     #event-time {
       font-family: 'Dela Gothic One', cursive;
-      font-size: 28px;
-      color: rgba(255,255,255,0.6);
+      font-size: clamp(20px, 2.2vw, 30px);
+      color: rgba(255,255,255,0.5);
       display: block;
-      margin-bottom: 4px;
+      margin-bottom: 10px;
       letter-spacing: 0.05em;
     }
 
     #event-title {
       font-family: 'Dela Gothic One', cursive;
-      font-size: clamp(40px, 6vw, 80px);
-      line-height: 1.1;
+      font-size: clamp(36px, 4.8vw, 68px);
+      line-height: 1.15;
       color: #fff;
       display: block;
-      margin-bottom: 12px;
+      margin-bottom: 20px;
     }
 
     #event-user {
       font-family: 'Zen Kaku Gothic New', sans-serif;
       font-weight: 700;
-      font-size: clamp(18px, 2.5vw, 28px);
-      color: rgba(255,255,255,0.75);
+      font-size: clamp(16px, 1.8vw, 24px);
+      color: rgba(255,255,255,0.65);
       display: block;
+      line-height: 1.6;
     }
 
     /* ---- NO-IMAGE DISPLAY ---- */
@@ -305,12 +318,16 @@
       const titleLines = event.title.split('\n').map(l => `<span>${l}</span>`).join('<br>');
 
       document.body.insertAdjacentHTML('afterbegin', `
-        <img id="bg-image" src="${event.image}" alt="${event.title}" />
-        <div id="info">
-          <span id="stage-badge">STAGE C</span>
-          <span id="event-time">${event.start} – ${event.end}</span>
-          <span id="event-title">${titleLines}</span>
-          <span id="event-user">${event.user}</span>
+        <div id="split-layout">
+          <div id="image-panel">
+            <img id="bg-image" src="${event.image}" alt="${event.title}" />
+          </div>
+          <div id="info-panel">
+            <span id="stage-badge">STAGE C</span>
+            <span id="event-time">${event.start} – ${event.end}</span>
+            <span id="event-title">${titleLines}</span>
+            <span id="event-user">${event.user}</span>
+          </div>
         </div>
       `);
     } else {
