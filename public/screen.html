@@ -144,6 +144,21 @@
       transition: opacity 1s;
     }
 
+    /* ---- NAV ARROWS ---- */
+    .nav-arrow {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Dela Gothic One', cursive;
+      font-size: 48px;
+      color: rgba(255,255,255,0.15);
+      z-index: 200;
+      pointer-events: none;
+      transition: opacity 1s;
+    }
+    #nav-prev { left: 24px; }
+    #nav-next { right: 24px; }
+
     /* ---- MENU BUTTON (top-left) ---- */
     #menu-btn {
       position: fixed;
@@ -188,7 +203,9 @@
 <body>
 
   <a id="menu-btn" href="/bunkasai/screensaver.html">← メニュー</a>
-  <div id="hint">CLICK TO RETURN</div>
+  <div id="hint">クリックでメニューへ戻る</div>
+  <div id="nav-prev" class="nav-arrow">‹</div>
+  <div id="nav-next" class="nav-arrow">›</div>
 
   <div id="content"></div>
 
@@ -312,9 +329,32 @@
       `;
     }
 
+    // 現在のイベントのインデックスを特定
+    const currentIndex = EVENTS.findIndex(e => e.id === eventId);
+
+    // 前後のナビゲーション用ヘルパー
+    function goNext() {
+      if (currentIndex < EVENTS.length - 1) {
+        window.location.href = '/bunkasai/screen.html?e=' + EVENTS[currentIndex + 1].id;
+      }
+    }
+    function goPrev() {
+      if (currentIndex > 0) {
+        window.location.href = '/bunkasai/screen.html?e=' + EVENTS[currentIndex - 1].id;
+      }
+    }
+
+    // 前後矢印の表示制御
+    const navPrev = document.getElementById('nav-prev');
+    const navNext = document.getElementById('nav-next');
+    if (currentIndex <= 0) navPrev.style.opacity = '0';
+    if (currentIndex >= EVENTS.length - 1) navNext.style.opacity = '0';
+
     // ヒントを4秒後に非表示
     setTimeout(() => {
       document.getElementById('hint').style.opacity = '0';
+      navPrev.style.opacity = '0';
+      navNext.style.opacity = '0';
     }, 4000);
 
     // クリックでメニューへ戻る（メニューボタン・画像以外のエリア）
@@ -323,8 +363,14 @@
       window.location.href = '/bunkasai/screensaver.html';
     });
 
-    document.addEventListener('keydown', () => {
-      window.location.href = '/bunkasai/screensaver.html';
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        goNext();
+      } else if (e.key === 'ArrowLeft') {
+        goPrev();
+      } else {
+        window.location.href = '/bunkasai/screensaver.html';
+      }
     });
   </script>
 </body>
