@@ -556,8 +556,8 @@ export default function EventPage() {
             <li className="flex gap-3 items-start">
               <span className="text-2xl mt-0.5">🔊</span>
               <div>
-                <p className="font-bold text-base mb-0.5">音量は周りへの配慮を最優先に</p>
-                <p className="text-sm text-gray-700 leading-relaxed">ギター・合唱など音が出る出し物は、ご近所・入居者の方に配慮した音量でお願いします。もし苦情が入った場合は、<strong>すぐに音量を下げるか演奏を止めてください</strong>。</p>
+                <p className="font-bold text-base mb-0.5">音量の調整にご協力を</p>
+                <p className="text-sm text-gray-700 leading-relaxed">ギター・合唱など音が出る出し物は、状況によって主催者から音量調整をお願いする場合があります。その際はご協力をお願いします。</p>
               </div>
             </li>
             <li className="flex gap-3 items-start">
