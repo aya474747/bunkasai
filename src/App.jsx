@@ -563,8 +563,8 @@ export default function EventPage() {
             <li className="flex gap-3 items-start">
               <span className="text-2xl mt-0.5">🪑</span>
               <div>
-                <p className="font-bold text-base mb-0.5">スペース確保と設備の取り扱いに注意</p>
-                <p className="text-sm text-gray-700 leading-relaxed">ダンスなど動きの大きい出し物は、事前にスペースを確認・確保してから行ってください。万が一、破損・汚損が発生した場合は<strong>必ずコールセンターへ先に連絡</strong>してから片付けをお願いします。</p>
+                <p className="font-bold text-base mb-0.5">設備・来場者への安全配慮</p>
+                <p className="text-sm text-gray-700 leading-relaxed">ダンスなど動きの大きい出し物は事前にスペースを確保してください。また、テープや装飾を貼る際は壁・家具への傷や剥がれにご注意を。来場者の方も含め怪我のないよう気を配りながら進めてください。万が一、破損・汚損が発生した場合は<strong>必ずコールセンターへ先に連絡</strong>してから片付けをお願いします。</p>
               </div>
             </li>
           </ul>
