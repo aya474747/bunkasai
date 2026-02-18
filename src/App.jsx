@@ -544,6 +544,33 @@ export default function EventPage() {
         <Marquee text="★ ENJOY THE MOMENT ★ LOOSE VIBES ONLY ★ ART & MUSIC & FOOD ★ WELCOME EVERYONE ★" />
       </div>
 
+      {/* NOTICES SECTION */}
+      <section className="px-4 md:px-8 max-w-3xl mx-auto mb-10">
+        <div className="bg-yellow-50 border-4 border-black brutalist-shadow rounded-lg p-5">
+          <div className="flex items-center gap-2 mb-4 border-b-2 border-black pb-3">
+            <span className="text-2xl">📢</span>
+            <h2 className="text-xl font-bold font-display tracking-wide">当日のお願い</h2>
+            <span className="ml-auto text-xs font-bold bg-black text-yellow-300 px-2 py-1 rounded">IMPORTANT</span>
+          </div>
+          <ul className="flex flex-col gap-4">
+            <li className="flex gap-3 items-start">
+              <span className="text-2xl mt-0.5">🔊</span>
+              <div>
+                <p className="font-bold text-base mb-0.5">音量は周りへの配慮を最優先に</p>
+                <p className="text-sm text-gray-700 leading-relaxed">ギター・合唱など音が出る出し物は、ご近所・入居者の方に配慮した音量でお願いします。もし苦情が入った場合は、<strong>すぐに音量を下げるか演奏を止めてください</strong>。</p>
+              </div>
+            </li>
+            <li className="flex gap-3 items-start">
+              <span className="text-2xl mt-0.5">🪑</span>
+              <div>
+                <p className="font-bold text-base mb-0.5">スペース確保と設備の取り扱いに注意</p>
+                <p className="text-sm text-gray-700 leading-relaxed">ダンスなど動きの大きい出し物は、事前にスペースを確認・確保してから行ってください。万が一、破損・汚損が発生した場合は<strong>必ずコールセンターへ先に連絡</strong>してから片付けをお願いします。</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
       <main className="px-4 md:px-8 max-w-7xl mx-auto">
 
         {/* COUNTDOWN */}
