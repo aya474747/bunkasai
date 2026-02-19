@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SCREEN — ネイバーズ江坂 文化祭 2026.2.22</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: #000;
+      cursor: none;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ---- SPLIT LAYOUT (画像あり) ---- */
+    #split-layout {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      z-index: 1;
+    }
+
+    #image-panel {
+      flex: 0 0 58%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #bg-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    #info-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 64px 52px;
+      background: #0d0d0d;
+      border-left: 1px solid rgba(255,255,255,0.07);
+    }
+
+    #stage-badge {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-weight: 900;
+      font-size: 16px;
+      letter-spacing: 0.2em;
+      color: #a3e635;
+      background: #000;
+      border: 2px solid #a3e635;
+      display: inline-block;
+      align-self: flex-start;
+      padding: 4px 16px;
+      border-radius: 4px;
+      margin-bottom: 28px;
+    }
+
+    #event-time {
+      font-family: 'Dela Gothic One', cursive;
+      font-size: clamp(20px, 2.2vw, 30px);
+      color: rgba(255,255,255,0.5);
+      display: block;
+      margin-bottom: 10px;
+      letter-spacing: 0.05em;
+    }
+
+    #event-title {
+      font-family: 'Dela Gothic One', cursive;
+      font-size: clamp(36px, 4.8vw, 68px);
+      line-height: 1.15;
+      color: #fff;
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    #event-user {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-weight: 700;
+      font-size: clamp(16px, 1.8vw, 24px);
+      color: rgba(255,255,255,0.65);
+      display: block;
+      line-height: 1.6;
+    }
+
+    /* ---- NO-IMAGE DISPLAY ---- */
+    #no-image-wrap {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 40px;
+    }
+
+    #no-image-wrap #stage-badge-center {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-weight: 900;
+      font-size: 18px;
+      letter-spacing: 0.2em;
+      color: #a3e635;
+      background: transparent;
+      border: 2px solid #a3e635;
+      display: inline-block;
+      padding: 6px 20px;
+      border-radius: 4px;
+      margin-bottom: 40px;
+    }
+
+    #no-image-wrap #event-time-center {
+      font-family: 'Dela Gothic One', cursive;
+      font-size: 36px;
+      color: rgba(255,255,255,0.5);
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    #no-image-wrap #event-title-center {
+      font-family: 'Dela Gothic One', cursive;
+      font-size: clamp(56px, 10vw, 128px);
+      line-height: 1.05;
+      -webkit-text-stroke: 3px #fff;
+      color: transparent;
+      display: block;
+      margin-bottom: 32px;
+    }
+
+    #no-image-wrap #event-user-center {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-weight: 700;
+      font-size: clamp(22px, 3vw, 36px);
+      color: rgba(255,255,255,0.7);
+      display: block;
+    }
+
+    /* ---- HINT ---- */
+    #hint {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-size: 12px;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.1em;
+      z-index: 200;
+      transition: opacity 1s;
+    }
+
+    /* ---- NAV ARROWS ---- */
+    .nav-arrow {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Dela Gothic One', cursive;
+      font-size: 48px;
+      color: rgba(255,255,255,0.15);
+      z-index: 200;
+      pointer-events: none;
+      transition: opacity 1s;
+    }
+    #nav-prev { left: 24px; }
+    #nav-next { right: 24px; }
+
+    /* ---- MENU BUTTON (top-left) ---- */
+    #menu-btn {
+      position: fixed;
+      top: 20px;
+      left: 24px;
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-weight: 900;
+      font-size: 13px;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.1em;
+      z-index: 200;
+      cursor: pointer;
+      transition: color 0.2s;
+      text-decoration: none;
+    }
+
+    #menu-btn:hover {
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* ---- ERROR STATE ---- */
+    #error-wrap {
+      text-align: center;
+      color: #fff;
+    }
+
+    #error-wrap p {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    #error-wrap a {
+      font-family: 'Dela Gothic One', cursive;
+      font-size: 24px;
+      color: #a3e635;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <a id="menu-btn" href="/bunkasai/screensaver.html">← メニュー</a>
+  <div id="hint">クリックでメニューへ戻る</div>
+  <div id="nav-prev" class="nav-arrow">‹</div>
+  <div id="nav-next" class="nav-arrow">›</div>
+
+  <div id="content"></div>
+
+  <script>
+    // ステージCの全出し物データ
+    const EVENTS = [
+      {
+        id: 0,
+        title: '開会式',
+        start: '13:00', end: '13:15',
+        user: 'つるみん・うみちゃん',
+        image: ''
+      },
+      {
+        id: 1,
+        title: '好日屋上\nアコースティックライブ',
+        start: '13:15', end: '13:30',
+        user: 'うみ・ももちゃん・まゆちゃん・さっちゃま・かのくん',
+        image: 'https://i.gyazo.com/61aa54eb72e5ddb43a1750aa5f014f9f.jpg'
+      },
+      {
+        id: 11,
+        title: '人生で最後の合唱\n旅立ちの日に',
+        start: '13:30', end: '14:00',
+        user: '全員  指揮:かよちゃん  ピアノ:さっちゃま',
+        image: 'https://i.gyazo.com/c62624ce8f2a843df2a8f1e2d63532aa.png'
+      },
+      {
+        id: 7,
+        title: '社交ダンス',
+        start: '14:00', end: '14:15',
+        user: 'つねぽん・りほちゃんペア',
+        image: 'https://i.gyazo.com/f2caa282aeb54407e86e67a73fc09c22.jpg'
+      },
+      {
+        id: 10,
+        title: 'FMネイバーズ\n書籍完成トークショー',
+        start: '14:30', end: '15:00',
+        user: 'DJしおり & ゆか',
+        image: 'https://i.gyazo.com/53ff64e38e1d275f8e4ff16c79c0ac71.jpg'
+      },
+      {
+        id: 8,
+        title: 'AI映像づくり',
+        start: '15:00', end: '16:00',
+        user: 'なべちゃん',
+        image: 'https://i.gyazo.com/3eed8aec0e64d1d7ba52fafd645948d2.jpg'
+      },
+      {
+        id: 14,
+        title: 'DJ George 🎧🔥',
+        start: '17:00', end: '18:00',
+        user: 'ジョージくん',
+        image: 'https://i.gyazo.com/47cc2932768a488ed0230886616849fa.jpg'
+      },
+      {
+        id: 2,
+        title: 'ネイバーズダンス部',
+        start: '18:00', end: '18:15',
+        user: 'ごうちゃん・りほちゃん・むぎちゃん・まりんちゃん・なっちゃん',
+        image: 'https://i.gyazo.com/f448099b0d91a21483e9a5887401404a.png'
+      },
+      {
+        id: 15,
+        title: '漫才',
+        start: '18:15', end: '18:30',
+        user: 'ゆうま・タキ',
+        image: 'https://i.gyazo.com/7b9612e3d70071b8aaa4f6e5fb3cd81f.jpg'
+      },
+      {
+        id: 13,
+        title: '閉会式\n&集合写真',
+        start: '18:30', end: '18:45',
+        user: 'つるみん・うみちゃん',
+        image: ''
+      },
+      {
+        id: 16,
+        title: '2ndへ移動',
+        start: '18:45', end: '19:00',
+        user: 'つるみん・うみちゃん',
+        image: ''
+      },
+    ];
+
+    const params = new URLSearchParams(window.location.search);
+    const eventId = parseInt(params.get('e'), 10);
+    const event = EVENTS.find(e => e.id === eventId);
+    const content = document.getElementById('content');
+
+    if (!event) {
+      // エラー表示
+      content.innerHTML = `
+        <div id="error-wrap">
+          <p>イベントが見つかりませんでした</p>
+          <a href="/bunkasai/screensaver.html">← メニューに戻る</a>
+        </div>
+      `;
+    } else if (event.image) {
+      // 画像あり：フルスクリーン画像 + 下部オーバーレイ
+      document.title = event.title.replace('\n', ' ') + ' — ネイバーズ江坂 文化祭';
+
+      // 改行をスペースに変換したタイトル（title属性用）
+      const titleLines = event.title.split('\n').map(l => `<span>${l}</span>`).join('<br>');
+
+      document.body.insertAdjacentHTML('afterbegin', `
+        <div id="split-layout">
+          <div id="image-panel">
+            <img id="bg-image" src="${event.image}" alt="${event.title}" />
+          </div>
+          <div id="info-panel">
+            <span id="stage-badge">STAGE C</span>
+            <span id="event-time">${event.start} – ${event.end}</span>
+            <span id="event-title">${titleLines}</span>
+            <span id="event-user">${event.user}</span>
+          </div>
+        </div>
+      `);
+    } else {
+      // 画像なし：テキスト中央表示
+      document.title = event.title.replace('\n', ' ') + ' — ネイバーズ江坂 文化祭';
+
+      const titleLines = event.title.split('\n').map(l => `<span>${l}</span>`).join('<br>');
+
+      content.innerHTML = `
+        <div id="no-image-wrap">
+          <span id="stage-badge-center">STAGE C</span>
+          <span id="event-time-center">${event.start} – ${event.end}</span>
+          <span id="event-title-center">${titleLines}</span>
+          <span id="event-user-center">${event.user}</span>
+        </div>
+      `;
+    }
+
+    // 現在のイベントのインデックスを特定
+    const currentIndex = EVENTS.findIndex(e => e.id === eventId);
+
+    // 前後のナビゲーション用ヘルパー
+    function goNext() {
+      if (currentIndex < EVENTS.length - 1) {
+        window.location.href = '/bunkasai/screen.html?e=' + EVENTS[currentIndex + 1].id;
+      }
+    }
+    function goPrev() {
+      if (currentIndex > 0) {
+        window.location.href = '/bunkasai/screen.html?e=' + EVENTS[currentIndex - 1].id;
+      }
+    }
+
+    // 前後矢印の表示制御
+    const navPrev = document.getElementById('nav-prev');
+    const navNext = document.getElementById('nav-next');
+    if (currentIndex <= 0) navPrev.style.opacity = '0';
+    if (currentIndex >= EVENTS.length - 1) navNext.style.opacity = '0';
+
+    // ヒントを4秒後に非表示
+    setTimeout(() => {
+      document.getElementById('hint').style.opacity = '0';
+      navPrev.style.opacity = '0';
+      navNext.style.opacity = '0';
+    }, 4000);
+
+    // クリックでメニューへ戻る（メニューボタン・画像以外のエリア）
+    document.addEventListener('click', (e) => {
+      if (e.target.id === 'menu-btn') return;
+      window.location.href = '/bunkasai/screensaver.html';
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        goNext();
+      } else if (e.key === 'ArrowLeft') {
+        goPrev();
+      } else {
+        window.location.href = '/bunkasai/screensaver.html';
+      }
+    });
+  </script>
+</body>
+</html>

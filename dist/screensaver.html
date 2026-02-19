@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SCREEN SELECT — ネイバーズ江坂 文化祭 2026.2.22</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      width: 100vw;
+      min-height: 100vh;
+      overflow-y: auto;
+      background-color: #f3f4f6;
+      background-image: radial-gradient(#000 1px, transparent 1px);
+      background-size: 24px 24px;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 24px;
+    }
+
+    /* ---- MARQUEE BAND ---- */
+    #marquee-top-wrap,
+    #marquee-wrap {
+      position: fixed;
+      left: 0;
+      width: 100%;
+      background: #a3e635;
+      padding: 10px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      z-index: 100;
+    }
+
+    #marquee-top-wrap {
+      top: 0;
+      border-bottom: 4px solid #000;
+    }
+
+    #marquee-wrap {
+      bottom: 0;
+      border-top: 4px solid #000;
+    }
+
+    #marquee-inner,
+    #marquee-top-inner {
+      display: inline-block;
+      font-family: 'Dela Gothic One', cursive;
+      font-size: 18px;
+      color: #000;
+      letter-spacing: 0.04em;
+    }
+
+    #marquee-inner {
+      animation: scroll-left 50s linear infinite;
+    }
+
+    #marquee-top-inner {
+      animation: scroll-right 50s linear infinite;
+    }
+
+    #marquee-inner .outline,
+    #marquee-top-inner .outline {
+      -webkit-text-stroke: 1px #000;
+      color: transparent;
+    }
+
+    @keyframes scroll-left {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    @keyframes scroll-right {
+      0%   { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+
+    /* ---- PANEL ---- */
+    .panel {
+      background: #fff;
+      border: 4px solid #000;
+      box-shadow: 8px 8px 0 #000;
+      border-radius: 12px;
+      padding: 40px 48px;
+      max-width: 560px;
+      width: 100%;
+    }
+
+    .panel-header {
+      margin-bottom: 32px;
+    }
+
+    .tagline {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      color: #000;
+      background: #facc15;
+      display: inline-block;
+      padding: 4px 12px;
+      border: 2px solid #000;
+      box-shadow: 3px 3px 0 #000;
+      border-radius: 4px;
+      margin-bottom: 14px;
+    }
+
+    .panel-title {
+      font-family: 'Dela Gothic One', cursive;
+      font-size: 48px;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: #000;
+      display: block;
+    }
+
+    .panel-sub {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: rgba(0,0,0,0.5);
+      margin-top: 8px;
+      letter-spacing: 0.08em;
+    }
+
+    /* ---- DIVIDER ---- */
+    .divider {
+      border: none;
+      border-top: 2px solid #000;
+      margin: 24px 0;
+    }
+
+    /* ---- SECTION LABEL ---- */
+    .section-label {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-weight: 900;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.4);
+      margin-bottom: 12px;
+    }
+
+    /* ---- LINK LIST ---- */
+    .link-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .link-item a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-weight: 900;
+      font-size: 20px;
+      color: #000;
+      text-decoration: none;
+      background: #f3f4f6;
+      border: 3px solid #000;
+      box-shadow: 4px 4px 0 #000;
+      border-radius: 8px;
+      padding: 14px 20px;
+      transition: transform 0.08s, box-shadow 0.08s, background 0.08s;
+    }
+
+    .link-item a:hover {
+      background: #facc15;
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 #000;
+    }
+
+    .link-item a:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 #000;
+    }
+
+    .link-item a .time-badge {
+      font-family: 'Dela Gothic One', cursive;
+      font-size: 13px;
+      color: rgba(0,0,0,0.45);
+      letter-spacing: 0.04em;
+    }
+
+    .link-item.screensaver a {
+      background: #000;
+      color: #a3e635;
+    }
+
+    .link-item.screensaver a:hover {
+      background: #1a1a1a;
+    }
+
+    .link-item.screensaver a .time-badge {
+      color: rgba(163, 230, 53, 0.5);
+    }
+
+    /* ---- BACK LINK ---- */
+    .back-link {
+      margin-top: 28px;
+      text-align: center;
+    }
+
+    .back-link a {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: rgba(0,0,0,0.5);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      transition: color 0.15s;
+    }
+
+    .back-link a:hover {
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="marquee-top-wrap">
+    <div id="marquee-top-inner">
+      <span>★ NEIGHBORS ESAKA ★ 文化祭 2026.2.22 ★ LOOSE &amp; ART &amp; FUN ★ WELCOME EVERYONE ★&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span class="outline">★ NEIGHBORS ESAKA ★ 文化祭 2026.2.22 ★ LOOSE &amp; ART &amp; FUN ★ WELCOME EVERYONE ★&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span>★ NEIGHBORS ESAKA ★ 文化祭 2026.2.22 ★ LOOSE &amp; ART &amp; FUN ★ WELCOME EVERYONE ★&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span class="outline">★ NEIGHBORS ESAKA ★ 文化祭 2026.2.22 ★ LOOSE &amp; ART &amp; FUN ★ WELCOME EVERYONE ★&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <span class="tagline">STAGE C — TV SCREEN</span>
+      <span class="panel-title">SCREEN<br>SELECT</span>
+      <p class="panel-sub">テレビに映したい画面を選んでください</p>
+    </div>
+
+    <hr class="divider" />
+
+    <p class="section-label">スクリーン</p>
+    <ul class="link-list">
+      <li class="link-item screensaver">
+        <a href="/bunkasai/screensaver-main.html">
+          <span>スクリーンセイバー</span>
+          <span class="time-badge">SAVER</span>
+        </a>
+      </li>
+    </ul>
+
+    <hr class="divider" />
+
+    <p class="section-label">ステージ C 出し物</p>
+    <ul class="link-list">
+      <li class="link-item">
+        <a href="/bunkasai/screen.html?e=0">
+          <span>開会式</span>
+          <span class="time-badge">13:00</span>
+        </a>
+      </li>
+      <li class="link-item">
+        <a href="/bunkasai/screen.html?e=1">
+          <span>好日屋上</span>
+          <span class="time-badge">13:15</span>
+        </a>
+      </li>
+      <li class="link-item">
+        <a href="/bunkasai/screen.html?e=11">
+          <span>人生で最後の合唱</span>
+          <span class="time-badge">13:30</span>
+        </a>
+      </li>
+      <li class="link-item">
+        <a href="/bunkasai/screen.html?e=7">
+          <span>社交ダンス</span>
+          <span class="time-badge">14:00</span>
+        </a>
+      </li>
+      <li class="link-item">
+        <a href="/bunkasai/screen.html?e=10">
+          <span>FMネイバーズ</span>
+          <span class="time-badge">14:30</span>
+        </a>
+      </li>
+      <li class="link-item">
+        <a href="/bunkasai/screen.html?e=8">
+          <span>AI映像づくり</span>
+          <span class="time-badge">15:00</span>
+        </a>
+      </li>
+      <li class="link-item">
+        <a href="/bunkasai/screen.html?e=14">
+          <span>DJ George 🎧</span>
+          <span class="time-badge">17:00</span>
+        </a>
+      </li>
+      <li class="link-item">
+        <a href="/bunkasai/screen.html?e=2">
+          <span>ネイバーズダンス部</span>
+          <span class="time-badge">18:00</span>
+        </a>
+      </li>
+      <li class="link-item">
+        <a href="/bunkasai/screen.html?e=15">
+          <span>漫才</span>
+          <span class="time-badge">18:15</span>
+        </a>
+      </li>
+      <li class="link-item">
+        <a href="/bunkasai/screen.html?e=13">
+          <span>閉会式&amp;集合写真</span>
+          <span class="time-badge">18:30</span>
+        </a>
+      </li>
+      <li class="link-item">
+        <a href="/bunkasai/screen.html?e=16">
+          <span>2ndへ移動</span>
+          <span class="time-badge">18:45</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="back-link">
+      <a href="/bunkasai/">← メインページへ戻る</a>
+    </div>
+  </div>
+
+  <div id="marquee-wrap">
+    <div id="marquee-inner">
+      <span>★ ENJOY THE MOMENT ★ LOOSE VIBES ONLY ★ ART &amp; MUSIC &amp; FOOD ★ WELCOME EVERYONE ★&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span class="outline">★ ENJOY THE MOMENT ★ LOOSE VIBES ONLY ★ ART &amp; MUSIC &amp; FOOD ★ WELCOME EVERYONE ★&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span>★ ENJOY THE MOMENT ★ LOOSE VIBES ONLY ★ ART &amp; MUSIC &amp; FOOD ★ WELCOME EVERYONE ★&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span class="outline">★ ENJOY THE MOMENT ★ LOOSE VIBES ONLY ★ ART &amp; MUSIC &amp; FOOD ★ WELCOME EVERYONE ★&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    </div>
+  </div>
+
+</body>
+</html>
