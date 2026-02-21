@@ -111,6 +111,9 @@
 
   <div id="preview-wrap">
     <video id="video" autoplay playsinline muted></video>
+    <div id="countdown-overlay" style="display:none; position:absolute; inset:0; background:rgba(0,0,0,0.4); display:none; align-items:center; justify-content:center;">
+      <span id="countdown-num" style="font-family:'Dela Gothic One',cursive; font-size:8rem; color:#fff; text-shadow:0 0 20px rgba(0,0,0,0.8);"></span>
+    </div>
   </div>
 
   <div id="photo-wrap">
@@ -284,8 +287,29 @@
         ctx.fillText('♥', FRAME.width - 30, FRAME.height - greenBandH / 2 - 4);
       }
 
+      const countdownOverlay = document.getElementById('countdown-overlay');
+      const countdownNum = document.getElementById('countdown-num');
+
       function capture() {
         if (!video.videoWidth) return;
+        btnCapture.disabled = true;
+        countdownOverlay.style.display = 'flex';
+        let count = 3;
+        countdownNum.textContent = count;
+        const timer = setInterval(function() {
+          count--;
+          if (count > 0) {
+            countdownNum.textContent = count;
+          } else {
+            clearInterval(timer);
+            countdownOverlay.style.display = 'none';
+            btnCapture.disabled = false;
+            doCapture();
+          }
+        }, 1000);
+      }
+
+      function doCapture() {
         const w = video.videoWidth;
         const h = video.videoHeight;
         const targetAspect = FRAME.photoW / FRAME.photoH;
