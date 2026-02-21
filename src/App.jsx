@@ -77,70 +77,6 @@ const Countdown = () => {
   );
 };
 
-// 次の出し物までのカウントダウンタイマー
-const NextEventCountdown = () => {
-  const [nextEvent, setNextEvent] = useState(null);
-  const [minutesLeft, setMinutesLeft] = useState(0);
-
-  useEffect(() => {
-    const findNextEvent = () => {
-      const now = new Date();
-      const today = '2026-02-22'; // イベント日
-
-      // EVENT_DATAからstartとendがあるイベントのみ抽出
-      const upcomingEvents = EVENT_DATA
-        .filter(event => event.start && event.end && event.stage !== null)
-        .map(event => {
-          const [hours, minutes] = event.start.split(':').map(Number);
-          const eventDate = new Date(today);
-          eventDate.setHours(hours, minutes, 0, 0);
-          return { ...event, startDate: eventDate };
-        })
-        .filter(event => event.startDate > now)
-        .sort((a, b) => a.startDate - b.startDate);
-
-      if (upcomingEvents.length > 0) {
-        const next = upcomingEvents[0];
-        setNextEvent(next);
-
-        const timeDiff = next.startDate - now;
-        const minutes = Math.floor(timeDiff / (1000 * 60));
-        setMinutesLeft(minutes);
-      } else {
-        setNextEvent(null);
-        setMinutesLeft(0);
-      }
-    };
-
-    findNextEvent();
-    const interval = setInterval(findNextEvent, 60000); // 1分ごとに更新
-
-    return () => clearInterval(interval);
-  }, []);
-
-  if (!nextEvent || minutesLeft <= 0) {
-    return null;
-  }
-
-  return (
-    <div className="bg-gradient-to-r from-blue-100 to-cyan-100 p-5 border-3 border-blue-400 mb-8 w-full max-w-4xl mx-auto rounded-2xl shadow-sm">
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-        <div className="text-center md:text-left">
-          <p className="text-sm font-bold text-blue-600 mb-1 font-rounded">つぎの出し物</p>
-          <h4 className="text-lg md:text-xl font-bold text-gray-800 font-rounded">{nextEvent.title}</h4>
-          <p className="text-xs text-gray-600 mt-1">{nextEvent.start}〜 @ STAGE {nextEvent.stage}</p>
-        </div>
-        <div className="flex items-baseline gap-2">
-          <span className="text-sm text-blue-700 font-bold font-rounded">のこり</span>
-          <span className="text-5xl md:text-6xl font-display text-blue-600 tabular-nums">
-            {minutesLeft}
-          </span>
-          <span className="text-xl font-bold text-blue-700 font-rounded">分</span>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 
 const SectionTitle = ({ title, icon: Icon, color = "bg-yellow-400" }) => (
@@ -656,9 +592,6 @@ export default function EventPage() {
 
         {/* COUNTDOWN */}
         <Countdown />
-
-        {/* NEXT EVENT COUNTDOWN */}
-        <NextEventCountdown />
 
         {/* TIME SCHEDULE */}
         <TimeSchedule onEventClick={handleEventClick} />
