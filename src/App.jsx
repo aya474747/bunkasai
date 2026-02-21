@@ -563,6 +563,13 @@ export default function EventPage() {
               </div>
             </li>
             <li className="flex gap-3 items-start">
+              <span className="text-2xl mt-0.5">🤝</span>
+              <div>
+                <p className="font-bold text-base mb-0.5">友達作ろう</p>
+                <p className="text-sm text-gray-700 leading-relaxed">江坂OB・OGも参加します！名札シールを配るので、知らない人とも気軽に話してみてね💬</p>
+              </div>
+            </li>
+            <li className="flex gap-3 items-start">
               <span className="text-2xl mt-0.5">🔊</span>
               <div>
                 <p className="font-bold text-base mb-0.5">音量の調整にご協力を</p>
