@@ -265,7 +265,8 @@
         title: 'AI映像づくり',
         start: '15:00', end: '16:00',
         user: 'なべちゃん',
-        image: 'https://i.gyazo.com/3eed8aec0e64d1d7ba52fafd645948d2.jpg'
+        image: 'https://i.gyazo.com/3eed8aec0e64d1d7ba52fafd645948d2.jpg',
+        cancelled: true
       },
       {
         id: 14,
@@ -321,8 +322,10 @@
       // 画像あり：フルスクリーン画像 + 下部オーバーレイ
       document.title = event.title.replace('\n', ' ') + ' — ネイバーズ江坂 文化祭';
 
-      // 改行をスペースに変換したタイトル（title属性用）
-      const titleLines = event.title.split('\n').map(l => `<span>${l}</span>`).join('<br>');
+      // 改行をスペースに変換したタイトル（title属性用）。中止の場合は取り消し線＋赤字
+      const titleLines = event.cancelled
+        ? event.title.split('\n').map(l => `<span style="text-decoration:line-through">${l}</span>`).join('<br>') + '<br><span style="color:#dc2626;font-weight:bold">都合により中止</span>'
+        : event.title.split('\n').map(l => `<span>${l}</span>`).join('<br>');
 
       document.body.insertAdjacentHTML('afterbegin', `
         <div id="split-layout">
@@ -341,7 +344,9 @@
       // 画像なし：テキスト中央表示
       document.title = event.title.replace('\n', ' ') + ' — ネイバーズ江坂 文化祭';
 
-      const titleLines = event.title.split('\n').map(l => `<span>${l}</span>`).join('<br>');
+      const titleLines = event.cancelled
+        ? event.title.split('\n').map(l => `<span style="text-decoration:line-through">${l}</span>`).join('<br>') + '<br><span style="color:#dc2626;font-weight:bold">都合により中止</span>'
+        : event.title.split('\n').map(l => `<span>${l}</span>`).join('<br>');
 
       content.innerHTML = `
         <div id="no-image-wrap">
