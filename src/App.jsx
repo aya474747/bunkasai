@@ -526,7 +526,7 @@ export default function EventPage() {
           {/* Main Title */}
           <div className="mb-10 relative">
             <span className="block text-2xl md:text-4xl font-bold tracking-widest mb-2 text-black transform -rotate-1 font-display">第一回 ネイバーズ江坂</span>
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-display leading-[1.1] tracking-tighter text-stroke-white relative z-10">
+            <h1 className="text-6xl md:text-8xl lg:text-9xl leading-[1.1] tracking-tighter text-stroke-white relative z-10" style={{ fontFamily: "'Dela Gothic One', cursive" }}>
               文化祭
             </h1>
             {/* デコ */}
@@ -770,8 +770,10 @@ export default function EventPage() {
               </button>
             </div>
         </div>
-        <div className="max-w-7xl mx-auto px-8 pt-6 border-t border-white/10 mt-6 text-center">
+        <div className="max-w-7xl mx-auto px-8 pt-6 border-t border-white/10 mt-6 text-center flex flex-wrap items-center justify-center gap-4">
           <a href="/bunkasai/screensaver.html" className="text-xs text-white/20 hover:text-white/50 transition-colors font-mono tracking-widest">SCREENSAVER</a>
+          <span className="text-white/20">|</span>
+          <a href="/bunkasai/purikura.html" className="text-xs text-white/20 hover:text-white/50 transition-colors font-mono tracking-widest">プリクラ</a>
         </div>
       </footer>
 
