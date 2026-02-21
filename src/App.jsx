@@ -558,7 +558,7 @@ export default function EventPage() {
             <li className="flex gap-3 items-start">
               <span className="text-2xl mt-0.5">👋</span>
               <div>
-                <p className="font-bold text-base mb-0.5">SA内覧の人が来る可能性があります</p>
+                <p className="font-bold text-base mb-0.5">内覧の方が来るかも</p>
                 <p className="text-sm text-gray-700 leading-relaxed">元気に挨拶しましょう🙋‍♂️🙋‍♀️</p>
               </div>
             </li>
