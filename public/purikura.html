@@ -224,6 +224,14 @@
         const marqueeText = '★ ENJOY THE MOMENT ★ LOOSE VIBES ONLY ★ ART & MUSIC & FOOD ★ WELCOME EVERYONE ★';
         ctx.fillText(marqueeText, FRAME.width / 2, 24);
 
+        ctx.textAlign = 'center';
+        ctx.font = 'bold 40px "Dela Gothic One", cursive';
+        ctx.lineWidth = 6;
+        ctx.strokeStyle = '#fff';
+        ctx.strokeText('第一回ネイバーズ江坂', FRAME.width / 2, greenBandH + topDotH - 4);
+        ctx.fillStyle = '#000';
+        ctx.fillText('第一回ネイバーズ江坂', FRAME.width / 2, greenBandH + topDotH - 4);
+
         ctx.fillStyle = '#000';
         ctx.fillRect(0, FRAME.height - greenBandH, FRAME.width, 4);
         ctx.fillStyle = lime;
@@ -237,13 +245,6 @@
         const pad = 12;
 
         ctx.textAlign = 'center';
-        ctx.font = 'bold 40px "Dela Gothic One", cursive';
-        ctx.lineWidth = 6;
-        ctx.strokeStyle = '#fff';
-        ctx.strokeText('第一回ネイバーズ江坂', FRAME.width / 2, bottomY - 6);
-        ctx.fillStyle = '#000';
-        ctx.fillText('第一回ネイバーズ江坂', FRAME.width / 2, bottomY - 6);
-
         ctx.font = 'bold 120px "Dela Gothic One", cursive';
         ctx.lineWidth = 8;
         ctx.strokeStyle = '#fff';
