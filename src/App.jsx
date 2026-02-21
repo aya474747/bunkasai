@@ -211,7 +211,7 @@ const EVENT_DATA = [
   { id: 11, title: '人生で最後の合唱(旅立ちの日に)', category: 'performance', stage: 'C', start: '13:30', end: '14:00', rowStart: 3, rowSpan: 2, user: '全員 指揮:かよちゃん ピアノ:さっちゃま', image: 'https://i.gyazo.com/c62624ce8f2a843df2a8f1e2d63532aa.png', detail: '人生で最後の合唱になるかもしれないよ！！！！奮ってご参加ください🙌', practiceVideos: { soprano: 'https://www.youtube.com/watch?v=mnM-UYeLz5Q', alto: 'https://www.youtube.com/watch?v=OW2dq5Xg73E', tenor: 'https://m.youtube.com/watch?v=m5ctvhONbsI' } },
   { id: 7, title: '社交ダンス', category: 'performance', stage: 'C', start: '14:00', end: '14:15', rowStart: 5, rowSpan: 1, user: 'つねぽん、りほちゃんペア', image: 'https://i.gyazo.com/f2caa282aeb54407e86e67a73fc09c22.jpg', detail: 'Shall we dance？💃' },
   { id: 10, title: 'FMネイバーズ〜書籍完成トークショー&みんなに即興インタビュー〜', category: 'performance', stage: 'C', start: '14:30', end: '15:00', rowStart: 7, rowSpan: 2, user: 'DJしおり&ゆか', image: 'https://i.gyazo.com/53ff64e38e1d275f8e4ff16c79c0ac71.jpg', detail: '集めてきたみんなの「最近よかったこと」をお便りに。ラジオ風にトーク&即興インタビューします🎤' },
-  { id: 8, title: 'AI映像づくり', category: 'performance', stage: 'C', start: '15:00', end: '16:00', rowStart: 9, rowSpan: 4, user: 'なべちゃん', image: 'https://i.gyazo.com/3eed8aec0e64d1d7ba52fafd645948d2.jpg', detail: 'Soraを使って動画作りをやります！目指せハリウッド進出！', cancelled: true },
+  { id: 8, title: 'AI映像づくり', category: 'performance', stage: 'C', start: '15:00', end: '16:00', rowStart: 9, rowSpan: 4, user: 'なべちゃん', image: 'https://i.gyazo.com/3eed8aec0e64d1d7ba52fafd645948d2.jpg', detail: 'Soraを使って動画作りをやります！目指せハリウッド進出！', cancelled: true, hideFromTimetable: true },
   { id: 14, title: 'DJ George 🎧🔥', category: 'performance', stage: 'C', start: '17:00', end: '18:00', rowStart: 17, rowSpan: 4, user: 'ジョージくん', image: 'https://i.gyazo.com/47cc2932768a488ed0230886616849fa.jpg', detail: 'その瞬間、その場所でしか生まれないバイブスを一緒に。\n音で繋がろう。' },
   { id: 2, title: 'ネイバーズダンス部', category: 'performance', stage: 'C', start: '18:00', end: '18:15', rowStart: 21, rowSpan: 1, user: 'ネイバーズダンス部', image: 'https://i.gyazo.com/f448099b0d91a21483e9a5887401404a.png', detail: 'キュートセクシーわんぱく詰め込みました🕺💖\nLet\'s party time！！！\n\n出演者：ごうちゃん・りほちゃん・むぎちゃん・まりんちゃん・なっちゃん' },
   { id: 15, title: '漫才', category: 'performance', stage: 'C', start: '18:15', end: '18:30', rowStart: 22, rowSpan: 1, user: 'ゆうま・タキ', image: 'https://i.gyazo.com/7b9612e3d70071b8aaa4f6e5fb3cd81f.jpg', detail: '出演者：ゆうま・タキ' },
@@ -367,8 +367,8 @@ const TimeSchedule = ({ onEventClick }) => {
     { id: 'F', name: 'STAGE F', bg: 'bg-purple-200', border: 'border-purple-500', text: 'text-purple-900' },
   ];
 
-  // タイムテーブルに表示するイベント（stageがnullでないもの）
-  const scheduleData15Min = EVENT_DATA.filter(event => event.stage !== null);
+  // タイムテーブルに表示するイベント（stageがnullでないもの。hideFromTimetableは除外）
+  const scheduleData15Min = EVENT_DATA.filter(event => event.stage !== null && !event.hideFromTimetable);
 
   const times = ['13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00'];
 
