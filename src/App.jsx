@@ -657,6 +657,9 @@ export default function EventPage() {
         {/* COUNTDOWN */}
         <Countdown />
 
+        {/* NEXT EVENT COUNTDOWN */}
+        <NextEventCountdown />
+
         {/* TIME SCHEDULE */}
         <TimeSchedule onEventClick={handleEventClick} />
 
