@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>プリクラ — ネイバーズ江坂 文化祭 2026.2.22</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      background: #f3f4f6;
+      min-height: 100vh;
+      padding: 24px 16px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .font-display { font-family: 'Dela Gothic One', cursive; }
+    h1 {
+      font-size: 1.25rem;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #000;
+    }
+    #preview-wrap {
+      width: 100%;
+      max-width: 480px;
+      aspect-ratio: 484/380;
+      background: #000;
+      border: 4px solid #000;
+      box-shadow: 6px 6px 0 #000;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 20px;
+    }
+    #video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scaleX(-1);
+    }
+    #photo-wrap {
+      display: none;
+      width: 100%;
+      max-width: 480px;
+      margin-bottom: 20px;
+    }
+    #result-canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 4px solid #000;
+      box-shadow: 6px 6px 0 #000;
+    }
+    .btn-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 8px;
+    }
+    button {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px 24px;
+      border: 3px solid #000;
+      box-shadow: 4px 4px 0 #000;
+      cursor: pointer;
+      transition: transform 0.1s, box-shadow 0.1s;
+    }
+    button:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 #000;
+    }
+    #btn-capture {
+      background: #a3e635;
+      color: #000;
+    }
+    #btn-retake {
+      background: #fff;
+      color: #000;
+    }
+    #btn-download {
+      background: #fbbf24;
+      color: #000;
+    }
+    .back-link {
+      margin-top: 24px;
+      font-size: 0.875rem;
+    }
+    .back-link a {
+      color: #000;
+      font-weight: 700;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="font-display">AIで作ったプリクラコーナー</h1>
+
+  <div id="preview-wrap">
+    <video id="video" autoplay playsinline muted></video>
+  </div>
+
+  <div id="photo-wrap">
+    <canvas id="result-canvas"></canvas>
+  </div>
+
+  <div class="btn-wrap">
+    <button type="button" id="btn-capture">撮る</button>
+    <button type="button" id="btn-retake" style="display:none;">もう一度撮る</button>
+    <button type="button" id="btn-download" style="display:none;">保存する</button>
+  </div>
+
+  <p class="back-link"><a href="/bunkasai/">← 文化祭トップへ戻る</a></p>
+
+  <script>
+    (function() {
+      const video = document.getElementById('video');
+      const previewWrap = document.getElementById('preview-wrap');
+      const photoWrap = document.getElementById('photo-wrap');
+      const resultCanvas = document.getElementById('result-canvas');
+      const ctx = resultCanvas.getContext('2d');
+      const btnCapture = document.getElementById('btn-capture');
+      const btnRetake = document.getElementById('btn-retake');
+      const btnDownload = document.getElementById('btn-download');
+
+      let stream = null;
+      let capturedImageData = null;
+
+      const FRAME = {
+        width: 500,
+        height: 500,
+        border: 16,
+        topBand: 56,
+        bottomBand: 64,
+        sideBand: 8,
+        photoX: 8,
+        photoY: 56,
+        photoW: 484,
+        photoH: 380
+      };
+
+      function startCamera() {
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } }, audio: false })
+          .then(function(s) {
+            stream = s;
+            video.srcObject = s;
+          })
+          .catch(function(err) {
+            alert('カメラを使うには許可が必要です。');
+            console.error(err);
+          });
+      }
+
+      function stopCamera() {
+        if (stream) {
+          stream.getTracks().forEach(function(t) { t.stop(); });
+          stream = null;
+        }
+      }
+
+      function fillDots(ctx, x, y, w, h) {
+          ctx.fillStyle = '#fff';
+          ctx.fillRect(x, y, w, h);
+          ctx.fillStyle = '#000';
+          const step = 10;
+          for (let px = x; px < x + w; px += step) {
+            for (let py = y; py < y + h; py += step) {
+              ctx.beginPath();
+              ctx.arc(px + step / 2, py + step / 2, 1, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          }
+        }
+
+      function drawFrame(ctx, img) {
+        const scale = Math.min(FRAME.photoW / img.width, FRAME.photoH / img.height);
+        const dw = img.width * scale;
+        const dh = img.height * scale;
+        const dx = (FRAME.photoW - dw) / 2;
+        const dy = (FRAME.photoH - dh) / 2;
+
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(0, 0, FRAME.width, FRAME.height);
+        fillDots(ctx, FRAME.photoX, FRAME.photoY, FRAME.photoW, FRAME.photoH);
+
+        ctx.save();
+        ctx.translate(FRAME.photoX, FRAME.photoY);
+        ctx.beginPath();
+        ctx.rect(0, 0, FRAME.photoW, FRAME.photoH);
+        ctx.clip();
+        ctx.drawImage(img, 0, 0, img.width, img.height, dx, dy, dw, dh);
+        ctx.restore();
+
+        ctx.strokeStyle = '#000';
+        ctx.lineWidth = 6;
+        ctx.strokeRect(FRAME.photoX, FRAME.photoY, FRAME.photoW, FRAME.photoH);
+
+        const lime = '#a3e635';
+        const greenBandH = 36;
+        const dotBandH = FRAME.bottomBand - greenBandH;
+        const topDotH = FRAME.topBand - greenBandH;
+
+        fillDots(ctx, 0, 0, FRAME.sideBand, FRAME.height);
+        fillDots(ctx, FRAME.width - FRAME.sideBand, 0, FRAME.sideBand, FRAME.height);
+        fillDots(ctx, FRAME.sideBand, greenBandH, FRAME.width - FRAME.sideBand * 2, topDotH);
+        fillDots(ctx, FRAME.sideBand, FRAME.height - FRAME.bottomBand, FRAME.width - FRAME.sideBand * 2, dotBandH);
+
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, 0, FRAME.width, 4);
+        ctx.fillStyle = lime;
+        ctx.fillRect(0, 4, FRAME.width, greenBandH - 4);
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, greenBandH - 4, FRAME.width, 4);
+
+        ctx.fillStyle = '#000';
+        ctx.font = 'bold 16px "Dela Gothic One", cursive';
+        ctx.textAlign = 'center';
+        const marqueeText = '★ ENJOY THE MOMENT ★ LOOSE VIBES ONLY ★ ART & MUSIC & FOOD ★ WELCOME EVERYONE ★';
+        ctx.fillText(marqueeText, FRAME.width / 2, 24);
+
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, FRAME.height - greenBandH, FRAME.width, 4);
+        ctx.fillStyle = lime;
+        ctx.fillRect(0, FRAME.height - greenBandH + 4, FRAME.width, greenBandH - 4);
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, FRAME.height - 4, FRAME.width, 4);
+        ctx.font = 'bold 16px "Dela Gothic One", cursive';
+        ctx.fillText(marqueeText, FRAME.width / 2, FRAME.height - 12);
+
+        const bottomY = FRAME.height - FRAME.bottomBand + 20;
+        const pad = 12;
+
+        ctx.fillStyle = '#000';
+        ctx.textAlign = 'left';
+        ctx.font = 'bold 11px "Zen Kaku Gothic New", sans-serif';
+        ctx.fillText('第一回ネイバーズ文化祭', FRAME.sideBand + pad, bottomY);
+
+        ctx.textAlign = 'center';
+        ctx.font = 'bold 120px "Dela Gothic One", cursive';
+        ctx.fillText('文化祭', FRAME.width / 2, bottomY);
+
+        const boxW = 88;
+        const boxH = 22;
+        const boxX = FRAME.width - FRAME.sideBand - pad - boxW;
+        ctx.fillStyle = '#fbbf24';
+        ctx.fillRect(boxX, bottomY - boxH + 4, boxW, boxH);
+        ctx.fillStyle = '#000';
+        ctx.font = 'bold 12px "Dela Gothic One", cursive';
+        ctx.fillText('2/22 (SUN)', boxX + boxW / 2, bottomY - 2);
+
+        ctx.font = '26px "Dela Gothic One", cursive';
+        ctx.fillStyle = '#facc15';
+        ctx.fillText('★', 18, FRAME.topBand / 2 + 6);
+        ctx.fillStyle = '#ec4899';
+        ctx.fillText('♥', FRAME.width - 30, FRAME.height - greenBandH / 2 - 4);
+      }
+
+      function capture() {
+        if (!video.videoWidth) return;
+        const w = video.videoWidth;
+        const h = video.videoHeight;
+        const targetAspect = FRAME.photoW / FRAME.photoH;
+        let cropW, cropH, sx, sy;
+        if (w / h > targetAspect) {
+          cropH = h;
+          cropW = h * targetAspect;
+          sx = (w - cropW) / 2;
+          sy = 0;
+        } else {
+          cropW = w;
+          cropH = w / targetAspect;
+          sx = 0;
+          sy = (h - cropH) / 2;
+        }
+        const tmp = document.createElement('canvas');
+        tmp.width = cropW;
+        tmp.height = cropH;
+        const tctx = tmp.getContext('2d');
+        tctx.translate(cropW, 0);
+        tctx.scale(-1, 1);
+        tctx.drawImage(video, sx, sy, cropW, cropH, 0, 0, cropW, cropH);
+        capturedImageData = tmp;
+        stopCamera();
+        previewWrap.style.display = 'none';
+        photoWrap.style.display = 'block';
+        btnCapture.style.display = 'none';
+        btnRetake.style.display = 'inline-block';
+        btnDownload.style.display = 'inline-block';
+
+        resultCanvas.width = FRAME.width;
+        resultCanvas.height = FRAME.height;
+        const img = new Image();
+        img.onload = function() {
+          document.fonts.ready.then(function() {
+            drawFrame(ctx, img);
+          });
+        };
+        img.src = tmp.toDataURL('image/png');
+      }
+
+      function retake() {
+        capturedImageData = null;
+        photoWrap.style.display = 'none';
+        previewWrap.style.display = 'block';
+        btnRetake.style.display = 'none';
+        btnDownload.style.display = 'none';
+        btnCapture.style.display = 'inline-block';
+        startCamera();
+      }
+
+      function download() {
+        const a = document.createElement('a');
+        a.download = 'bunkasai-purikura-2026.png';
+        a.href = resultCanvas.toDataURL('image/png');
+        a.click();
+      }
+
+      btnCapture.addEventListener('click', capture);
+      btnRetake.addEventListener('click', retake);
+      btnDownload.addEventListener('click', download);
+
+      startCamera();
+      window.addEventListener('beforeunload', stopCamera);
+    })();
+  </script>
+</body>
+</html>
