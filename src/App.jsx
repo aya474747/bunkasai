@@ -206,7 +206,7 @@ const StageMap = () => {
 
 // マスターデータ（このデータを編集すれば、タイムテーブルとコンテンツセクションの両方に反映されます）
 const EVENT_DATA = [
-  { id: 0, title: '開会式', category: 'performance', stage: 'C', start: '13:00', end: '13:15', rowStart: 1, rowSpan: 1, user: 'つるみん・うみちゃん', detail: '多分サプライズあり🥰この時間からご参加ください❤️' },
+  { id: 0, title: '開会式', category: 'performance', stage: 'C', start: '13:15', end: '13:30', rowStart: 2, rowSpan: 1, user: 'つるみん・うみちゃん', detail: '多分サプライズあり🥰この時間からご参加ください❤️' },
   { id: 1, title: '好日屋上 アコースティックライブ', category: 'performance', stage: 'C', start: '15:00', end: '15:15', rowStart: 9, rowSpan: 1, user: 'うみ・ももちゃん・まゆちゃん・さっちゃま・かのくん', image: 'https://i.gyazo.com/61aa54eb72e5ddb43a1750aa5f014f9f.jpg', detail: '屋上で演奏するのが大好きなメンバーでアコースティックライブします🎸🎸🎸🎹🥁' },
   { id: 11, title: '人生で最後の合唱(旅立ちの日に)', category: 'performance', stage: 'C', start: '15:15', end: '15:45', rowStart: 10, rowSpan: 2, user: '全員 指揮:かよちゃん ピアノ:さっちゃま', image: 'https://i.gyazo.com/c62624ce8f2a843df2a8f1e2d63532aa.png', detail: '人生で最後の合唱になるかもしれないよ！！！！奮ってご参加ください🙌', practiceVideos: { soprano: 'https://www.youtube.com/watch?v=mnM-UYeLz5Q', alto: 'https://www.youtube.com/watch?v=OW2dq5Xg73E', tenor: 'https://m.youtube.com/watch?v=m5ctvhONbsI' } },
   { id: 7, title: '社交ダンス', category: 'performance', stage: 'C', start: '14:00', end: '14:15', rowStart: 5, rowSpan: 1, user: 'つねぽん、りほちゃんペア', image: 'https://i.gyazo.com/f2caa282aeb54407e86e67a73fc09c22.jpg', detail: 'Shall we dance？💃' },
