@@ -118,7 +118,14 @@ const ContentCard = ({ title, items, colorClass, rotate = "rotate-0", onItemClic
 
           <div className="w-full">
              {/* タイトル (コンテンツ名) */}
-             <div className="font-bold text-xl leading-tight text-black font-rounded">{item.name}</div>
+             <div className="font-bold text-xl leading-tight text-black font-rounded">
+               {item.cancelled ? (
+                 <>
+                   <span className="line-through text-gray-400">{item.name}</span>
+                   <span className="ml-2 text-xs font-bold bg-red-500 text-white px-2 py-0.5 rounded-sm align-middle">都合により中止</span>
+                 </>
+               ) : item.name}
+             </div>
 
              {/* 時間・ステージ */}
              {(item.time || item.stage) && (
@@ -209,7 +216,7 @@ const EVENT_DATA = [
   { id: 13, title: '閉会式&集合写真', category: 'performance', stage: 'C', start: '18:30', end: '18:45', rowStart: 23, rowSpan: 1, user: 'つるみん・うみちゃん' },
   { id: 16, title: '2ndに移動', category: 'performance', stage: 'C', start: '18:45', end: '19:00', rowStart: 24, rowSpan: 1, detail: '状況に応じて1stに留まるかも？指示に従ってください' },
   { id: 4, title: 'スマホストラップ作り', category: 'workshop', stage: 'C', start: '16:00', end: '17:00', rowStart: 13, rowSpan: 4, user: 'みなみ先生', image: 'https://i.gyazo.com/8a702743f7af57bb8e0e14f5f9eff64e.jpg', detail: 'カラフルなパラコードで、スマホストラップを作ろう！' },
-  { id: 12, title: 'かのお悩み相談室', category: 'shops', stage: 'A', start: '14:15', end: '16:00', rowStart: 6, rowSpan: 7, user: 'かのくん(うみの夫)', image: 'https://i.gyazo.com/b9e87d295b700786368bda29c865c97b.jpg', detail: 'かのくんがあなたのお悩み相談にのります！あるいはあなたにかのくんのお悩みを聞いてもらいます！決めるのはア・ナ・タ♡' },
+  { id: 12, title: 'かのお悩み相談室', category: 'shops', stage: 'A', start: '14:15', end: '16:00', rowStart: 6, rowSpan: 7, user: 'かのくん(うみの夫)', image: 'https://i.gyazo.com/b9e87d295b700786368bda29c865c97b.jpg', detail: 'かのくんがあなたのお悩み相談にのります！あるいはあなたにかのくんのお悩みを聞いてもらいます！決めるのはア・ナ・タ♡', cancelled: true },
   { id: 5, title: 'トイレZINE販売', category: 'shops', stage: 'D', start: '14:15', end: '18:00', rowStart: 6, rowSpan: 15, user: 'さくらちゃん・ゆうこりん', image: 'https://i.gyazo.com/4f5d109e4ddc5bbdddaab52ea475f5fc.jpg', detail: 'トイレマークの写真を撮り集めて、気づいたら、10年以上経っていました.........！様々な国を旅して出会った、ニッチな世界へようこそ......！' },
   { id: 61, title: 'ほぐしの満洲', category: 'shops', stage: 'E', start: '14:30', end: '14:40', rowStart: 7, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg', detail: '施術時間10分 Max 5人' },
   { id: 62, title: 'ほぐしの満洲', category: 'shops', stage: 'E', start: '15:00', end: '15:10', rowStart: 9, rowSpan: 1, user: 'ごとちゃん', image: 'https://i.gyazo.com/202c7310a52ccc20a37c0388d6568c13.jpg', detail: '施術時間10分 Max 5人' },
@@ -456,7 +463,8 @@ export default function EventPage() {
           image: event.image || '',
           detail: event.detail || '',
           practiceVideos: event.practiceVideos,
-          role: event.role
+          role: event.role,
+          cancelled: event.cancelled || false
         };
 
         // ほぐしの満洲の特別処理
