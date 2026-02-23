@@ -493,6 +493,16 @@ export default function EventPage() {
     <div className="min-h-screen pb-20 w-full overflow-x-hidden">
       <GlobalStyles />
 
+      {/* THANK YOU BANNER */}
+      <div className="w-full bg-yellow-400 border-b-4 border-black py-5 px-4 text-center">
+        <p className="font-display text-2xl md:text-3xl tracking-tight text-black">
+          ご来場ありがとうございました！
+        </p>
+        <p className="mt-2 text-sm md:text-base font-bold text-black">
+          第一回ネイバーズ江坂文化祭は無事終了しました。皆さんのおかげで最高の一日になりました。
+        </p>
+      </div>
+
       {/* HEADER SECTION - CENTERED */}
       <header className="pt-12 px-4 md:px-8 max-w-5xl mx-auto mb-8 text-center relative">
         <div className="flex flex-col items-center border-b-8 border-black pb-10">
