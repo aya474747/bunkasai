@@ -31,30 +31,70 @@ const GlobalStyles = () => (
 );
 
 const Countdown = () => {
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const eventStart = new Date('2026-02-22T13:00:00');
+  const eventEnd = new Date('2026-02-22T21:00:00');
+
+  const getTimeState = () => {
+    const now = new Date();
+    const elapsedSinceEnd = now.getTime() - eventEnd.getTime();
+
+    if (elapsedSinceEnd >= 0) {
+      return {
+        mode: 'after',
+        days: Math.floor(elapsedSinceEnd / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((elapsedSinceEnd / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((elapsedSinceEnd / 1000 / 60) % 60),
+        seconds: Math.floor((elapsedSinceEnd / 1000) % 60),
+      };
+    }
+
+    const remaining = eventStart.getTime() - now.getTime();
+    if (remaining <= 0) {
+      return { mode: 'during', days: 0, hours: 0, minutes: 0, seconds: 0 };
+    }
+    return {
+      mode: 'before',
+      days: Math.floor(remaining / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((remaining / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((remaining / 1000 / 60) % 60),
+      seconds: Math.floor((remaining / 1000) % 60),
+    };
+  };
+
+  const [timeState, setTimeState] = useState(() => getTimeState());
 
   useEffect(() => {
-    // 2026年2月22日 13:00 (と仮定)
-    const targetDate = new Date('2026-02-22T13:00:00');
-
     const interval = setInterval(() => {
-      const now = new Date();
-      const difference = targetDate.getTime() - now.getTime();
-
-      if (difference > 0) {
-        setTimeLeft({
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          minutes: Math.floor((difference / 1000 / 60) % 60),
-          seconds: Math.floor((difference / 1000) % 60),
-        });
-      } else {
-        clearInterval(interval);
-      }
+      setTimeState(getTimeState());
     }, 1000);
-
     return () => clearInterval(interval);
   }, []);
+
+  const { mode, ...time } = timeState;
+
+  if (mode === 'after') {
+    return (
+      <div className="bg-pink-500 text-white p-6 border-4 border-black mb-12 w-full max-w-4xl mx-auto transform rotate-1 brutalist-shadow">
+        <div className="text-center mb-4">
+          <h3 className="text-xl font-bold font-display text-yellow-200 tracking-widest">
+            ✨ EVENT ENDED ✨
+          </h3>
+          <p className="text-sm text-pink-200 font-bold">あのキラキラした時間から...</p>
+        </div>
+        <div className="flex gap-4 md:gap-8 text-center justify-center">
+          {Object.entries(time).map(([unit, value]) => (
+            <div key={unit} className="flex flex-col items-center">
+              <span className="text-4xl md:text-6xl font-display leading-none tabular-nums text-white">
+                {String(value).padStart(2, '0')}
+              </span>
+              <span className="text-xs uppercase font-bold tracking-widest text-pink-200">{unit}</span>
+            </div>
+          ))}
+        </div>
+        <p className="text-center mt-4 text-sm font-bold text-pink-100">が経過しています ♡</p>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-black text-white p-6 border-4 border-black mb-12 w-full max-w-4xl mx-auto transform -rotate-1 brutalist-shadow">
@@ -63,7 +103,7 @@ const Countdown = () => {
           EVENT STARTS IN
         </h3>
         <div className="flex gap-4 md:gap-8 text-center justify-center">
-          {Object.entries(timeLeft).map(([unit, value]) => (
+          {Object.entries(time).map(([unit, value]) => (
             <div key={unit} className="flex flex-col items-center">
               <span className="text-4xl md:text-6xl font-display leading-none tabular-nums text-white">
                 {String(value).padStart(2, '0')}
@@ -179,6 +219,46 @@ const Marquee = ({ text }) => {
     </div>
   );
 };
+
+const ThankYou = () => (
+  <section className="px-4 md:px-8 max-w-3xl mx-auto mb-12">
+    <div className="bg-pink-100 border-4 border-black brutalist-shadow rounded-2xl p-8 text-center relative overflow-hidden transform -rotate-1">
+      <span className="absolute top-3 left-5 text-5xl opacity-30 select-none" style={{ transform: 'rotate(-15deg)', display: 'inline-block' }}>♡</span>
+      <span className="absolute top-3 right-5 text-5xl opacity-30 select-none" style={{ transform: 'rotate(15deg)', display: 'inline-block' }}>★</span>
+      <span className="absolute bottom-3 left-8 text-4xl opacity-20 select-none" style={{ transform: 'rotate(8deg)', display: 'inline-block' }}>♡</span>
+      <span className="absolute bottom-3 right-8 text-4xl opacity-20 select-none" style={{ transform: 'rotate(-8deg)', display: 'inline-block' }}>★</span>
+
+      <div className="relative z-10">
+        <div className="inline-block bg-pink-500 text-white border-4 border-black px-6 py-2 mb-6 transform rotate-1 brutalist-shadow font-display text-lg rounded-lg">
+          🎉 THANK YOU SO MUCH!! 🎉
+        </div>
+
+        <h2 className="text-5xl md:text-7xl font-display mb-6 text-black leading-tight">
+          ありがとう<br/>
+          <span className="text-pink-600">ございました！！</span>
+        </h2>
+
+        <div className="bg-white border-2 border-black rounded-xl p-5 space-y-3">
+          <p className="text-base md:text-lg font-bold text-black">
+            第一回 ネイバーズ江坂 文化祭、<br/>
+            最高の一日になりました！
+          </p>
+          <p className="text-sm text-gray-700 leading-relaxed">
+            出演・出展してくれたみんな、<br/>
+            遊びに来てくれたみんな、<br/>
+            支えてくれた全ての方に<br/>
+            <span className="text-pink-600 font-bold">心から感謝します 💖</span>
+          </p>
+          <div className="flex justify-center pt-2">
+            <span className="bg-yellow-300 border-2 border-black px-4 py-1 font-bold text-sm transform rotate-1 rounded-md brutalist-shadow-sm">
+              また会いましょう！
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+);
 
 const StageMap = () => {
   return (
@@ -571,51 +651,13 @@ export default function EventPage() {
         </div>
       </header>
 
+      {/* THANK YOU */}
+      <ThankYou />
+
       {/* MARQUEE */}
       <div className="mb-12 w-full transform -rotate-1 origin-left scale-105">
-        <Marquee text="★ ENJOY THE MOMENT ★ LOOSE VIBES ONLY ★ ART & MUSIC & FOOD ★ WELCOME EVERYONE ★" />
+        <Marquee text="★ THANK YOU ★ ありがとうございました ★ また会いましょう ★ LOOSE & ART & FUN ★ 最高の一日 ★" />
       </div>
-
-      {/* NOTICES SECTION */}
-      <section className="px-4 md:px-8 max-w-3xl mx-auto mb-10">
-        <div className="bg-yellow-50 border-4 border-black brutalist-shadow rounded-lg p-5">
-          <div className="flex items-center gap-2 mb-4 border-b-2 border-black pb-3">
-            <span className="text-2xl">📢</span>
-            <h2 className="text-xl font-bold font-display tracking-wide">当日のお願い</h2>
-            <span className="ml-auto text-xs font-bold bg-black text-yellow-300 px-2 py-1 rounded">IMPORTANT</span>
-          </div>
-          <ul className="flex flex-col gap-4">
-            <li className="flex gap-3 items-start">
-              <span className="text-2xl mt-0.5">👋</span>
-              <div>
-                <p className="font-bold text-base mb-0.5">内覧の方が来るかも</p>
-                <p className="text-sm text-gray-700 leading-relaxed">元気に挨拶しましょう🙋‍♂️🙋‍♀️</p>
-              </div>
-            </li>
-            <li className="flex gap-3 items-start">
-              <span className="text-2xl mt-0.5">🤝</span>
-              <div>
-                <p className="font-bold text-base mb-0.5">友達作ろう</p>
-                <p className="text-sm text-gray-700 leading-relaxed">江坂OB・OGも参加します！名札シールを配るので、知らない人とも気軽に話してみてね💬</p>
-              </div>
-            </li>
-            <li className="flex gap-3 items-start">
-              <span className="text-2xl mt-0.5">🔊</span>
-              <div>
-                <p className="font-bold text-base mb-0.5">音量の調整にご協力を</p>
-                <p className="text-sm text-gray-700 leading-relaxed">ギター・合唱など音が出る出し物は、状況によって主催者から音量調整をお願いする場合があります。その際はご協力をお願いします。</p>
-              </div>
-            </li>
-            <li className="flex gap-3 items-start">
-              <span className="text-2xl mt-0.5">🪑</span>
-              <div>
-                <p className="font-bold text-base mb-0.5">設備・来場者への安全配慮</p>
-                <p className="text-sm text-gray-700 leading-relaxed">ダンスなど動きの大きい出し物は事前にスペースを確保してください。また、テープや装飾を貼る際は壁・家具への傷や剥がれにご注意を。来場者の方も含め怪我のないよう気を配りながら進めてください。万が一、破損・汚損が発生した場合は<strong>必ずコールセンターへ先に連絡</strong>してから片付けをお願いします。</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </section>
 
       <main className="px-4 md:px-8 max-w-7xl mx-auto">
 
