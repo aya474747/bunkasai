@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Sparkles, Music, Zap, Coffee, Image as ImageIcon, Moon, MapPin, Clock, AlertCircle, Heart, ArrowRightLeft, Star } from 'lucide-react';
 
 // Google Fonts読み込み用のスタイルコンポーネント
@@ -29,54 +29,6 @@ const GlobalStyles = () => (
     .text-stroke-white { -webkit-text-stroke: 2px black; color: white; }
   `}</style>
 );
-
-const Countdown = () => {
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-
-  useEffect(() => {
-    // 2026年2月22日 13:00 (と仮定)
-    const targetDate = new Date('2026-02-22T13:00:00');
-
-    const interval = setInterval(() => {
-      const now = new Date();
-      const difference = targetDate.getTime() - now.getTime();
-
-      if (difference > 0) {
-        setTimeLeft({
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          minutes: Math.floor((difference / 1000 / 60) % 60),
-          seconds: Math.floor((difference / 1000) % 60),
-        });
-      } else {
-        clearInterval(interval);
-      }
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div className="bg-black text-white p-6 border-4 border-black mb-12 w-full max-w-4xl mx-auto transform -rotate-1 brutalist-shadow">
-      <div className="flex flex-col md:flex-row items-center justify-between gap-6 px-4">
-        <h3 className="text-xl font-bold font-display text-lime-400 blink text-center md:text-left">
-          EVENT STARTS IN
-        </h3>
-        <div className="flex gap-4 md:gap-8 text-center justify-center">
-          {Object.entries(timeLeft).map(([unit, value]) => (
-            <div key={unit} className="flex flex-col items-center">
-              <span className="text-4xl md:text-6xl font-display leading-none tabular-nums text-white">
-                {String(value).padStart(2, '0')}
-              </span>
-              <span className="text-xs uppercase font-bold tracking-widest text-gray-400">{unit}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
 
 
 const SectionTitle = ({ title, icon: Icon, color = "bg-yellow-400" }) => (
@@ -448,6 +400,7 @@ const TimeSchedule = ({ onEventClick }) => {
 
 export default function EventPage() {
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [noticesOpen, setNoticesOpen] = useState(false);
 
   const handleEventClick = (item) => {
     setSelectedEvent({
@@ -589,51 +542,55 @@ export default function EventPage() {
         <Marquee text="★ THANK YOU ★ LOOSE VIBES ONLY ★ ART & MUSIC & FOOD ★ SEE YOU NEXT TIME ★" />
       </div>
 
-      {/* NOTICES SECTION */}
+      {/* NOTICES SECTION (collapsible) */}
       <section className="px-4 md:px-8 max-w-3xl mx-auto mb-10">
-        <div className="bg-yellow-50 border-4 border-black brutalist-shadow rounded-lg p-5">
-          <div className="flex items-center gap-2 mb-4 border-b-2 border-black pb-3">
+        <div className="bg-yellow-50 border-4 border-black brutalist-shadow rounded-lg overflow-hidden">
+          <button
+            className="w-full flex items-center gap-2 p-5 pb-4 cursor-pointer bg-transparent border-none text-left"
+            onClick={() => setNoticesOpen(!noticesOpen)}
+          >
             <span className="text-2xl">📢</span>
             <h2 className="text-xl font-bold font-display tracking-wide">当日のお願い</h2>
-            <span className="ml-auto text-xs font-bold bg-black text-yellow-300 px-2 py-1 rounded">IMPORTANT</span>
-          </div>
-          <ul className="flex flex-col gap-4">
-            <li className="flex gap-3 items-start">
-              <span className="text-2xl mt-0.5">👋</span>
-              <div>
-                <p className="font-bold text-base mb-0.5">内覧の方が来るかも</p>
-                <p className="text-sm text-gray-700 leading-relaxed">元気に挨拶しましょう🙋‍♂️🙋‍♀️</p>
-              </div>
-            </li>
-            <li className="flex gap-3 items-start">
-              <span className="text-2xl mt-0.5">🤝</span>
-              <div>
-                <p className="font-bold text-base mb-0.5">友達作ろう</p>
-                <p className="text-sm text-gray-700 leading-relaxed">江坂OB・OGも参加します！名札シールを配るので、知らない人とも気軽に話してみてね💬</p>
-              </div>
-            </li>
-            <li className="flex gap-3 items-start">
-              <span className="text-2xl mt-0.5">🔊</span>
-              <div>
-                <p className="font-bold text-base mb-0.5">音量の調整にご協力を</p>
-                <p className="text-sm text-gray-700 leading-relaxed">ギター・合唱など音が出る出し物は、状況によって主催者から音量調整をお願いする場合があります。その際はご協力をお願いします。</p>
-              </div>
-            </li>
-            <li className="flex gap-3 items-start">
-              <span className="text-2xl mt-0.5">🪑</span>
-              <div>
-                <p className="font-bold text-base mb-0.5">設備・来場者への安全配慮</p>
-                <p className="text-sm text-gray-700 leading-relaxed">ダンスなど動きの大きい出し物は事前にスペースを確保してください。また、テープや装飾を貼る際は壁・家具への傷や剥がれにご注意を。来場者の方も含め怪我のないよう気を配りながら進めてください。万が一、破損・汚損が発生した場合は<strong>必ずコールセンターへ先に連絡</strong>してから片付けをお願いします。</p>
-              </div>
-            </li>
-          </ul>
+            <span className="ml-auto text-lg font-bold text-black">{noticesOpen ? '▲' : '▼'}</span>
+          </button>
+          {noticesOpen && (
+            <ul className="flex flex-col gap-4 px-5 pb-5 border-t-2 border-black pt-4">
+              <li className="flex gap-3 items-start">
+                <span className="text-2xl mt-0.5">👋</span>
+                <div>
+                  <p className="font-bold text-base mb-0.5">内覧の方が来るかも</p>
+                  <p className="text-sm text-gray-700 leading-relaxed">元気に挨拶しましょう🙋‍♂️🙋‍♀️</p>
+                </div>
+              </li>
+              <li className="flex gap-3 items-start">
+                <span className="text-2xl mt-0.5">🤝</span>
+                <div>
+                  <p className="font-bold text-base mb-0.5">友達作ろう</p>
+                  <p className="text-sm text-gray-700 leading-relaxed">江坂OB・OGも参加します！名札シールを配るので、知らない人とも気軽に話してみてね💬</p>
+                </div>
+              </li>
+              <li className="flex gap-3 items-start">
+                <span className="text-2xl mt-0.5">🔊</span>
+                <div>
+                  <p className="font-bold text-base mb-0.5">音量の調整にご協力を</p>
+                  <p className="text-sm text-gray-700 leading-relaxed">ギター・合唱など音が出る出し物は、状況によって主催者から音量調整をお願いする場合があります。その際はご協力をお願いします。</p>
+                </div>
+              </li>
+              <li className="flex gap-3 items-start">
+                <span className="text-2xl mt-0.5">🪑</span>
+                <div>
+                  <p className="font-bold text-base mb-0.5">設備・来場者への安全配慮</p>
+                  <p className="text-sm text-gray-700 leading-relaxed">ダンスなど動きの大きい出し物は事前にスペースを確保してください。また、テープや装飾を貼る際は壁・家具への傷や剥がれにご注意を。来場者の方も含め怪我のないよう気を配りながら進めてください。万が一、破損・汚損が発生した場合は<strong>必ずコールセンターへ先に連絡</strong>してから片付けをお願いします。</p>
+                </div>
+              </li>
+            </ul>
+          )}
         </div>
       </section>
 
       <main className="px-4 md:px-8 max-w-7xl mx-auto">
 
-        {/* COUNTDOWN */}
-        <Countdown />
+        {/* COUNTDOWN removed — event is over */}
 
         {/* TIME SCHEDULE */}
         <TimeSchedule onEventClick={handleEventClick} />
