@@ -571,9 +571,21 @@ export default function EventPage() {
         </div>
       </header>
 
+      {/* THANK YOU BANNER */}
+      <section className="px-4 md:px-8 max-w-3xl mx-auto mb-8">
+        <div className="bg-lime-400 border-4 border-black brutalist-shadow rounded-xl p-8 text-center transform rotate-1">
+          <div className="text-4xl md:text-5xl font-display mb-4 text-black">THANK YOU!</div>
+          <p className="text-lg md:text-xl font-bold text-black font-rounded leading-relaxed">
+            第一回ネイバーズ江坂 文化祭、<br/>無事終了しました！<br/>
+            ご来場いただいた皆さま、<br className="md:hidden"/>出演者の皆さま、<br/>
+            本当にありがとうございました！
+          </p>
+        </div>
+      </section>
+
       {/* MARQUEE */}
       <div className="mb-12 w-full transform -rotate-1 origin-left scale-105">
-        <Marquee text="★ ENJOY THE MOMENT ★ LOOSE VIBES ONLY ★ ART & MUSIC & FOOD ★ WELCOME EVERYONE ★" />
+        <Marquee text="★ THANK YOU ★ LOOSE VIBES ONLY ★ ART & MUSIC & FOOD ★ SEE YOU NEXT TIME ★" />
       </div>
 
       {/* NOTICES SECTION */}
